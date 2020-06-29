@@ -1,0 +1,15 @@
+models:
+  Models/Student:
+    name: string:150
+    last_name: string:150
+    identification: string:20
+    phone: string:20
+    city: string:150
+
+controllers:
+  Api/StudentController:
+    index:
+      query: all students
+    store:
+      validate: name, last_name, last_name, phone, city
+      save: student

@@ -1,7 +1,7 @@
 <template>
     <main>
         <px-header></px-header>
-        <router-view />
+        <router-view class="py-12 flex justify-center" />
     </main>
 </template>
 

@@ -10,10 +10,7 @@ Vue.use(firestorePlugin);
 
 Vue.config.productionTip = false;
 
-const app = new Vue({
-    el: "#app",
-    components: {
-        App,
-    },
+new Vue({
     router,
-});
+    render: h => h(App)
+}).$mount("#app");

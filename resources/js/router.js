@@ -1,7 +1,6 @@
 import Vue from "vue";
 import Router from "vue-router";
 import Register from "./views/Register";
-import Confirmation from "./views/Confirmation";
 import Response from "./views/Response";
 import Error from "./views/Error";
 import Start from "./views/Start";
@@ -21,11 +20,6 @@ export default new Router({
             path: "/register",
             name: "register",
             component: Register
-        },
-        {
-            path: "/confirmation",
-            name: "confirmation",
-            component: Confirmation
         },
         {
             path: "/response",

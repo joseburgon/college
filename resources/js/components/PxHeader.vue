@@ -13,12 +13,6 @@
                 REGISTER
             </router-link>
             <router-link
-                :to="{ name: 'confirmation' }"
-                class="no-underline text-dustyGray hover:text-black ml-2"
-            >
-                CONFIRMATION
-            </router-link>
-            <router-link
                 :to="{ name: 'response' }"
                 class="no-underline text-dustyGray hover:text-black ml-2"
             >
@@ -32,6 +26,7 @@
 import PxLogo from "./PxLogo";
 
 export default {
+    name: "PxHeader",
     data() {
         return {};
     },
