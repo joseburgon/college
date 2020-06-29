@@ -1,16 +1,16 @@
 <template>
     <nav class="flex items-center justify-between flex-wrap bg-wildsand p-6">
         <div>
-            <router-link :to="{ name: 'registro' }">
+            <router-link :to="{ name: 'start' }">
                 <px-logo class="w-48" />
             </router-link>
         </div>
         <div>
             <router-link
-                :to="{ name: 'registro' }"
+                :to="{ name: 'register' }"
                 class="no-underline text-dustyGray hover:text-black ml-2"
             >
-                REGISTRO
+                REGISTER
             </router-link>
             <router-link
                 :to="{ name: 'confirmation' }"
