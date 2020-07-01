@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StudentRequest;
 use App\Models\Student;
 use Illuminate\Http\Request;
 
@@ -24,14 +25,23 @@ class StudentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StudentRequest $request)
     {
-        $data = $request->data;
-        /*         $student = new Student();
-        $student->name = $info['buyerFullName'];
-        $student->save(); */
+        $student = Student::updateOrCreate(
+            ['identification' => $request['identification']],
+            [
+                'name' => $request['name'],
+                'last_name' => $request['last_name'],
+                'email' => $request['buyerEmail'],
+                'phone' => $request['mobilePhone'],
+                'city' => $request['billingCity'],
+            ]
+        );
+
+        $student->courses()->sync($request['extra2']);
+
         return response()->json([
-            'currency' => $data['currency'],
+            'message' => 'Student created!',
         ]);
     }
 

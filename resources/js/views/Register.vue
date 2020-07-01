@@ -6,7 +6,7 @@
             id="registerForm"
             action="https://sandbox.checkout.payulatam.com/ppp-web-gateway-payu/"
             method="post"
-            @submit="submitHandler"
+            @submit="addStudent"
         >
             <h2 class="font-normal text-black text-5xl text-center mb-8">
                 Registrarme
@@ -27,8 +27,10 @@
                 value="Curso de Finanzas"
             />
             <FormulateInput name="extra1" type="hidden" value="" />
+            <FormulateInput name="extra2" type="hidden" value="2" />
             <FormulateInput name="currency" type="hidden" value="COP" />
             <FormulateInput name="signature" type="hidden" value="" />
+            <FormulateInput name="buyerFullName" type="hidden" value="" />
             <FormulateInput name="test" type="hidden" value="1" />
             <FormulateInput
                 name="responseUrl"
@@ -40,17 +42,28 @@
                 type="hidden"
                 value="http://college.test/api/transactions"
             />
-
-            <div class="flex-col justify-center pb-6">
+            <div class="grid grid-flow-col grid-cols-2 gap-4">
                 <FormulateInput
-                    name="buyerFullName"
+                    name="name"
                     type="text"
-                    label="Tu nombre completo"
-                    placeholder="Tu nombre"
+                    label="Tu nombre"
+                    placeholder="Tu primer nombre"
                     validation="required"
-                    element-class="flex-grow"
+                    outer-class="formulate-input flex-grow pr-2"
                     label-class="text-xs font-bold"
                 />
+                <FormulateInput
+                    name="last_name"
+                    type="text"
+                    label="Tu apellido"
+                    placeholder="Tu apellido"
+                    validation="required"
+                    outer-class="formulate-input flex-grow pl-2"
+                    label-class="text-xs font-bold"
+                />
+            </div>
+
+            <div class="flex-col justify-center pb-6">
                 <FormulateInput
                     name="buyerEmail"
                     type="email"
@@ -61,9 +74,10 @@
                     label-class="text-xs font-bold"
                 />
             </div>
+
             <div class="grid grid-flow-col grid-cols-2 gap-4">
                 <FormulateInput
-                    name="id"
+                    name="identification"
                     type="text"
                     label="Número de cédula"
                     placeholder="Tu cédula"
@@ -84,7 +98,7 @@
             </div>
             <div class="flex-col justify-center mb-6">
                 <FormulateInput
-                    name="city"
+                    name="billingCity"
                     type="text"
                     label="Ciudad de residencia"
                     placeholder="Tu ciudad"
@@ -114,23 +128,20 @@ export default {
     },
     methods: {
         addStudent() {
+            this.formValues.extra1 = this.formValues.identification;
+            this.formValues.buyerFullName =
+                this.formValues.name + " " + this.formValues.last_name;
             let data = this.formValues;
-            data.extra1 = data.id;
 
             axios
-                .post("api/students", {
-                    data: data
-                })
+                .post("api/students", data)
                 .then(res => {
                     console.log(`Response: ${res.message}`);
+                    document.forms["registerForm"].submit();
                 })
                 .catch(e => {
                     console.log(e);
                 });
-        },
-        submitHandler() {
-            this.addStudent();
-            //document.forms["registerForm"].submit();
         },
         setReferenceCode(reference) {
             this.formValues.referenceCode = reference.code;
