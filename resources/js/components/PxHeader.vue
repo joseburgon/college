@@ -5,7 +5,7 @@
                 <px-logo class="w-48" />
             </router-link>
         </div>
-        <div>
+        <!--         <div>
             <router-link
                 :to="{ name: 'register' }"
                 class="no-underline text-dustyGray hover:text-black ml-2"
@@ -18,7 +18,7 @@
             >
                 RESPONSE
             </router-link>
-        </div>
+        </div> -->
     </nav>
 </template>
 
