@@ -170,13 +170,16 @@
                             class="block mt-1 text-lg leading-tight font-semibold text-gray-900 hover:underline"
                             >De la carencia a la abundancia</a
                         >
-                        <p class="mt-2 text-gray-600">
+                        <p class="mt-2 font-thin text-black">
                             Getting a new business off the ground is a lot of
                             hard work. Here are five ideas you can use to find
                             your first customers.
                         </p>
                         <hr class="border-gray-400 my-4 lg:my-8" />
                         <h3 class="text-2xl font-bold mb-4">$80.000 COP</h3>
+                        <p class="font-hairline text-dustyGray text-xs">
+                            MEDIOS DE PAGO
+                        </p>
                         <px-payment-methods />
                     </div>
                 </div>

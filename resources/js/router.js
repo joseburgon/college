@@ -3,7 +3,6 @@ import Router from "vue-router";
 import Register from "./views/Register";
 import Response from "./views/Response";
 import Error from "./views/Error";
-import Start from "./views/Start";
 
 Vue.use(Router);
 
