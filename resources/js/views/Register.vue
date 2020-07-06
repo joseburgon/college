@@ -190,7 +190,6 @@
 
 <script>
 import md5 from "crypto-js/md5";
-import "../../sass/form/form.scss";
 import PxPaymentMethods from "../components/PxPaymentMethods";
 
 export default {
