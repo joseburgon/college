@@ -20,7 +20,6 @@ mix.js("resources/js/app.js", "public/js");
 
 // CSS
 mix.sass("resources/sass/app.scss", "public/css")
-    .sass("resources/sass/form/form.scss", "public/css/form")
     .options({
         processCssUrls: false,
         postCss: [tailwindcss("./tailwind.config.js")]
