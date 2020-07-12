@@ -51,9 +51,11 @@ class StudentController extends Controller
      * @param  \App\Models\Student  $student
      * @return \Illuminate\Http\Response
      */
-    public function show(Student $student)
+    public function show($identification)
     {
-        //
+        $student = Student::where('identification', $identification)->first();
+
+        return response()->json(['student' => $student]);
     }
 
     /**

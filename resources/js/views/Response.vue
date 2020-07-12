@@ -32,6 +32,7 @@
 </template>
 
 <script>
+import api from "../api";
 import PxThumbsUp from "../components/PxThumbsUp";
 import PxThumbsDown from "../components/PxThumbsDown";
 export default {
@@ -39,16 +40,70 @@ export default {
         return {
             query: this.$route.query,
             transactionState: "",
-            estadoTx: ""
+            estadoTx: "",
+            student: {}
         };
     },
     components: { PxThumbsUp, PxThumbsDown },
+    methods: {
+        async createThinkificUser() {
+
+            let id = this.query.extra1;
+
+            await this.getRegisteredStudent(id).then(
+                student => (this.student = student)
+            );
+
+            console.log(this.student.name);
+
+            let data = {
+                id: this.student.identification,
+                email: this.student.email,
+                first_name: this.student.name,
+                last_name: this.student.last_name,
+                password: this.generateRandomPwd(),
+                roles: ["affiliate"],
+                affiliate_commission: 0,
+                affiliate_payout_email: this.student.email,                
+            };
+
+            api.createUser(data).then(res => console.log('User created!'));
+
+        },
+
+        getRegisteredStudent(id) {
+
+            return fetch(`api/students/${id}`, {
+                method: "GET"
+            })
+                .then(res => res.json())
+                .then(res => res.student);
+
+        },
+
+        generateRandomPwd() {
+
+            var randomChars =
+                "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+            var result = "";
+
+            for (var i = 0; i < 9; i++) {
+                result += randomChars.charAt(
+                    Math.floor(Math.random() * randomChars.length)
+                );
+            }
+
+            return result;
+        }
+    },
     created() {
         this.transactionState = this.query.transactionState;
 
         switch (parseInt(this.transactionState)) {
             case 4:
                 this.estadoTx = "Transacción Aprobada";
+                this.createThinkificUser();
                 break;
             case 6:
                 this.estadoTx = "Transacción Rechazada";
