@@ -23,5 +23,6 @@ class Transaction extends Model
         'transaction_date',
         'currency',
         'email_buyer',
+        'confirmacion'
     ];
 }

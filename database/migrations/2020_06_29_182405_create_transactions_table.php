@@ -73,6 +73,7 @@ class CreateTransactionsTable extends Migration
             $table->string('transaction_bank_id', 255)->nullable();
             $table->string('transaction_id', 36)->nullable();
             $table->string('payment_method_name', 255)->nullable();
+            $table->mediumText('confirmacion')->nullable();
             $table->timestamps();
         });
     }
