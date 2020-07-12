@@ -31,7 +31,7 @@ class TransactionController extends Controller
         $transaction->save();
         return response()->json([
             'message' => 'success'
-        ])
+        ]);
     }
 
     /**
