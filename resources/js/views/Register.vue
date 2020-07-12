@@ -54,12 +54,12 @@
                     <FormulateInput
                         name="responseUrl"
                         type="hidden"
-                        value="http://college.test/response"
+                        value="http://checkout.livingroomcollege.org/response"
                     />
                     <FormulateInput
                         name="confirmationUrl"
                         type="hidden"
-                        value="http://college.test/api/transactions"
+                        value="http://checkout.livingroomcollege.org/api/transactions"
                     />
                     <div class="grid grid-flow-col grid-cols-2 gap-4">
                         <FormulateInput
