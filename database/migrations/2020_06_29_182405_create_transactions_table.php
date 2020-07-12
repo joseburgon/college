@@ -15,7 +15,7 @@ class CreateTransactionsTable extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
-            $table->integer('merchant_id')->nullable();
+            $table->bigInteger('merchant_id')->nullable();
             $table->string('state_pol', 32)->nullable();
             $table->decimal('risk', 8, 2)->nullable();
             $table->string('response_code_pol', 255)->nullable();
@@ -24,9 +24,9 @@ class CreateTransactionsTable extends Migration
             $table->string('sign', 255)->nullable();
             $table->string('extra1', 255)->nullable();
             $table->string('extra2', 255)->nullable();
-            $table->integer('payment_method')->nullable();
-            $table->integer('payment_method_type')->nullable();
-            $table->integer('installments_number')->nullable();
+            $table->bigInteger('payment_method')->nullable();
+            $table->bigInteger('payment_method_type')->nullable();
+            $table->bigInteger('installments_number')->nullable();
             $table->decimal('value', 14, 2)->nullable();
             $table->decimal('tax', 14, 2)->nullable();
             $table->decimal('additional_value', 14, 2)->nullable();
@@ -54,7 +54,7 @@ class CreateTransactionsTable extends Migration
             $table->string('billing_country', 2)->nullable();
             $table->decimal('commision_pol', 8, 2)->nullable();
             $table->string('commision_pol_currency', 3)->nullable();
-            $table->integer('customer_number')->nullable();
+            $table->bigInteger('customer_number')->nullable();
             $table->date('date')->nullable();
             $table->string('error_code_bank', 255)->nullable();
             $table->string('error_message_bank', 255)->nullable();
@@ -62,7 +62,7 @@ class CreateTransactionsTable extends Migration
             $table->string('ip', 39)->nullable();
             $table->string('nickname_buyer', 150)->nullable();
             $table->string('nickname_seller', 150)->nullable();
-            $table->integer('payment_method_id')->nullable();
+            $table->bigInteger('payment_method_id')->nullable();
             $table->string('payment_request_state', 32)->nullable();
             $table->string('pseReference1', 255)->nullable();
             $table->string('pseReference2', 255)->nullable();
