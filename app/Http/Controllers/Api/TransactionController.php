@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Transaction;
 use Illuminate\Http\Request;
 
 class TransactionController extends Controller
@@ -25,10 +26,7 @@ class TransactionController extends Controller
      */
     public function store(Request $request)
     {
-        $myfile = fopen("newfile.txt", "w") or die("Unable to open file!");
-        $txt = $request->all();
-        fwrite($myfile, $txt);
-        fclose($myfile);
+        $transaction = Transaction::create($request->all());
     }
 
     /**
