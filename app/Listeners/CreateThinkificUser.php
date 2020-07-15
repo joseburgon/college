@@ -27,14 +27,26 @@ class CreateThinkificUser
      */
     public function handle(TransactionSaved $event)
     {
-        if ($event->transaction->state_pol === 4) {
+        $transaction = $event->transaction;
 
-            Log::info('Transaction approved!');
+        if ($transaction->state_pol === 4) {
+
+            Log::info('Transaction approved!', $transaction);
+
+            $data = [
+                'email' => $transaction->email_buyer,
+                'first_name' => 'Test Name',
+                'last_name' => 'Test LastName',
+                'password' => '12345678',
+                'roles' => ["affiliate"],
+                'affiliate_commission' => 0,
+                'affiliate_payout_email' => 'test3@email.com',
+            ];
 
         } else {
 
             Log::info('Transaction not approved.');
-            
+
         }
     }
 }
