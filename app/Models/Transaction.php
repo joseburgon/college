@@ -2,19 +2,11 @@
 
 namespace App\Models;
 
+use App\Events\TransactionSaved;
 use Illuminate\Database\Eloquent\Model;
 
 class Transaction extends Model
 {
-
-    /**
-     * The event map for the model.
-     *
-     * @var array
-     */
-    protected $dispatchesEvents = [
-        'saved' => TransactionSaved::class,
-    ];
 
     protected $fillable = [
         'merchant_id',
@@ -74,4 +66,5 @@ class Transaction extends Model
         'transaction_id',
         'payment_method_name',
     ];
+    
 }
