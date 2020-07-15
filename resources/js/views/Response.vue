@@ -103,7 +103,7 @@ export default {
         switch (parseInt(this.transactionState)) {
             case 4:
                 this.estadoTx = "Transacción Aprobada";
-                this.createThinkificUser();
+                //this.createThinkificUser();
                 break;
             case 6:
                 this.estadoTx = "Transacción Rechazada";

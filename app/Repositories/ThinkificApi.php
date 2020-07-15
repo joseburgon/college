@@ -19,11 +19,20 @@ class ThinkificApi
         //
     }
 
+    public function getUsers()
+    {
+        
+        $response = Http::withHeaders($this->headers)->get($this->baseUrl . 'users');
+        
+        return $response->json();
+
+    }
+
     public function createUser($data)
     {
         $response = Http::withHeaders($this->headers)
                             ->post($this->baseUrl . 'users', $data);
 
-        return $response;
+        return $response->json();
     }
 }

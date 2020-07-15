@@ -6,7 +6,7 @@
                     class="w-full max-w-lg px-2 md:px-8"
                     v-model="formValues"
                     id="registerForm"
-                    action="https://sandbox.checkout.payulatam.com/ppp-web-gateway-payu/"
+                    action="https://sandbox.checkout.payulatam.com/ppp-web-gateway-payu"
                     method="post"
                     @submit="addStudent"
                 >
@@ -41,14 +41,19 @@
                         type="hidden"
                         value="Curso de Finanzas"
                     />
-                    <FormulateInput name="extra1" type="hidden" value="" />
+
+                    <FormulateInput
+                        name="extra1"
+                        type="hidden"
+                        v-model="cedula"
+                    />
                     <FormulateInput name="extra2" type="hidden" value="2" />
                     <FormulateInput name="currency" type="hidden" value="COP" />
                     <FormulateInput name="signature" type="hidden" value="" />
                     <FormulateInput
                         name="buyerFullName"
                         type="hidden"
-                        value=""
+                        v-model="fullName"
                     />
                     <FormulateInput name="test" type="hidden" value="1" />
                     <FormulateInput
@@ -67,6 +72,7 @@
                             type="text"
                             label="Tu nombre"
                             placeholder="Tu primer nombre"
+                            v-model="firstName"
                             validation="required"
                             :validation-messages="{
                                 required: 'Nombre es requerido'
@@ -79,6 +85,7 @@
                             type="text"
                             label="Tu apellido"
                             placeholder="Tu apellido"
+                            v-model="lastName"
                             validation="required"
                             :validation-messages="{
                                 required: 'Apellido es requerido'
@@ -110,6 +117,7 @@
                             type="text"
                             label="Número de cédula"
                             placeholder="Tu cédula"
+                            v-model="cedula"
                             validation="required"
                             :validation-messages="{
                                 required: 'Cedula es requerida'
@@ -151,7 +159,7 @@
                             type="submit"
                             name="Registrarme y Pagar"
                         />
-                        <!-- <pre class="code px-2" v-text="formValues" /> -->
+                        <pre class="code px-2" v-text="formValues" />
                     </div>
                 </FormulateForm>
             </div>
@@ -198,26 +206,33 @@ export default {
             formValues: {},
             valid: {},
             Students: [],
-            cedula: ""
+            cedula: "",
+            firstName: "",
+            lastName: "",
         };
     },
     components: { PxPaymentMethods },
+    computed: {
+        fullName: function() {
+            return this.firstName + " " + this.lastName;
+        }
+    },
     methods: {
         addStudent() {
-            this.formValues.extra1 = this.formValues.identification;
-            this.formValues.buyerFullName =
-                this.formValues.name + " " + this.formValues.last_name;
+
             let data = this.formValues;
 
             axios
                 .post("api/students", data)
                 .then(res => {
-                    console.log(`Response: ${res.message}`);
+                    console.log(`Response: ${res.data.message}`);
+                    console.log(`Response: ${res.data.extra1}`);
                     document.forms["registerForm"].submit();
                 })
                 .catch(e => {
                     console.log(e);
                 });
+                
         },
         setReferenceCode(reference) {
             this.formValues.referenceCode = reference.code;

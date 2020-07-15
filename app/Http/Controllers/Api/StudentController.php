@@ -42,6 +42,7 @@ class StudentController extends Controller
 
         return response()->json([
             'message' => 'Student created!',
+            'extra1' => $request['extra1'],
         ]);
     }
 
