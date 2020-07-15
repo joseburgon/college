@@ -229,4 +229,11 @@ return [
 
     ],
 
+    /* My custom global variables */
+
+    'payu' => [
+        'apiKey' => '4Vj8eK4rloUd272L48hsrarnUA',
+        'merchantId' => '508029',
+    ],
+
 ];

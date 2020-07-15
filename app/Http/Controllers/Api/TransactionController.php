@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Events\TransactionSaved;
 use App\Http\Controllers\Controller;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
@@ -26,10 +27,36 @@ class TransactionController extends Controller
      */
     public function store(Request $request)
     {
-        $transaction = Transaction::create($request->all());
+
+        $ApiKey = config('app.payu.apiKey');
+        $merchantId = config('app.payu.merchantId');
+
+        $referenceCode = $request->reference_sale;
+        $txtValue = $request->value;
+        $newValue = number_format($txtValue, 1, '.', '');
+        $currency = $request->currency;
+        $statePol = $request->state_pol;
+        $sign = $request->sign;
+
+        $signature = "$ApiKey~$merchantId~$referenceCode~$newValue~$currency~$statePol";
+        $signatureMd5 = md5($signature);
+
+        $responseMsg = 'Something went wrong';
+
+        if ($signatureMd5 === $sign) {            
+            
+            $transaction = Transaction::create($request->all());
+            
+            TransactionSaved::dispatch($transaction);
+
+            $responseMsg = 'Transaction stored!';
+
+        }       
+        
         return response()->json([
-            'message' => 'Transaction stored!'
+            'message' => $responseMsg
         ]);
+        
     }
 
     /**
