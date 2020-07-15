@@ -29,7 +29,7 @@ class CreateThinkificUser
     {
         $transaction = $event->transaction;
 
-        if ($transaction->state_pol === 4) {
+        if (intval($transaction->state_pol) === 4) {
 
             Log::info('Transaction approved!', $transaction);
 
@@ -45,7 +45,7 @@ class CreateThinkificUser
 
         } else {
 
-            Log::info('Transaction not approved.');
+            Log::info('Transaction not approved', $transaction);
 
         }
     }

@@ -58,9 +58,8 @@ class TransactionController extends Controller
 
         }       
         
-        return response()->json([
-            'message' => $responseMsg
-        ]);
+        return response()->json(
+            ['message' => $responseMsg], 200);
         
     }
 

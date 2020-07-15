@@ -159,7 +159,7 @@
                             type="submit"
                             name="Registrarme y Pagar"
                         />
-                        <pre class="code px-2" v-text="formValues" />
+                        <!-- <pre class="code px-2" v-text="formValues" /> -->
                     </div>
                 </FormulateForm>
             </div>
@@ -225,14 +225,14 @@ export default {
             axios
                 .post("api/students", data)
                 .then(res => {
-                    console.log(`Response: ${res.data.message}`);
                     console.log(`Response: ${res.data.extra1}`);
+                    console.log(`Response: ${res.data.message}`);
                     document.forms["registerForm"].submit();
                 })
                 .catch(e => {
                     console.log(e);
                 });
-                
+
         },
         setReferenceCode(reference) {
             this.formValues.referenceCode = reference.code;
