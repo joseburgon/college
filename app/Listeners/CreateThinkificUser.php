@@ -31,7 +31,7 @@ class CreateThinkificUser
 
         if (intval($transaction->state_pol) === 4) {
 
-            Log::info('Transaction approved!', $transaction);
+            Log::info('Transaction approved!', (array) $transaction);
 
             $data = [
                 'email' => $transaction->email_buyer,
@@ -45,7 +45,7 @@ class CreateThinkificUser
 
         } else {
 
-            Log::info('Transaction not approved', $transaction);
+            Log::info('Transaction not approved', (array) $transaction);
 
         }
     }
