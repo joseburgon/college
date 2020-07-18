@@ -47,8 +47,11 @@ class TransactionController extends Controller
         if ($signatureMd5 === $sign) {            
             
             $data = $request->all();
-
-            $transaction = Transaction::create($data);
+            
+            $transaction = Transaction::firstOrNew(
+                ['transaction_id' => $data['transaction_id']],
+                $data
+            );
 
             Log::info('Transaction stored', $data);
             

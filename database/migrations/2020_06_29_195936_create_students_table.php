@@ -19,7 +19,7 @@ class CreateStudentsTable extends Migration
             $table->string('last_name', 150);
             $table->string('identification', 20)->unique();
             $table->string('phone', 20);
-            $table->string('email', 255);
+            $table->string('email', 255)->unique();
             $table->string('city', 150);
             $table->string('status', 150)->default('registered');
             $table->bigInteger('thinkific_user_id')->nullable();

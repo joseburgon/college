@@ -37,7 +37,7 @@ class CreateThinkificUser
 
             Log::info('Transaction approved!', (array) $transaction);
 
-            $student = Student::where('identification', $transaction->extra1);
+            $student = Student::where('email', $transaction->email_buyer)->get();
 
             $password = Str::random(8);
 
