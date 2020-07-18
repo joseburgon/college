@@ -21,7 +21,8 @@ class CreateStudentsTable extends Migration
             $table->string('phone', 20);
             $table->string('email', 255);
             $table->string('city', 150);
-            $table->unsignedBigInteger('thinkific_user_id')->nullable();
+            $table->string('status', 150)->default('registered');
+            $table->bigInteger('thinkific_user_id')->nullable();
             $table->timestamps();
         });
     }

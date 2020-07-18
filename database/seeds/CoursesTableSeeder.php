@@ -14,12 +14,14 @@ class CoursesTableSeeder extends Seeder
     {
         Course::create([
             'name' => 'Curso Básico',
-            'cohort' => 'Septiembre 2020'
+            'cohort' => 'Septiembre 2020',
+            'thinkific_id' => 761932
         ]);
 
         Course::create([
             'name' => 'Curso de Finanzas',
-            'cohort' => 'Agosto 2020'
+            'cohort' => 'Agosto 2020',
+            'thinkific_id' => 761932
         ]);
     }
 }

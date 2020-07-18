@@ -22,7 +22,9 @@ class ThinkificApi
     public function getUsers()
     {
         
-        $response = Http::withHeaders($this->headers)->get($this->baseUrl . 'users');
+        $response = Http::withHeaders($this->headers)
+                            ->get($this->baseUrl . 'users')
+                            ->throw();
         
         return $response->json();
 
@@ -31,7 +33,17 @@ class ThinkificApi
     public function createUser($data)
     {
         $response = Http::withHeaders($this->headers)
-                            ->post($this->baseUrl . 'users', $data);
+                            ->post($this->baseUrl . 'users', $data)
+                            ->throw();
+
+        return $response->json();
+    }
+
+    public function createEnrollment($data)
+    {
+        $response = Http::withHeaders($this->headers)
+                            ->post($this->baseUrl . 'enrollments', $data)
+                            ->throw();
 
         return $response->json();
     }

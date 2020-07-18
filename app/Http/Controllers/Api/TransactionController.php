@@ -28,7 +28,7 @@ class TransactionController extends Controller
      */
     public function store(Request $request)
     {
-
+        
         $ApiKey = config('app.payu.apiKey');
         $merchantId = config('app.payu.merchantId');
 
@@ -96,4 +96,5 @@ class TransactionController extends Controller
     {
         //
     }
+    
 }

@@ -3,8 +3,12 @@
 namespace App\Listeners;
 
 use App\Events\TransactionSaved;
+use App\Models\Course;
+use App\Models\Student;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
+use App\Repositories\ThinkificApi;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Log;
 
 class CreateThinkificUser
@@ -33,20 +37,55 @@ class CreateThinkificUser
 
             Log::info('Transaction approved!', (array) $transaction);
 
-            $data = [
-                'email' => $transaction->email_buyer,
-                'first_name' => 'Test Name',
-                'last_name' => 'Test LastName',
-                'password' => '12345678',
+            $student = Student::where('identification', $transaction->extra1);
+
+            $password = Str::random(8);
+
+            $userData = [
+                'email' => $student->email,
+                'first_name' => $student->name,
+                'last_name' => $student->last_name,
+                'password' => $password,
                 'roles' => ["affiliate"],
                 'affiliate_commission' => 0,
-                'affiliate_payout_email' => 'test3@email.com',
+                'affiliate_payout_email' => $student->email,
             ];
+
+            $apiRepo = new ThinkificApi();
+
+            $user = $apiRepo->createUser($userData);
+
+            if ($user->successful()) {
+
+                Log::info('Thinkific user created with ID: ' . $user->id);
+
+                $student->update([
+                    'thinkific_user_id' => $user->id,
+                    'status' => 'user created'
+                ]);
+
+                $course = Course::find($transaction->extra2);
+
+                $enrollmentData = [
+                    'course_id' => $course->thinkific_id,
+                    'user_id' => $user->id,
+                    'activated_at' => now(),
+                ];
+
+                $enrollment = $apiRepo->createEnrollment($enrollmentData);
+
+                if ($enrollment->successful()) {
+
+                    Log::info('Studente enrolled successfully in course ' . $enrollment->course_name);
+
+                    $student->update(['status' => 'enrolled']);
+
+                }
+            }
 
         } else {
 
             Log::info('Transaction not approved', (array) $transaction);
-
         }
     }
 }
