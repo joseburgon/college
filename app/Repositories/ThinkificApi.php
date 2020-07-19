@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 
 class ThinkificApi
 {
@@ -53,7 +54,9 @@ class ThinkificApi
             ])
             ->throw()
             ->json();
-
+            
+        Log::info('check if user exists response', $response);
+        
         if (empty($response['items'])) {
 
             return false;
@@ -67,12 +70,17 @@ class ThinkificApi
     public function createUser($data)
     {
         $response = Http::withHeaders($this->headers)
-            ->post($this->baseUrl . 'users', $data)
-            ->throw();
+            ->post($this->baseUrl . 'users', $data);
+            
 
         if ($response->successful()) {
 
             return $response->json();
+        
+        } else {
+
+            Log::info('Error creating user', $response->json());
+
         }
     }
 

@@ -67,11 +67,11 @@ class CreateThinkificUser implements ShouldQueue
 
         $userExists = $apiRepo->checkIfUserExists($student->email);
 
-        Log::info('User exists', ['result' => $userExists]);
+        Log::info('User exists?', ['result' => $userExists]);
 
         if ($userExists) {
 
-            Log:info('Segun esto existo');
+            Log:info('User already exists');
 
             $user = $apiRepo->getUser($student->email);
 
@@ -88,6 +88,7 @@ class CreateThinkificUser implements ShouldQueue
             'roles' => ["affiliate"],
             'affiliate_commission' => 0,
             'affiliate_payout_email' => $student->email,
+            'send_welcome_email' => true
         ];
 
         $user = $apiRepo->createUser($userData);
