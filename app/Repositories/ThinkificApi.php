@@ -21,30 +21,69 @@ class ThinkificApi
 
     public function getUsers()
     {
-        
-        $response = Http::withHeaders($this->headers)
-                            ->get($this->baseUrl . 'users')
-                            ->throw();
-        
-        return $response->json();
 
+        $response = Http::withHeaders($this->headers)
+            ->get($this->baseUrl . 'users')
+            ->throw();
+
+        if ($response->successful()) {
+
+            return $response->json();
+        }
+    }
+
+    public function getUser($email)
+    {
+
+        $response = Http::withHeaders($this->headers)
+            ->get($this->baseUrl . 'users', [
+                'query[email]' => $email
+            ])
+            ->throw()
+            ->json();
+
+        return $response['items']['0'];
+    }
+
+    public function checkIfUserExists($email)
+    {
+        $response = Http::withHeaders($this->headers)
+            ->get($this->baseUrl . 'users', [
+                'query[email]' => $email
+            ])
+            ->throw()
+            ->json();
+
+        if ($response['items'] > 0) {
+
+            return true;
+        } else {
+
+            return false;
+        }
     }
 
     public function createUser($data)
     {
         $response = Http::withHeaders($this->headers)
-                            ->post($this->baseUrl . 'users', $data)
-                            ->throw();
+            ->post($this->baseUrl . 'users', $data)
+            ->throw();
 
-        return $response->json();
+        if ($response->successful()) {
+
+            return $response->json();
+        }
     }
 
     public function createEnrollment($data)
     {
         $response = Http::withHeaders($this->headers)
-                            ->post($this->baseUrl . 'enrollments', $data)
-                            ->throw();
+            ->post($this->baseUrl . 'enrollments', $data)
+            ->throw();
 
-        return $response->json();
+        if ($response->successful()) {
+
+            return $response->json();
+        }
     }
 }
