@@ -67,7 +67,11 @@ class CreateThinkificUser implements ShouldQueue
 
         $userExists = $apiRepo->checkIfUserExists($student->email);
 
+        Log::info('User exists', ['result' => $userExists]);
+
         if ($userExists) {
+
+            Log:info('Segun esto existo');
 
             $user = $apiRepo->getUser($student->email);
 

@@ -54,12 +54,13 @@ class ThinkificApi
             ->throw()
             ->json();
 
-        if ($response['items'] > 0) {
-
-            return true;
-        } else {
+        if (empty($response['items'])) {
 
             return false;
+
+        } else {
+
+            return true;
         }
     }
 
