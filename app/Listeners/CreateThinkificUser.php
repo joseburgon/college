@@ -3,6 +3,7 @@
 namespace App\Listeners;
 
 use App\Events\TransactionSaved;
+use App\Mail\ThinkificCredentials;
 use App\Models\Course;
 use App\Models\ReferenceCode;
 use App\Models\Student;
@@ -11,6 +12,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use App\Repositories\ThinkificApi;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 
 class CreateThinkificUser implements ShouldQueue
 {
@@ -58,7 +60,7 @@ class CreateThinkificUser implements ShouldQueue
         } else {
 
             Log::info('Transaction not approved', (array) $transaction);
-            
+
         }
     }
 
@@ -94,6 +96,8 @@ class CreateThinkificUser implements ShouldQueue
         ];
 
         $user = $apiRepo->createUser($userData);
+
+        Mail::to($student->email)->queue(new ThinkificCredentials($userData));
 
         return $user;
     }
