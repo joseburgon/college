@@ -16,6 +16,7 @@ class CreateReferenceCodesTable extends Migration
         Schema::create('reference_codes', function (Blueprint $table) {
             $table->id();
             $table->string('code');
+            $table->unsignedBigInteger('course_id');
             $table->timestamps();
         });
     }

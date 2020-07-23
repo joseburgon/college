@@ -4,6 +4,7 @@ namespace App\Listeners;
 
 use App\Events\TransactionSaved;
 use App\Models\Course;
+use App\Models\ReferenceCode;
 use App\Models\Student;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
@@ -50,13 +51,14 @@ class CreateThinkificUser implements ShouldQueue
                 'status' => 'user created'
             ])->save();
 
-            $course = Course::find($transaction->extra2);
+            $course = Course::has('referenceCodes', '=', $transaction->reference_sale)->first();
 
-            $enrollment = $this->enrollmentProccess($user, $course, $student);
+            $this->enrollmentProccess($user, $course, $student);
             
         } else {
 
             Log::info('Transaction not approved', (array) $transaction);
+            
         }
     }
 

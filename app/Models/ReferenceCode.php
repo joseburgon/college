@@ -23,4 +23,9 @@ class ReferenceCode extends Model
     protected $casts = [
         'id' => 'integer',
     ];
+
+    public function course()
+    {
+        return $this->belongsTo(Course::class);
+    }
 }

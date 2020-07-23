@@ -203,6 +203,7 @@ import PxPaymentMethods from "../components/PxPaymentMethods";
 export default {
     data() {
         return {
+            query: this.$route.query,
             formValues: {},
             valid: {},
             Students: [],
@@ -248,7 +249,8 @@ export default {
     mounted() {
         axios
             .post("api/reference", {
-                prefix: "LvrCollege_Test"
+                prefix: "LvrCollege_Test",
+                course: this.query.course
             })
             .then(res => {
                 this.setReferenceCode(res.data);

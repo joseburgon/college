@@ -22,6 +22,7 @@ class ReferenceCodeController extends Controller
     {
         $referenceCode = new ReferenceCode;
         $referenceCode->code = $request->prefix . '-' . Str::random(8);
+        $referenceCode->course_id = $request->course;
         $referenceCode->save();
         return $referenceCode->toJson();
     }

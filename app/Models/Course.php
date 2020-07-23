@@ -29,4 +29,9 @@ class Course extends Model
     {
         return $this->belongsToMany(Student::class)->withTimestamps();
     }
+
+    public function referenceCodes()
+    {
+        return $this->hasMany(ReferenceCode::class);
+    }
 }

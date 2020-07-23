@@ -59,7 +59,11 @@ class TransactionController extends Controller
 
             $responseMsg = 'Transaction stored!';
 
-        }       
+        } else {
+
+            Log::info('Invalid Sign.');
+
+        }
         
         return response()->json(
             ['message' => $responseMsg], 200);
