@@ -4,10 +4,10 @@
 Estas son tu credenciales de acceso a la plataforma.
 
 ## Usuario:
-micorreo@mail.com
+{{ $user['email'] }}
 
 ## Contraseña:
-P3erkdwoiw
+{{ $user['password'] }}
 
 
 @component('mail::button', ['url' => 'https://cursos.livingroomcollege.org/users/sign_in'])
