@@ -27,12 +27,13 @@ class StudentController extends Controller
      */
     public function store(StudentRequest $request)
     {
-        $student = Student::updateOrCreate(
-            ['identification' => $request['identification']],
+        $student = Student::updateOrCreate([
+            'identification' => $request['identification'],
+            'email' => $request['buyerEmail']
+            ],
             [
                 'name' => $request['name'],
                 'last_name' => $request['last_name'],
-                'email' => $request['buyerEmail'],
                 'phone' => $request['mobilePhone'],
                 'city' => $request['billingCity'],
             ]
