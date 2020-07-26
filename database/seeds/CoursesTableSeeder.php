@@ -16,6 +16,7 @@ class CoursesTableSeeder extends Seeder
             'name' => 'Curso Básico',
             'tagline' => 'SCHOOL PATH',
             'description' => 'Getting a new business off the ground is a lot of hard work. Here are five ideas you can use to find your first customers.',
+            'price' => 99900,
             'cohort' => 'Septiembre 2020',
             'thinkific_id' => 761932
         ]);
@@ -24,6 +25,7 @@ class CoursesTableSeeder extends Seeder
             'name' => 'Curso de Finanzas',
             'tagline' => 'De la carencia a la abundancia',
             'description' => 'Getting a new business off the ground is a lot of hard work. Here are five ideas you can use to find your first customers.',
+            'price' => 80000,
             'cohort' => 'Agosto 2020',
             'thinkific_id' => 761932
         ]);

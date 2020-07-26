@@ -30,7 +30,7 @@
                         type="hidden"
                         value=""
                     />
-                    <FormulateInput name="amount" type="hidden" value="20000" />
+                    <FormulateInput name="amount" type="hidden" v-model="course.price" />
                     <FormulateInput
                         name="accountId"
                         type="hidden"
@@ -182,7 +182,9 @@
                             {{ course.description }}
                         </p>
                         <hr class="border-gray-400 my-4 lg:my-8" />
-                        <h3 class="text-2xl font-bold mb-4">$80.000 COP</h3>
+                        <h3 class="text-2xl font-bold mb-4">
+                            {{ '$ ' + new Intl.NumberFormat().format(course.price) }}
+                        </h3>
                         <p class="font-hairline text-dustyGray text-xs">
                             MEDIOS DE PAGO
                         </p>

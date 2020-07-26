@@ -18,6 +18,7 @@ class CreateCoursesTable extends Migration
             $table->string('name', 150);
             $table->string('tagline', 250);
             $table->string('description', 500);
+            $table->float('price', 10, 2);
             $table->string('cohort', 150);
             $table->bigInteger('thinkific_id');
             $table->timestamps();

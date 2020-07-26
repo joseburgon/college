@@ -26,6 +26,7 @@ class Course extends Model
      */
     protected $casts = [
         'id' => 'integer',
+        'price' => 'integer'
     ];
 
     public function students()

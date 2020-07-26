@@ -7604,6 +7604,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -59376,7 +59378,14 @@ var render = function() {
               }),
               _vm._v(" "),
               _c("FormulateInput", {
-                attrs: { name: "amount", type: "hidden", value: "20000" }
+                attrs: { name: "amount", type: "hidden" },
+                model: {
+                  value: _vm.course.price,
+                  callback: function($$v) {
+                    _vm.$set(_vm.course, "price", $$v)
+                  },
+                  expression: "course.price"
+                }
               }),
               _vm._v(" "),
               _c("FormulateInput", {
@@ -59653,7 +59662,13 @@ var render = function() {
                 _c("hr", { staticClass: "border-gray-400 my-4 lg:my-8" }),
                 _vm._v(" "),
                 _c("h3", { staticClass: "text-2xl font-bold mb-4" }, [
-                  _vm._v("$80.000 COP")
+                  _vm._v(
+                    "\n                        " +
+                      _vm._s(
+                        "$ " + new Intl.NumberFormat().format(_vm.course.price)
+                      ) +
+                      "\n                    "
+                  )
                 ]),
                 _vm._v(" "),
                 _c(
