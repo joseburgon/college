@@ -171,17 +171,15 @@
                         <div
                             class="uppercase tracking-wide text-sm text-dustyGray font-bold my-4"
                         >
-                            Curso de finanzas
+                            {{ course.name }}
                         </div>
                         <a
                             href="#"
                             class="block mt-1 text-lg leading-tight font-semibold text-gray-900 hover:underline"
-                            >De la carencia a la abundancia</a
+                            >{{ course.tagline }}</a
                         >
                         <p class="mt-2 font-thin text-black">
-                            Getting a new business off the ground is a lot of
-                            hard work. Here are five ideas you can use to find
-                            your first customers.
+                            {{ course.description }}
                         </p>
                         <hr class="border-gray-400 my-4 lg:my-8" />
                         <h3 class="text-2xl font-bold mb-4">$80.000 COP</h3>
@@ -207,6 +205,7 @@ export default {
             formValues: {},
             valid: {},
             Students: [],
+            course: "",
             cedula: "",
             firstName: "",
             lastName: "",
@@ -246,11 +245,21 @@ export default {
             console.log("Signature created!");
         }
     },
+    created() {
+        axios
+            .get(`api/courses/${this.query.course}`)
+            .then(res => {
+                this.course = res.data;
+            })
+            .catch(e => {
+                window.location.replace("/error");
+            });
+    },
     mounted() {
         axios
             .post("api/reference", {
                 prefix: "LvrCollege_Test",
-                course: this.query.course
+                course: this.query.course,
             })
             .then(res => {
                 this.setReferenceCode(res.data);

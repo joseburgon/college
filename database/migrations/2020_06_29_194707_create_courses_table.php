@@ -16,6 +16,8 @@ class CreateCoursesTable extends Migration
         Schema::create('courses', function (Blueprint $table) {
             $table->id();
             $table->string('name', 150);
+            $table->string('tagline', 250);
+            $table->string('description', 500);
             $table->string('cohort', 150);
             $table->bigInteger('thinkific_id');
             $table->timestamps();

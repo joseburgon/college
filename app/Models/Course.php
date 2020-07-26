@@ -14,6 +14,9 @@ class Course extends Model
     protected $fillable = [
         'name',
         'cohort',
+        'tagline',
+        'description',
+        'thinkific_id'
     ];
 
     /**

@@ -7604,8 +7604,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -7615,6 +7613,7 @@ __webpack_require__.r(__webpack_exports__);
       formValues: {},
       valid: {},
       Students: [],
+      course: "",
       cedula: "",
       firstName: "",
       lastName: ""
@@ -7648,16 +7647,25 @@ __webpack_require__.r(__webpack_exports__);
       console.log("Signature created!");
     }
   },
-  mounted: function mounted() {
+  created: function created() {
     var _this = this;
+
+    axios.get("api/courses/".concat(this.query.course)).then(function (res) {
+      _this.course = res.data;
+    })["catch"](function (e) {
+      window.location.replace("/error");
+    });
+  },
+  mounted: function mounted() {
+    var _this2 = this;
 
     axios.post("api/reference", {
       prefix: "LvrCollege_Test",
       course: this.query.course
     }).then(function (res) {
-      _this.setReferenceCode(res.data);
+      _this2.setReferenceCode(res.data);
 
-      _this.setSignature();
+      _this2.setSignature();
     })["catch"](function (e) {
       console.log(e);
     });
@@ -59272,27 +59280,29 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "flex-col items-center" },
-    [
+  return _vm._m(0)
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "flex-col items-center text-center" }, [
       _c("h1", { staticClass: "text-gray-700 text-6xl uppercase" }, [
         _vm._v("error")
       ]),
       _vm._v(" "),
       _c(
-        "router-link",
+        "a",
         {
           staticClass: "mt-5 text-xl text-black hover:underline",
-          attrs: { to: "/" }
+          attrs: { href: "https://cursos.livingroomcollege.org" }
         },
-        [_vm._v("Volver a la página de Inicio\n  ")]
+        [_vm._v("\n        Volver a la página de Inicio\n    ")]
       )
-    ],
-    1
-  )
-}
-var staticRenderFns = []
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -59615,7 +59625,9 @@ var render = function() {
                   },
                   [
                     _vm._v(
-                      "\n                        Curso de finanzas\n                    "
+                      "\n                        " +
+                        _vm._s(_vm.course.name) +
+                        "\n                    "
                     )
                   ]
                 ),
@@ -59627,12 +59639,14 @@ var render = function() {
                       "block mt-1 text-lg leading-tight font-semibold text-gray-900 hover:underline",
                     attrs: { href: "#" }
                   },
-                  [_vm._v("De la carencia a la abundancia")]
+                  [_vm._v(_vm._s(_vm.course.tagline))]
                 ),
                 _vm._v(" "),
                 _c("p", { staticClass: "mt-2 font-thin text-black" }, [
                   _vm._v(
-                    "\n                        Getting a new business off the ground is a lot of\n                        hard work. Here are five ideas you can use to find\n                        your first customers.\n                    "
+                    "\n                        " +
+                      _vm._s(_vm.course.description) +
+                      "\n                    "
                   )
                 ]),
                 _vm._v(" "),

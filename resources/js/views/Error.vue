@@ -1,8 +1,11 @@
 <template>
-  <div class="flex-col items-center">
-    <h1 class="text-gray-700 text-6xl uppercase">error</h1>
-    <router-link class="mt-5 text-xl text-black hover:underline" to="/"
-      >Volver a la página de Inicio
-    </router-link>
-  </div>
+    <div class="flex-col items-center text-center">
+        <h1 class="text-gray-700 text-6xl uppercase">error</h1>
+        <a
+            href="https://cursos.livingroomcollege.org"
+            class="mt-5 text-xl text-black hover:underline"
+        >
+            Volver a la página de Inicio
+        </a>
+    </div>
 </template>
