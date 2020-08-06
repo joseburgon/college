@@ -35,8 +35,8 @@ class ReferenceCodeController extends Controller
 
         $preference->back_urls = array(
             "success" => "http://checkout.livingroomcollege.org/response",
-            "failure" => "http://checkout.livingroomcollege.org/response",
-            "pending" => "http://checkout.livingroomcollege.org/response"
+            "failure" => "http://checkout.livingroomcollege.org/failure",
+            "pending" => "http://checkout.livingroomcollege.org/pending"
         );
         
         $preference->auto_return = "approved";

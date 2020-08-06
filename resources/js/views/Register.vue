@@ -125,7 +125,7 @@
                         <script v-if="registered"
                             src="https://www.mercadopago.com.co/integrations/v1/web-payment-checkout.js"
                             type="application/javascript"
-                            :data-preference-id="formValues.referenceCode"
+                            :data-preference-id="referenceCode"
                         ></script>
                         <!-- <pre class="code px-2" v-text="formValues" /> -->
                     </div>
@@ -179,6 +179,7 @@ export default {
             valid: {},
             Students: [],
             course: "",
+            referenceCode: "",
             cedula: "",
             firstName: "",
             lastName: "",
@@ -208,7 +209,7 @@ export default {
                 });
         },
         setReferenceCode(reference) {
-            this.formValues.referenceCode = reference.code;
+            this.referenceCode = reference.code;
         },
         setSignature() {
             let data = this.formValues;
@@ -231,7 +232,6 @@ export default {
     mounted() {
         axios
             .post("api/reference", {
-                prefix: "LvrCollege_Test",
                 course: this.query.course
             })
             .then(res => {

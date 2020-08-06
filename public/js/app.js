@@ -7587,6 +7587,7 @@ __webpack_require__.r(__webpack_exports__);
       valid: {},
       Students: [],
       course: "",
+      referenceCode: "",
       cedula: "",
       firstName: "",
       lastName: "",
@@ -7615,7 +7616,7 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     setReferenceCode: function setReferenceCode(reference) {
-      this.formValues.referenceCode = reference.code;
+      this.referenceCode = reference.code;
     },
     setSignature: function setSignature() {
       var data = this.formValues;
@@ -7636,7 +7637,6 @@ __webpack_require__.r(__webpack_exports__);
     var _this3 = this;
 
     axios.post("api/reference", {
-      prefix: "LvrCollege_Test",
       course: this.query.course
     }).then(function (res) {
       _this3.setReferenceCode(res.data);
@@ -59417,7 +59417,7 @@ var render = function() {
                           src:
                             "https://www.mercadopago.com.co/integrations/v1/web-payment-checkout.js",
                           type: "application/javascript",
-                          "data-preference-id": _vm.formValues.referenceCode
+                          "data-preference-id": _vm.referenceCode
                         }
                       })
                     : _vm._e()
