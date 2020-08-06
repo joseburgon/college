@@ -17,6 +17,7 @@ class CreateReferenceCodesTable extends Migration
             $table->id();
             $table->string('code');
             $table->unsignedBigInteger('course_id');
+            $table->unsignedBigInteger('student_id')->nullable();
             $table->timestamps();
         });
     }

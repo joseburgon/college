@@ -6,9 +6,8 @@
                     class="w-full max-w-lg px-2 md:px-8"
                     v-model="formValues"
                     id="registerForm"
-                    action="http://checkout.livingroomcollege.org/response"
+                    action="#"
                     method="GET"
-                    
                 >
                     <h2
                         class="font-normal text-black text-2xl md:text-4xl mb-4 md:mb-8"
@@ -17,17 +16,17 @@
                     </h2>
 
                     <FormulateInput
-                        name="extra1"
+                        name="code"
                         type="hidden"
-                        v-model="cedula"
+                        v-model="referenceCode"
                     />
+
                     <div class="grid grid-flow-col grid-cols-2 gap-4">
                         <FormulateInput
                             name="name"
                             type="text"
                             label="Tu nombre"
                             placeholder="Tu primer nombre"
-                            v-model="firstName"
                             validation="required"
                             :validation-messages="{
                                 required: 'Nombre es requerido'
@@ -41,7 +40,6 @@
                             type="text"
                             label="Tu apellido"
                             placeholder="Tu apellido"
-                            v-model="lastName"
                             validation="required"
                             :validation-messages="{
                                 required: 'Apellido es requerido'
@@ -75,7 +73,6 @@
                             type="text"
                             label="Número de cédula"
                             placeholder="Tu cédula"
-                            v-model="cedula"
                             validation="required"
                             :validation-messages="{
                                 required: 'Cedula es requerida'
@@ -115,18 +112,13 @@
                             :disabled="registered"
                         />
                     </div>
-                    <div class="div mt-10">
+                    <div class="flex mt-10">
                         <FormulateInput
                             type="button"
                             name="Registrarme"
                             @click="addStudent"
                             :disabled="registered"
                         />
-                        <script v-if="registered"
-                            src="https://www.mercadopago.com.co/integrations/v1/web-payment-checkout.js"
-                            type="application/javascript"
-                            :data-preference-id="referenceCode"
-                        ></script>
                         <!-- <pre class="code px-2" v-text="formValues" /> -->
                     </div>
                 </FormulateForm>
@@ -168,7 +160,6 @@
 </template>
 
 <script>
-import md5 from "crypto-js/md5";
 import PxPaymentMethods from "../components/PxPaymentMethods";
 
 export default {
@@ -177,21 +168,15 @@ export default {
             query: this.$route.query,
             formValues: {},
             valid: {},
-            Students: [],
             course: "",
             referenceCode: "",
-            cedula: "",
-            firstName: "",
-            lastName: "",
-            registered: false,
+            mercadoPagoUrl: "",
+            registered: false
         };
     },
+
     components: { PxPaymentMethods },
-    computed: {
-        fullName: function() {
-            return this.firstName + " " + this.lastName;
-        }
-    },
+
     methods: {
         addStudent() {
             let data = this.formValues;
@@ -199,27 +184,27 @@ export default {
             axios
                 .post("api/students", data)
                 .then(res => {
-                    console.log(`Response: ${res.data.extra1}`);
+                    console.log(`Response: ${res.data.identification}`);
                     console.log(`Response: ${res.data.message}`);
                     this.registered = true;
-                    //document.forms["registerForm"].submit();
+                    window.location.replace(this.mercadoPagoUrl);
                 })
                 .catch(e => {
                     console.log(e);
                 });
         },
+
         setReferenceCode(reference) {
-            this.referenceCode = reference.code;
-        },
-        setSignature() {
-            let data = this.formValues;
-            data.signature = md5(
-                `${this.formValues.ApiKey}~${this.formValues.merchantId}~${this.formValues.referenceCode}~${this.formValues.amount}~${this.formValues.currency}`
-            ).toString();
-            console.log("Signature created!");
+            this.referenceCode = reference;
+            console.log(`Reference Code: ${reference}`);
         }
     },
+
     created() {
+        if (!this.query.course) {
+            this.query.course = 2;
+        }
+
         axios
             .get(`api/courses/${this.query.course}`)
             .then(res => {
@@ -229,14 +214,16 @@ export default {
                 window.location.replace("/error");
             });
     },
+
     mounted() {
         axios
             .post("api/reference", {
                 course: this.query.course
             })
             .then(res => {
-                this.setReferenceCode(res.data);
-                this.setSignature();
+                console.log(res.data);
+                this.setReferenceCode(res.data.referenceCode);
+                this.mercadoPagoUrl = res.data.init_point;
             })
             .catch(e => {
                 console.log(e);

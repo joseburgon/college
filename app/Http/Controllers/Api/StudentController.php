@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StudentRequest;
+use App\Models\Course;
+use App\Models\ReferenceCode;
 use App\Models\Student;
 use Illuminate\Http\Request;
 
@@ -36,12 +38,16 @@ class StudentController extends Controller
                 'city' => $request['billingCity'],
             ]
         );
+        
+        $referenceCode = ReferenceCode::where('code', $request['code'])->first();
 
-        $student->courses()->sync($request['extra2']);
+        $student->courses()->sync($referenceCode->course_id);
+
+        $referenceCode->fill(['student_id' => $student->id]);
 
         return response()->json([
             'message' => 'Student created!',
-            'extra1' => $request['extra1'],
+            'identification' => $request['identification'],
         ]);
     }
 

@@ -35,8 +35,8 @@ class ReferenceCodeController extends Controller
 
         $preference->back_urls = array(
             "success" => "http://checkout.livingroomcollege.org/response",
-            "failure" => "http://checkout.livingroomcollege.org/failure",
-            "pending" => "http://checkout.livingroomcollege.org/pending"
+            "failure" => "http://checkout.livingroomcollege.org/response",
+            "pending" => "http://checkout.livingroomcollege.org/response"
         );
         
         $preference->auto_return = "all";
@@ -54,6 +54,11 @@ class ReferenceCodeController extends Controller
         $referenceCode->course_id = $request->course;
         $referenceCode->save();
 
-        return $referenceCode->toJson();
+        return response()->json([
+            'referenceCode' => $referenceCode->code,
+            'init_point' => $preference->init_point,
+        ]);
+
+        //return $referenceCode->toJson();
     }
 }
