@@ -20,6 +20,11 @@ export default new Router({
             component: Register
         },
         {
+            path: "/pending",
+            name: "pending",
+            component: Pending
+        },
+        {
             path: "/response",
             name: "response",
             component: Response

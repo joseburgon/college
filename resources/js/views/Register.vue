@@ -6,65 +6,20 @@
                     class="w-full max-w-lg px-2 md:px-8"
                     v-model="formValues"
                     id="registerForm"
-                    action="https://sandbox.checkout.payulatam.com/ppp-web-gateway-payu"
-                    method="post"
-                    @submit="addStudent"
+                    action="http://checkout.livingroomcollege.org/response"
+                    method="POST"
+                    
                 >
                     <h2
                         class="font-normal text-black text-2xl md:text-4xl mb-4 md:mb-8"
                     >
                         Registrarme
                     </h2>
-                    <FormulateInput
-                        type="hidden"
-                        name="ApiKey"
-                        value="4Vj8eK4rloUd272L48hsrarnUA"
-                    />
-                    <FormulateInput
-                        name="merchantId"
-                        type="hidden"
-                        value="508029"
-                    />
-                    <FormulateInput
-                        name="referenceCode"
-                        type="hidden"
-                        value=""
-                    />
-                    <FormulateInput name="amount" type="hidden" v-model="course.price" />
-                    <FormulateInput
-                        name="accountId"
-                        type="hidden"
-                        value="512321"
-                    />
-                    <FormulateInput
-                        name="description"
-                        type="hidden"
-                        value="Curso de Finanzas"
-                    />
 
                     <FormulateInput
                         name="extra1"
                         type="hidden"
                         v-model="cedula"
-                    />
-                    <FormulateInput name="extra2" type="hidden" value="2" />
-                    <FormulateInput name="currency" type="hidden" value="COP" />
-                    <FormulateInput name="signature" type="hidden" value="" />
-                    <FormulateInput
-                        name="buyerFullName"
-                        type="hidden"
-                        v-model="fullName"
-                    />
-                    <FormulateInput name="test" type="hidden" value="1" />
-                    <FormulateInput
-                        name="responseUrl"
-                        type="hidden"
-                        value="http://checkout.livingroomcollege.org/response"
-                    />
-                    <FormulateInput
-                        name="confirmationUrl"
-                        type="hidden"
-                        value="http://checkout.livingroomcollege.org/api/transactions"
                     />
                     <div class="grid grid-flow-col grid-cols-2 gap-4">
                         <FormulateInput
@@ -79,6 +34,7 @@
                             }"
                             outer-class="formulate-input flex-grow pr-2"
                             label-class="text-xs font-bold"
+                            :disabled="registered"
                         />
                         <FormulateInput
                             name="last_name"
@@ -92,6 +48,7 @@
                             }"
                             outer-class="formulate-input flex-grow pl-2"
                             label-class="text-xs font-bold"
+                            :disabled="registered"
                         />
                     </div>
 
@@ -108,6 +65,7 @@
                             }"
                             element-class="flex-grow"
                             label-class="text-xs font-bold"
+                            :disabled="registered"
                         />
                     </div>
 
@@ -125,6 +83,7 @@
                             element-class="flex justify-center"
                             outer-class="formulate-input flex-grow pr-2"
                             label-class="text-xs font-bold"
+                            :disabled="registered"
                         />
                         <FormulateInput
                             name="mobilePhone"
@@ -138,6 +97,7 @@
                             }"
                             outer-class="formulate-input flex-grow pl-2"
                             label-class="text-xs font-bold"
+                            :disabled="registered"
                         />
                     </div>
                     <div class="flex-col justify-center mb-6">
@@ -152,13 +112,21 @@
                             }"
                             element-class="flex-grow"
                             label-class="text-xs font-bold"
+                            :disabled="registered"
                         />
                     </div>
                     <div class="div mt-10">
                         <FormulateInput
-                            type="submit"
-                            name="Registrarme y Pagar"
+                            type="button"
+                            name="Registrarme"
+                            @click="addStudent"
+                            :disabled="registered"
                         />
+                        <script v-if="registered"
+                            src="https://www.mercadopago.com.co/integrations/v1/web-payment-checkout.js"
+                            type="application/javascript"
+                            :data-preference-id="formValues.referenceCode"
+                        ></script>
                         <!-- <pre class="code px-2" v-text="formValues" /> -->
                     </div>
                 </FormulateForm>
@@ -183,7 +151,10 @@
                         </p>
                         <hr class="border-gray-400 my-4 lg:my-8" />
                         <h3 class="text-2xl font-bold mb-4">
-                            {{ '$ ' + new Intl.NumberFormat().format(course.price) }}
+                            {{
+                                "$ " +
+                                    new Intl.NumberFormat().format(course.price)
+                            }}
                         </h3>
                         <p class="font-hairline text-dustyGray text-xs">
                             MEDIOS DE PAGO
@@ -211,6 +182,7 @@ export default {
             cedula: "",
             firstName: "",
             lastName: "",
+            registered: false,
         };
     },
     components: { PxPaymentMethods },
@@ -221,7 +193,6 @@ export default {
     },
     methods: {
         addStudent() {
-
             let data = this.formValues;
 
             axios
@@ -229,12 +200,12 @@ export default {
                 .then(res => {
                     console.log(`Response: ${res.data.extra1}`);
                     console.log(`Response: ${res.data.message}`);
-                    document.forms["registerForm"].submit();
+                    this.registered = true;
+                    //document.forms["registerForm"].submit();
                 })
                 .catch(e => {
                     console.log(e);
                 });
-
         },
         setReferenceCode(reference) {
             this.formValues.referenceCode = reference.code;
@@ -261,7 +232,7 @@ export default {
         axios
             .post("api/reference", {
                 prefix: "LvrCollege_Test",
-                course: this.query.course,
+                course: this.query.course
             })
             .then(res => {
                 this.setReferenceCode(res.data);

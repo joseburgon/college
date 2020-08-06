@@ -36,6 +36,7 @@
     <div id="app" class="container mx-auto">
         @yield('content')
     </div>
+    @yield('scripts')
 </body>
 
 </html>

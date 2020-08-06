@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,7 +22,11 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::namespace('Api')->group(function () {
 
-    Route::post('/reference', 'ReferenceCodeController@store')->name('api.reference');
+    Route::post('reference', 'ReferenceCodeController@store')->name('api.reference');
+    
+    Route::post('notifications', function (Request $request) {
+        Log::info('Mercado Pago notification.', $request->input());
+    })->name('api.notifications');
 
     Route::apiResources([
         'courses' => 'CourseController',
