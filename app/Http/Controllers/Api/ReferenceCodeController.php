@@ -39,7 +39,7 @@ class ReferenceCodeController extends Controller
             "pending" => "http://checkout.livingroomcollege.org/pending"
         );
         
-        $preference->auto_return = "approved";
+        $preference->auto_return = "all";
 
         $preference->notification_url = 'http://checkout.livingroomcollege.org/api/notifications?source_news=ipn';
 

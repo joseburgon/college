@@ -59219,7 +59219,7 @@ var render = function() {
               attrs: {
                 id: "registerForm",
                 action: "http://checkout.livingroomcollege.org/response",
-                method: "POST"
+                method: "GET"
               },
               model: {
                 value: _vm.formValues,

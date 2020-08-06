@@ -7,7 +7,7 @@
                     v-model="formValues"
                     id="registerForm"
                     action="http://checkout.livingroomcollege.org/response"
-                    method="POST"
+                    method="GET"
                     
                 >
                     <h2
