@@ -36,11 +36,13 @@ class CreateThinkificUser implements ShouldQueue
     {
         $transaction = $event->transaction;
 
-        if (intval($transaction->state_pol) === 4) {
+        if (intval($transaction->status) === 'approved') {
 
             Log::info('Transaction approved!', (array) $transaction);
 
-            $student = Student::where('email', $transaction->email_buyer)->first();
+            $referenceCode = ReferenceCode::find($transaction->external_reference);
+
+            $student = $referenceCode->student;
 
             Log::info('Retrieving student', (array) $student);
 

@@ -29,8 +29,6 @@ class TransactionController extends Controller
      */
     public function store(Request $request)
     {
-        $responseMsg = 'Something went wrong';
-
         Log::info('Request', $request->input());
 
         if (isset($request->type)) {
@@ -43,23 +41,21 @@ class TransactionController extends Controller
 
                 if ($payment['status'] === 'approved') {
 
-                    /* $transaction = Transaction::firstOrCreate(
-                        ['transaction_id' => $payment['transaction_id']],
+                    $transaction = Transaction::firstOrCreate(
+                        ['id' => $payment['id']],
                         $payment
-                    ); */
+                    );
         
-                    Log::info('Transaction stored', $payment);
+                    Log::info('Transaction stored', $transaction);
                     
                     //TransactionSaved::dispatch($transaction);
-        
-                    $responseMsg = 'Transaction stored!';
 
                 }
             }
         }
         
         return response()->json(
-            ['message' => $responseMsg], 200);
+            ['message' => 'Received!'], 200);
         
     }
 
