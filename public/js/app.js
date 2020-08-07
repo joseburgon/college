@@ -2285,47 +2285,46 @@ __webpack_require__.r(__webpack_exports__);
 
       var data = this.formValues;
       axios.post("api/students", data).then(function (res) {
-        console.log("Response: ".concat(res.data.identification));
-        console.log("Response: ".concat(res.data.message));
-        _this.registered = true;
-        window.location.replace(_this.mercadoPagoUrl);
+        _this.getReferenceCode(res.data.id); //this.registered = true;
+
       })["catch"](function (e) {
         console.log(e);
       });
     },
-    setReferenceCode: function setReferenceCode(reference) {
-      this.referenceCode = reference;
-      console.log("Reference Code: ".concat(reference));
+    getReferenceCode: function getReferenceCode(student) {
+      var _this2 = this;
+
+      axios.post("api/reference", {
+        course: this.query.course,
+        student: student
+      }).then(function (res) {
+        console.log(res.data);
+        _this2.referenceCode = res.data.referenceCode;
+        _this2.mercadoPagoUrl = res.data.init_point;
+
+        _this2.goToMercadoPago();
+      })["catch"](function (e) {
+        console.log(e);
+      });
+    },
+    goToMercadoPago: function goToMercadoPago() {
+      window.location.replace(this.mercadoPagoUrl);
     }
   },
   created: function created() {
-    var _this2 = this;
+    var _this3 = this;
 
     if (!this.query.course) {
       this.query.course = 2;
     }
 
     axios.get("api/courses/".concat(this.query.course)).then(function (res) {
-      _this2.course = res.data;
+      _this3.course = res.data;
     })["catch"](function (e) {
       window.location.replace("/error");
     });
   },
-  mounted: function mounted() {
-    var _this3 = this;
-
-    axios.post("api/reference", {
-      course: this.query.course
-    }).then(function (res) {
-      console.log(res.data);
-
-      _this3.setReferenceCode(res.data.referenceCode);
-
-      _this3.mercadoPagoUrl = res.data.init_point;
-    })["catch"](function (e) {
-      console.log(e);
-    });
-  }
+  mounted: function mounted() {}
 });
 
 /***/ }),
@@ -4252,13 +4251,13 @@ var render = function() {
               ),
               _vm._v(" "),
               _c("FormulateInput", {
-                attrs: { name: "code", type: "hidden" },
+                attrs: { name: "course", type: "hidden" },
                 model: {
-                  value: _vm.referenceCode,
+                  value: _vm.course,
                   callback: function($$v) {
-                    _vm.referenceCode = $$v
+                    _vm.course = $$v
                   },
-                  expression: "referenceCode"
+                  expression: "course"
                 }
               }),
               _vm._v(" "),

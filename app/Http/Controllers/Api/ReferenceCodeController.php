@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Course;
 use App\Models\ReferenceCode;
+use App\Models\Student;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use MercadoPago;
@@ -24,8 +25,32 @@ class ReferenceCodeController extends Controller
     {
         $course = Course::find($request->course);
 
+        $student = Student::find($request->student);
+
+        $student->courses()->sync($course->id);
+
+        $referenceCode = ReferenceCode::create([
+            'course_id' => $request->course,
+            'student_id' => $request->student,
+        ]);
+
         // Agrega credenciales
         MercadoPago\SDK::setAccessToken(env('MERCADOPAGO_ACCESS_TOKEN'));
+
+        $payer = new MercadoPago\Payer();
+        $payer->name = $student->name;
+        $payer->surname = $student->last_name;
+        $payer->email = $student->email;
+        $payer->date_created = $student->created_at;
+        $payer->phone = array(
+            "area_code" => "",
+            "number" => $student->phone
+        );
+
+        $payer->identification = array(
+            "type" => "CC",
+            "number" => $student->identification
+        );        
 
         // Crea un objeto de preferencia
         $preference = new MercadoPago\Preference();
@@ -38,21 +63,28 @@ class ReferenceCodeController extends Controller
             "failure" => "http://checkout.livingroomcollege.org/response",
             "pending" => "http://checkout.livingroomcollege.org/response"
         );
-        
-        $preference->auto_return = "all";
 
-        $preference->notification_url = 'http://checkout.livingroomcollege.org/api/notifications';
+        $preference->auto_return = "approved";
+
+        $preference->notification_url = 'http://checkout.livingroomcollege.org/api/transactions';
 
         $item->title = $course->name;
+        $item->description = $course->description;
+        $item->category_id = 'learnings';
         $item->quantity = 1;
         $item->unit_price = $course->price;
+        
+        $tax = new MercadoPago\Tax();
+        $tax->type = 'IVA';
+        $tax->value = 0;
+        $preference->taxes = array($tax);
+
+        $preference->external_reference = $referenceCode->id;
+        $preference->payer = $payer;
         $preference->items = array($item);
         $preference->save();
 
-        $referenceCode = new ReferenceCode;
-        $referenceCode->code = $preference->id;
-        $referenceCode->course_id = $request->course;
-        $referenceCode->save();
+        $referenceCode->update(['code' => $preference->id]);
 
         return response()->json([
             'referenceCode' => $referenceCode->code,

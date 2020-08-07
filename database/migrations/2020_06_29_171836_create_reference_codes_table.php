@@ -15,9 +15,9 @@ class CreateReferenceCodesTable extends Migration
     {
         Schema::create('reference_codes', function (Blueprint $table) {
             $table->id();
-            $table->string('code');
+            $table->string('code')->nullable();
             $table->unsignedBigInteger('course_id');
-            $table->unsignedBigInteger('student_id')->nullable();
+            $table->unsignedBigInteger('student_id');
             $table->timestamps();
         });
     }

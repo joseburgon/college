@@ -16,9 +16,9 @@
                     </h2>
 
                     <FormulateInput
-                        name="code"
+                        name="course"
                         type="hidden"
-                        v-model="referenceCode"
+                        v-model="course"
                     />
 
                     <div class="grid grid-flow-col grid-cols-2 gap-4">
@@ -184,19 +184,33 @@ export default {
             axios
                 .post("api/students", data)
                 .then(res => {
-                    console.log(`Response: ${res.data.identification}`);
-                    console.log(`Response: ${res.data.message}`);
-                    this.registered = true;
-                    window.location.replace(this.mercadoPagoUrl);
+                    this.getReferenceCode(res.data.id);
+                    //this.registered = true;
                 })
                 .catch(e => {
                     console.log(e);
                 });
         },
 
-        setReferenceCode(reference) {
-            this.referenceCode = reference;
-            console.log(`Reference Code: ${reference}`);
+        getReferenceCode(student) {
+            axios
+                .post("api/reference", {
+                    course: this.query.course,
+                    student: student
+                })
+                .then(res => {
+                    console.log(res.data);
+                    this.referenceCode = res.data.referenceCode;
+                    this.mercadoPagoUrl = res.data.init_point;
+                    this.goToMercadoPago();
+                })
+                .catch(e => {
+                    console.log(e);
+                });
+        },
+
+        goToMercadoPago() {
+            window.location.replace(this.mercadoPagoUrl);
         }
     },
 
@@ -215,19 +229,6 @@ export default {
             });
     },
 
-    mounted() {
-        axios
-            .post("api/reference", {
-                course: this.query.course
-            })
-            .then(res => {
-                console.log(res.data);
-                this.setReferenceCode(res.data.referenceCode);
-                this.mercadoPagoUrl = res.data.init_point;
-            })
-            .catch(e => {
-                console.log(e);
-            });
-    }
+    mounted() {}
 };
 </script>

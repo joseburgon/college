@@ -7,7 +7,7 @@ Auth::routes();
 
 Route::get('testing', function () {
     $apiRepo = new MercadoPagoApi();
-    return $apiRepo->getOrder('1656653618');
+    return $apiRepo->getPayment('28692185');
 });
 
 Route::get('{any}', 'AppController@index')

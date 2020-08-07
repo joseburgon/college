@@ -38,17 +38,8 @@ class StudentController extends Controller
                 'city' => $request['billingCity'],
             ]
         );
-        
-        $referenceCode = ReferenceCode::where('code', $request['code'])->first();
 
-        $student->courses()->sync($referenceCode->course_id);
-
-        $referenceCode->fill(['student_id' => $student->id]);
-
-        return response()->json([
-            'message' => 'Student created!',
-            'identification' => $request['identification'],
-        ]);
+        return response()->json($student);
     }
 
     /**
