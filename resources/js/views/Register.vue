@@ -115,7 +115,7 @@
                     <div class="flex mt-10">
                         <FormulateInput
                             type="button"
-                            name="Registrarme"
+                            name="Registrarme y Pagar"
                             @click="addStudent"
                             :disabled="registered"
                         />

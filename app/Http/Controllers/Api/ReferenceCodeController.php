@@ -41,7 +41,7 @@ class ReferenceCodeController extends Controller
         
         $preference->auto_return = "all";
 
-        $preference->notification_url = 'http://checkout.livingroomcollege.org/api/notifications?source_news=ipn';
+        $preference->notification_url = 'http://checkout.livingroomcollege.org/api/notifications';
 
         $item->title = $course->name;
         $item->quantity = 1;

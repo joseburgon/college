@@ -26,6 +26,7 @@ Route::namespace('Api')->group(function () {
     
     Route::post('notifications', function (Request $request) {
         Log::info('Mercado Pago notification.', $request->input());
+        return response('Success', 200);
     })->name('api.notifications');
 
     Route::apiResources([

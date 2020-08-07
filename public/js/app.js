@@ -4396,7 +4396,7 @@ var render = function() {
                   _c("FormulateInput", {
                     attrs: {
                       type: "button",
-                      name: "Registrarme",
+                      name: "Registrarme y Pagar",
                       disabled: _vm.registered
                     },
                     on: { click: _vm.addStudent }
