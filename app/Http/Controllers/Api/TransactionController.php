@@ -29,15 +29,19 @@ class TransactionController extends Controller
      */
     public function store(Request $request)
     {
-        Log::info('Request', $request->input());
+        Log::info('Notification Request', $request->input());
 
         if (isset($request->type)) {
             if ($request->type === 'payment') {
                 $apiRepo = new MercadoPagoApi();
                 
-                $id = $request->input('data_id');
+                $id = $request->data_id;
+
+                Log::info('Before getting payment');
 
                 $payment = $apiRepo->getPayment($id);
+
+                Log::info('After getting payment', $payment);
 
                 if ($payment['status'] === 'approved') {
 
@@ -46,7 +50,7 @@ class TransactionController extends Controller
                         $payment
                     );
         
-                    Log::info('Transaction stored', $transaction);
+                    Log::info('Transaction stored', (array) $transaction);
                     
                     //TransactionSaved::dispatch($transaction);
 
