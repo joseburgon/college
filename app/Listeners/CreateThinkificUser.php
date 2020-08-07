@@ -36,11 +36,15 @@ class CreateThinkificUser implements ShouldQueue
     {
         $transaction = $event->transaction;
 
-        if (intval($transaction->status) === 'approved') {
+        Log::info('Llegue al listener');
+
+        if ($transaction->status === 'approved') {
 
             Log::info('Transaction approved!', (array) $transaction);
 
             $referenceCode = ReferenceCode::find($transaction->external_reference);
+
+            Log::info('Getting reference!', (array) $referenceCode);
 
             $student = $referenceCode->student;
 
@@ -55,7 +59,7 @@ class CreateThinkificUser implements ShouldQueue
                 'status' => 'user created'
             ])->save();
 
-            $course = Course::has('referenceCodes', '=', $transaction->reference_sale)->first();
+            $course = $referenceCode->course;
 
             $this->enrollmentProccess($user, $course, $student);
             
@@ -116,7 +120,7 @@ class CreateThinkificUser implements ShouldQueue
 
         $enrollment = $apiRepo->createEnrollment($enrollmentData);
 
-        Log::info('Student enrolled successfully in course ' . $enrollment['course_name']);
+        Log::info('Student enrolled successfully in course.' . $enrollment);
 
         $student->fill(['status' => 'enrolled'])->save();
     }

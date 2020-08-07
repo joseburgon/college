@@ -37,13 +37,9 @@ class TransactionController extends Controller
                 
                 $id = $request->data_id;
 
-                Log::info('Before getting payment');
-
                 $payment = $apiRepo->getPayment($id);
 
-                Log::info('After getting payment', $payment);
-
-                if ($payment['status'] === 'approved') {
+                if ($payment['status'] === "approved") {
 
                     $transaction = Transaction::firstOrCreate(
                         ['id' => $payment['id']],
@@ -52,7 +48,7 @@ class TransactionController extends Controller
         
                     Log::info('Transaction stored', (array) $transaction);
                     
-                    //TransactionSaved::dispatch($transaction);
+                    TransactionSaved::dispatch($transaction);
 
                 }
             }
