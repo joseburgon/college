@@ -4,9 +4,7 @@ namespace App\Listeners;
 
 use App\Events\TransactionSaved;
 use App\Mail\ThinkificCredentials;
-use App\Models\Course;
 use App\Models\ReferenceCode;
-use App\Models\Student;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use App\Repositories\ThinkificApi;
@@ -120,7 +118,7 @@ class CreateThinkificUser implements ShouldQueue
 
         $enrollment = $apiRepo->createEnrollment($enrollmentData);
 
-        Log::info('Student enrolled successfully in course.' . $enrollment);
+        Log::info('Student enrolled successfully in course.', $enrollment);
 
         $student->fill(['status' => 'enrolled'])->save();
     }
