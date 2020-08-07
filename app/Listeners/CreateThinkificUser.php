@@ -93,9 +93,6 @@ class CreateThinkificUser implements ShouldQueue
             'first_name' => $student->name,
             'last_name' => $student->last_name,
             'password' => $password,
-            'roles' => ["affiliate"],
-            'affiliate_commission' => 0,
-            'affiliate_payout_email' => $student->email,
             'send_welcome_email' => true
         ];
 
