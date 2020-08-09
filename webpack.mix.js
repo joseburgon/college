@@ -28,3 +28,5 @@ mix.sass("resources/sass/app.scss", "public/css")
         folders: ["src", "templates"],
         extensions: ["html", "js", "php", "vue"]
     });
+
+mix.browserSync('college.test');

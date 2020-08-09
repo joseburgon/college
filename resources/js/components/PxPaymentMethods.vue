@@ -1,6 +1,6 @@
 <template>
-    <section class="flex-col flex-wrap items-center">
-        <div class="flex credit-cards">
+    <div class="flex-col flex-wrap items-center">
+        <div class="flex flex-wrap credit-cards">
             <div class="flex items-center w-10 m-4">
                 <img
                     alt="Visa"
@@ -20,7 +20,7 @@
                 />
             </div>
         </div>
-        <div class="flex banks">
+        <div class="flex flex-wrap banks">
             <div class="flex items-center w-20 m-4">
                 <img
                     alt="Bancolombia"
@@ -40,7 +40,7 @@
                 />
             </div>
         </div>
-        <div class="flex others">
+        <div class="flex flex-wrap others">
             <div class="flex items-center w-10 m-4">
                 <img
                     alt="PSE"
@@ -60,5 +60,5 @@
                 />
             </div>
         </div>
-    </section>
+    </div>
 </template>

@@ -2263,6 +2263,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -2341,6 +2343,26 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../api */ "./resources/js/api.js");
 /* harmony import */ var _components_PxThumbsUp__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/PxThumbsUp */ "./resources/js/components/PxThumbsUp.vue");
 /* harmony import */ var _components_PxThumbsDown__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/PxThumbsDown */ "./resources/js/components/PxThumbsDown.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -3729,15 +3751,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "main",
-    [
-      _c("px-header"),
-      _vm._v(" "),
-      _c("router-view", { staticClass: "p-4 md:p-12 mx-2 md:mx-20" })
-    ],
-    1
-  )
+  return _c("main", [_c("px-header"), _vm._v(" "), _c("router-view")], 1)
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -3763,17 +3777,16 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "nav",
-    {
-      staticClass: "flex items-center justify-between flex-wrap bg-wildsand p-6"
-    },
+    { staticClass: "flex items-center justify-between flex-wrap bg-wildsand" },
     [
       _c(
         "div",
+        { staticClass: "py-4 mx-40" },
         [
           _c(
             "router-link",
             { attrs: { to: { name: "start" } } },
-            [_c("px-logo", { staticClass: "w-48" })],
+            [_c("px-logo", { staticClass: "w-40" })],
             1
           )
         ],
@@ -3987,8 +4000,8 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("section", { staticClass: "flex-col flex-wrap items-center" }, [
-      _c("div", { staticClass: "flex credit-cards" }, [
+    return _c("div", { staticClass: "flex-col flex-wrap items-center" }, [
+      _c("div", { staticClass: "flex flex-wrap credit-cards" }, [
         _c("div", { staticClass: "flex items-center w-10 m-4" }, [
           _c("img", {
             attrs: {
@@ -4020,7 +4033,7 @@ var staticRenderFns = [
         ])
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "flex banks" }, [
+      _c("div", { staticClass: "flex flex-wrap banks" }, [
         _c("div", { staticClass: "flex items-center w-20 m-4" }, [
           _c("img", {
             attrs: {
@@ -4052,7 +4065,7 @@ var staticRenderFns = [
         ])
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "flex others" }, [
+      _c("div", { staticClass: "flex flex-wrap others" }, [
         _c("div", { staticClass: "flex items-center w-10 m-4" }, [
           _c("img", {
             attrs: {
@@ -4221,206 +4234,210 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "flex-col" }, [
-    _c("div", { staticClass: "flex flex-wrap md:6 lg:px-20" }, [
-      _c(
-        "div",
-        { staticClass: "flex w-full md:w-1/2" },
-        [
-          _c(
-            "FormulateForm",
-            {
-              staticClass: "w-full max-w-lg px-2 md:px-8",
-              attrs: { id: "registerForm", action: "#", method: "GET" },
-              model: {
-                value: _vm.formValues,
-                callback: function($$v) {
-                  _vm.formValues = $$v
-                },
-                expression: "formValues"
-              }
-            },
-            [
-              _c(
-                "h2",
-                {
-                  staticClass:
-                    "font-normal text-black text-2xl md:text-4xl mb-4 md:mb-8"
-                },
-                [_vm._v("\n                    Registrarme\n                ")]
-              ),
-              _vm._v(" "),
-              _c("FormulateInput", {
-                attrs: { name: "course", type: "hidden" },
+  return _c("div", { staticClass: "py-4 md:py-12 mx-8 md:mx-40" }, [
+    _c("div", { staticClass: "flex-col" }, [
+      _c("div", { staticClass: "flex flex-wrap md:6" }, [
+        _c(
+          "div",
+          { staticClass: "flex w-full md:w-1/2" },
+          [
+            _c(
+              "FormulateForm",
+              {
+                staticClass: "w-full max-w-lg pr-2 md:pr-8",
+                attrs: { id: "registerForm", action: "#", method: "GET" },
                 model: {
-                  value: _vm.course,
+                  value: _vm.formValues,
                   callback: function($$v) {
-                    _vm.course = $$v
+                    _vm.formValues = $$v
                   },
-                  expression: "course"
+                  expression: "formValues"
                 }
-              }),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "grid grid-flow-col grid-cols-2 gap-4" },
-                [
-                  _c("FormulateInput", {
-                    attrs: {
-                      name: "name",
-                      type: "text",
-                      label: "Tu nombre",
-                      placeholder: "Tu primer nombre",
-                      validation: "required",
-                      "validation-messages": {
-                        required: "Nombre es requerido"
-                      },
-                      "outer-class": "formulate-input flex-grow pr-2",
-                      "label-class": "text-xs font-bold",
-                      disabled: _vm.registered
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c("FormulateInput", {
-                    attrs: {
-                      name: "last_name",
-                      type: "text",
-                      label: "Tu apellido",
-                      placeholder: "Tu apellido",
-                      validation: "required",
-                      "validation-messages": {
-                        required: "Apellido es requerido"
-                      },
-                      "outer-class": "formulate-input flex-grow pl-2",
-                      "label-class": "text-xs font-bold",
-                      disabled: _vm.registered
-                    }
-                  })
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "flex-col justify-center pb-6" },
-                [
-                  _c("FormulateInput", {
-                    attrs: {
-                      name: "buyerEmail",
-                      type: "email",
-                      label: "Correo electrónico",
-                      placeholder: "Email",
-                      validation: "required|email",
-                      "validation-messages": {
-                        required: "Tu correo es requerido",
-                        email: "Tu correo debe ser un email válido"
-                      },
-                      "element-class": "flex-grow",
-                      "label-class": "text-xs font-bold",
-                      disabled: _vm.registered
-                    }
-                  })
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "grid grid-flow-col grid-cols-2 gap-4" },
-                [
-                  _c("FormulateInput", {
-                    attrs: {
-                      name: "identification",
-                      type: "text",
-                      label: "Número de cédula",
-                      placeholder: "Tu cédula",
-                      validation: "required",
-                      "validation-messages": {
-                        required: "Cedula es requerida"
-                      },
-                      "element-class": "flex justify-center",
-                      "outer-class": "formulate-input flex-grow pr-2",
-                      "label-class": "text-xs font-bold",
-                      disabled: _vm.registered
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c("FormulateInput", {
-                    attrs: {
-                      name: "mobilePhone",
-                      type: "text",
-                      label: "Número de teléfono",
-                      placeholder: "Tu teléfono",
-                      validation: "required|number",
-                      "validation-messages": {
-                        required: "Tu teléfono es requerido",
-                        number: "Tu teléfono debe ser un número"
-                      },
-                      "outer-class": "formulate-input flex-grow pl-2",
-                      "label-class": "text-xs font-bold",
-                      disabled: _vm.registered
-                    }
-                  })
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "flex-col justify-center mb-6" },
-                [
-                  _c("FormulateInput", {
-                    attrs: {
-                      name: "billingCity",
-                      type: "text",
-                      label: "Ciudad de residencia",
-                      placeholder: "Tu ciudad",
-                      validation: "required",
-                      "validation-messages": {
-                        required: "Ciudad es requerida"
-                      },
-                      "element-class": "flex-grow",
-                      "label-class": "text-xs font-bold",
-                      disabled: _vm.registered
-                    }
-                  })
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "flex mt-10" },
-                [
-                  _c("FormulateInput", {
-                    attrs: {
-                      type: "button",
-                      name: "Registrarme y Pagar",
-                      disabled: _vm.registered
+              },
+              [
+                _c(
+                  "h2",
+                  {
+                    staticClass:
+                      "font-normal text-black text-2xl md:text-4xl mb-4 md:mb-8"
+                  },
+                  [
+                    _vm._v(
+                      "\n                        Registrarme\n                    "
+                    )
+                  ]
+                ),
+                _vm._v(" "),
+                _c("FormulateInput", {
+                  attrs: { name: "course", type: "hidden" },
+                  model: {
+                    value: _vm.course,
+                    callback: function($$v) {
+                      _vm.course = $$v
                     },
-                    on: { click: _vm.addStudent }
-                  })
-                ],
-                1
-              )
-            ],
-            1
-          )
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c(
-        "div",
-        {
-          staticClass:
-            "bg-gray-100 rounded w-full md:w-1/2 mt-6 md:mt-0 sm:mt-6"
-        },
-        [
-          _c("div", { staticClass: "md:flex py-4 px-8" }, [
+                    expression: "course"
+                  }
+                }),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "grid grid-flow-col grid-cols-2 gap-4" },
+                  [
+                    _c("FormulateInput", {
+                      attrs: {
+                        name: "name",
+                        type: "text",
+                        label: "Tu nombre",
+                        placeholder: "Tu primer nombre",
+                        validation: "required",
+                        "validation-messages": {
+                          required: "Nombre es requerido"
+                        },
+                        "outer-class": "formulate-input flex-grow pr-2",
+                        "label-class": "text-xs font-bold",
+                        disabled: _vm.registered
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("FormulateInput", {
+                      attrs: {
+                        name: "last_name",
+                        type: "text",
+                        label: "Tu apellido",
+                        placeholder: "Tu apellido",
+                        validation: "required",
+                        "validation-messages": {
+                          required: "Apellido es requerido"
+                        },
+                        "outer-class": "formulate-input flex-grow pl-2",
+                        "label-class": "text-xs font-bold",
+                        disabled: _vm.registered
+                      }
+                    })
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "flex-col justify-center pb-6" },
+                  [
+                    _c("FormulateInput", {
+                      attrs: {
+                        name: "buyerEmail",
+                        type: "email",
+                        label: "Correo electrónico",
+                        placeholder: "Email",
+                        validation: "required|email",
+                        "validation-messages": {
+                          required: "Tu correo es requerido",
+                          email: "Tu correo debe ser un email válido"
+                        },
+                        "element-class": "flex-grow",
+                        "label-class": "text-xs font-bold",
+                        disabled: _vm.registered
+                      }
+                    })
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "grid grid-flow-col grid-cols-2 gap-4" },
+                  [
+                    _c("FormulateInput", {
+                      attrs: {
+                        name: "identification",
+                        type: "text",
+                        label: "Número de cédula",
+                        placeholder: "Tu cédula",
+                        validation: "required",
+                        "validation-messages": {
+                          required: "Cedula es requerida"
+                        },
+                        "element-class": "flex justify-center",
+                        "outer-class": "formulate-input flex-grow pr-2",
+                        "label-class": "text-xs font-bold",
+                        disabled: _vm.registered
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("FormulateInput", {
+                      attrs: {
+                        name: "mobilePhone",
+                        type: "text",
+                        label: "Número de teléfono",
+                        placeholder: "Tu teléfono",
+                        validation: "required|number",
+                        "validation-messages": {
+                          required: "Tu teléfono es requerido",
+                          number: "Tu teléfono debe ser un número"
+                        },
+                        "outer-class": "formulate-input flex-grow pl-2",
+                        "label-class": "text-xs font-bold",
+                        disabled: _vm.registered
+                      }
+                    })
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "flex-col justify-center mb-6" },
+                  [
+                    _c("FormulateInput", {
+                      attrs: {
+                        name: "billingCity",
+                        type: "text",
+                        label: "Ciudad de residencia",
+                        placeholder: "Tu ciudad",
+                        validation: "required",
+                        "validation-messages": {
+                          required: "Ciudad es requerida"
+                        },
+                        "element-class": "flex-grow",
+                        "label-class": "text-xs font-bold",
+                        disabled: _vm.registered
+                      }
+                    })
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "flex mt-10" },
+                  [
+                    _c("FormulateInput", {
+                      attrs: {
+                        type: "button",
+                        name: "Registrarme y Pagar",
+                        disabled: _vm.registered
+                      },
+                      on: { click: _vm.addStudent }
+                    })
+                  ],
+                  1
+                )
+              ],
+              1
+            )
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass:
+              "flex flex-col flex-wrap bg-gray-100 rounded w-full md:w-1/2 mt-6 md:mt-0 sm:mt-6"
+          },
+          [
             _c(
               "div",
-              { staticClass: "flex-col flex-wrap mt-4 md:mt-0" },
+              { staticClass: "flex flex-col flex-wrap py-4 px-8" },
               [
                 _c(
                   "div",
@@ -4430,9 +4447,9 @@ var render = function() {
                   },
                   [
                     _vm._v(
-                      "\n                        " +
+                      "\n                            " +
                         _vm._s(_vm.course.name) +
-                        "\n                    "
+                        "\n                        "
                     )
                   ]
                 ),
@@ -4447,23 +4464,27 @@ var render = function() {
                   [_vm._v(_vm._s(_vm.course.tagline))]
                 ),
                 _vm._v(" "),
-                _c("p", { staticClass: "mt-2 font-thin text-black" }, [
-                  _vm._v(
-                    "\n                        " +
-                      _vm._s(_vm.course.description) +
-                      "\n                    "
-                  )
-                ]),
+                _c(
+                  "p",
+                  { staticClass: "mt-2 font-thin text-black break-words" },
+                  [
+                    _vm._v(
+                      "\n                            " +
+                        _vm._s(_vm.course.description) +
+                        "\n                        "
+                    )
+                  ]
+                ),
                 _vm._v(" "),
                 _c("hr", { staticClass: "border-gray-400 my-4 lg:my-8" }),
                 _vm._v(" "),
                 _c("h3", { staticClass: "text-2xl font-bold mb-4" }, [
                   _vm._v(
-                    "\n                        " +
+                    "\n                            " +
                       _vm._s(
                         "$ " + new Intl.NumberFormat().format(_vm.course.price)
                       ) +
-                      "\n                    "
+                      "\n                        "
                   )
                 ]),
                 _vm._v(" "),
@@ -4472,7 +4493,7 @@ var render = function() {
                   { staticClass: "font-hairline text-dustyGray text-xs" },
                   [
                     _vm._v(
-                      "\n                        MEDIOS DE PAGO\n                    "
+                      "\n                            MEDIOS DE PAGO\n                        "
                     )
                   ]
                 ),
@@ -4481,9 +4502,9 @@ var render = function() {
               ],
               1
             )
-          ])
-        ]
-      )
+          ]
+        )
+      ])
     ])
   ])
 }
@@ -4509,74 +4530,113 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "flex justify-center mt-16" }, [
+  return _c("div", { staticClass: "w-full" }, [
     _c(
       "div",
-      { staticClass: "max-w-sm rounded overflow-hidden shadow-lg py-8" },
+      { staticClass: "flex bg-white pl-40", staticStyle: { height: "700px" } },
       [
         _c(
           "div",
-          { staticClass: "flex justify-center mt-8" },
-          [
-            _vm.transactionState == "approved"
-              ? _c("px-thumbs-up", { staticClass: "w-12" })
-              : _c("px-thumbs-down", { staticClass: "w-12" })
-          ],
-          1
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
           {
-            staticClass: "flex flex-col justify-center items-center px-6 py-4"
+            staticClass:
+              "flex items-center text-center lg:text-left px-8 md:px-12 lg:w-1/2"
           },
           [
-            _c("p", { staticClass: "font-light text-sm" }, [
-              _vm._v("Resultado del pago:")
-            ]),
-            _vm._v(" "),
-            _c("p", { staticClass: "font-bold text-2xl mb-2" }, [
-              _vm._v(
-                "\n                " + _vm._s(_vm.estadoTx) + "\n            "
-              )
-            ]),
-            _vm._v(" "),
-            _vm.transactionState == "approved"
-              ? _c(
-                  "p",
-                  { staticClass: "text-gray-700 text-base text-center" },
-                  [
-                    _vm._v(
-                      "\n                Con esto has quedado matriculado para el curso:\n                "
-                    ),
-                    _c("span", { staticClass: "tx-wildsand font-semibold" }, [
+            _c("div", [
+              _c("h2", { staticClass: "text-3xl font-semibold md:text-4xl" }, [
+                _vm._v(
+                  "\n                    ¡Compra completada!\n                "
+                )
+              ]),
+              _vm._v(" "),
+              _vm.transactionState == "approved"
+                ? _c(
+                    "p",
+                    { staticClass: "mt-2 text-sm text-gray-500 md:text-base" },
+                    [
                       _vm._v(
-                        "\n                    De la carencia a la abundancia\n                "
+                        "\n                    Con esto has quedado matriculado para el curso:\n                    "
+                      ),
+                      _c("span", { staticClass: "text-black font-semibold" }, [
+                        _vm._v(
+                          "\n                        De la carencia a la abundancia.\n                    "
+                        )
+                      ]),
+                      _vm._v(
+                        "\n                    Enviaremos tu usuario y contraseña a tu mail para que\n                    puedas acceder a la plataforma tan pronto se lance el\n                    curso.\n                "
                       )
-                    ]),
-                    _vm._v(
-                      "\n                Enviaremos tu usuario y contraseña a tu mail para que\n                puedas acceder a la plataforma tan pronto se lance el curso.\n            "
-                    )
-                  ]
-                )
-              : _c(
-                  "p",
-                  { staticClass: "text-gray-700 text-base text-center" },
-                  [
-                    _vm._v(
-                      "\n                " +
-                        _vm._s(_vm.transactionState) +
-                        "\n            "
-                    )
-                  ]
-                )
+                    ]
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              _vm._m(0)
+            ])
           ]
-        )
+        ),
+        _vm._v(" "),
+        _vm._m(1)
       ]
     )
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "flex justify-center lg:justify-start mt-6" },
+      [
+        _c(
+          "a",
+          {
+            staticClass:
+              "px-4 py-3 bg-gray-900 text-gray-200 text-xs font-semibold rounded hover:bg-gray-800",
+            attrs: {
+              href: "https://cursos.livingroomcollege.org/users/sign_in"
+            }
+          },
+          [_vm._v("Iniciar Sesión")]
+        ),
+        _vm._v(" "),
+        _c(
+          "a",
+          {
+            staticClass:
+              "mx-4 px-4 py-3 bg-gray-300 text-gray-900 text-xs font-semibold rounded hover:bg-gray-400",
+            attrs: { href: "https://cursos.livingroomcollege.org/collections" }
+          },
+          [_vm._v("Otros Cursos")]
+        )
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass: "hidden lg:block lg:w-1/2",
+        staticStyle: {
+          "clip-path": "polygon(10% 0, 100% 0%, 100% 100%, 0 100%)"
+        }
+      },
+      [
+        _c(
+          "div",
+          {
+            staticClass: "h-full object-none",
+            staticStyle: { "background-image": "url(/img/approved_banner.jpg)" }
+          },
+          [_c("div", { staticClass: "h-full bg-black opacity-25" })]
+        )
+      ]
+    )
+  }
+]
 render._withStripped = true
 
 
@@ -20471,8 +20531,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/visual/Documents/DEV/college/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Users/visual/Documents/DEV/college/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\laragon\www\college\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\laragon\www\college\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

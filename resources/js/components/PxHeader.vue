@@ -1,8 +1,8 @@
 <template>
-    <nav class="flex items-center justify-between flex-wrap bg-wildsand p-6">
-        <div>
+    <nav class="flex items-center justify-between flex-wrap bg-wildsand">
+        <div class="py-4 mx-40">
             <router-link :to="{ name: 'start' }">
-                <px-logo class="w-48" />
+                <px-logo class="w-40" />
             </router-link>
         </div>
         <!--         <div>
