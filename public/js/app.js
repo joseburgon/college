@@ -2394,6 +2394,42 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -4533,48 +4569,147 @@ var render = function() {
   return _c("div", { staticClass: "w-full" }, [
     _c(
       "div",
-      { staticClass: "flex bg-white pl-40", staticStyle: { height: "700px" } },
+      {
+        staticClass: "flex bg-white sm:px-40 md:px-0",
+        staticStyle: { height: "685px" }
+      },
       [
         _c(
           "div",
           {
             staticClass:
-              "flex items-center text-center lg:text-left px-8 md:px-12 lg:w-1/2"
+              "flex items-center text-center lg:text-left px-12 md:px-40 lg:w-1/2"
           },
           [
-            _c("div", [
-              _c("h2", { staticClass: "text-3xl font-semibold md:text-4xl" }, [
-                _vm._v(
-                  "\n                    ¡Compra completada!\n                "
-                )
-              ]),
-              _vm._v(" "),
-              _vm.transactionState == "approved"
-                ? _c(
+            _vm.transactionState === "approved"
+              ? _c("div", [
+                  _c(
+                    "h2",
+                    { staticClass: "text-3xl font-semibold md:text-4xl" },
+                    [
+                      _vm._v(
+                        "\n                    ¡Compra completada!\n                "
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _vm.transactionState == "approved"
+                    ? _c(
+                        "p",
+                        {
+                          staticClass: "mt-2 text-sm text-gray-500 md:text-base"
+                        },
+                        [
+                          _vm._v(
+                            "\n                    Con esto has quedado matriculado para el curso:\n                    "
+                          ),
+                          _c(
+                            "span",
+                            { staticClass: "text-black font-semibold" },
+                            [
+                              _vm._v(
+                                "\n                        De la carencia a la abundancia.\n                    "
+                              )
+                            ]
+                          ),
+                          _vm._v(
+                            "\n                    Enviaremos tu usuario y contraseña a tu mail para que\n                    puedas acceder a la plataforma tan pronto se lance el\n                    curso.\n                "
+                          )
+                        ]
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm._m(0)
+                ])
+              : _vm.transactionState === "pending"
+              ? _c("div", [
+                  _c(
+                    "h2",
+                    { staticClass: "text-3xl font-semibold md:text-4xl" },
+                    [
+                      _vm._v(
+                        "\n                    Tu pago se encuentra pendiente.\n                "
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
                     "p",
                     { staticClass: "mt-2 text-sm text-gray-500 md:text-base" },
                     [
                       _vm._v(
-                        "\n                    Con esto has quedado matriculado para el curso:\n                    "
-                      ),
-                      _c("span", { staticClass: "text-black font-semibold" }, [
-                        _vm._v(
-                          "\n                        De la carencia a la abundancia.\n                    "
-                        )
-                      ]),
-                      _vm._v(
-                        "\n                    Enviaremos tu usuario y contraseña a tu mail para que\n                    puedas acceder a la plataforma tan pronto se lance el\n                    curso.\n                "
+                        "\n                    Apenas tu pago cambie a estado aprobado procederemos a\n                    enviar tus credenciales de acceso a tu correo electrónico.\n                "
                       )
                     ]
                   )
-                : _vm._e(),
-              _vm._v(" "),
-              _vm._m(0)
-            ])
+                ])
+              : _c("div", [
+                  _c(
+                    "h2",
+                    { staticClass: "text-3xl font-semibold md:text-4xl" },
+                    [
+                      _vm._v(
+                        "\n                    Ocurrió un problema con tu compra\n                "
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "p",
+                    { staticClass: "mt-2 text-sm text-gray-500 md:text-base" },
+                    [
+                      _vm._v(
+                        "\n                    Por favor intentálo de nuevo.\n                "
+                      )
+                    ]
+                  )
+                ])
           ]
         ),
         _vm._v(" "),
-        _vm._m(1)
+        _c(
+          "div",
+          {
+            staticClass: "hidden lg:block lg:w-1/2",
+            staticStyle: {
+              "clip-path": "polygon(10% 0, 100% 0%, 100% 100%, 0 100%)"
+            }
+          },
+          [
+            _vm.transactionState === "approved"
+              ? _c(
+                  "div",
+                  {
+                    staticClass: "h-full object-fit",
+                    staticStyle: {
+                      "background-image": "url(/img/approved_banner_v2.jpg)"
+                    }
+                  },
+                  [_c("div", { staticClass: "h-full bg-black opacity-25" })]
+                )
+              : _vm.transactionState === "pending"
+              ? _c(
+                  "div",
+                  {
+                    staticClass: "h-full object-fit",
+                    staticStyle: {
+                      "background-image": "url(/img/pending_banner.jpg)"
+                    }
+                  },
+                  [_c("div", { staticClass: "h-full bg-black opacity-25" })]
+                )
+              : _c(
+                  "div",
+                  {
+                    staticClass: "h-full object-fit",
+                    staticStyle: {
+                      "background-image": "url(/img/rejected_banner.jpg)"
+                    }
+                  },
+                  [_c("div", { staticClass: "h-full bg-black opacity-25" })]
+                )
+          ]
+        )
       ]
     )
   ])
@@ -4608,30 +4743,6 @@ var staticRenderFns = [
             attrs: { href: "https://cursos.livingroomcollege.org/collections" }
           },
           [_vm._v("Otros Cursos")]
-        )
-      ]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      {
-        staticClass: "hidden lg:block lg:w-1/2",
-        staticStyle: {
-          "clip-path": "polygon(10% 0, 100% 0%, 100% 100%, 0 100%)"
-        }
-      },
-      [
-        _c(
-          "div",
-          {
-            staticClass: "h-full object-none",
-            staticStyle: { "background-image": "url(/img/approved_banner.jpg)" }
-          },
-          [_c("div", { staticClass: "h-full bg-black opacity-25" })]
         )
       ]
     )
