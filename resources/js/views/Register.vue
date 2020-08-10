@@ -13,7 +13,7 @@
                         <h2
                             class="font-normal text-black text-2xl md:text-4xl mb-4 md:mb-8"
                         >
-                            Registrarme
+                            Matricularme
                         </h2>
 
                         <FormulateInput
@@ -116,7 +116,7 @@
                         <div class="flex mt-10">
                             <FormulateInput
                                 type="button"
-                                name="Registrarme y Pagar"
+                                name="Pagar"
                                 @click="addStudent"
                                 :disabled="registered"
                             />
