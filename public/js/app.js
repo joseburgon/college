@@ -2257,14 +2257,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -2272,7 +2264,7 @@ __webpack_require__.r(__webpack_exports__);
       query: this.$route.query,
       formValues: {},
       valid: {},
-      course: "",
+      course: {},
       referenceCode: "",
       mercadoPagoUrl: "",
       registered: false
@@ -2287,8 +2279,11 @@ __webpack_require__.r(__webpack_exports__);
 
       var data = this.formValues;
       axios.post("api/students", data).then(function (res) {
-        _this.getReferenceCode(res.data.id); //this.registered = true;
+        _this.getReferenceCode(res.data.id);
 
+        _this.registered = true;
+
+        _this.createPaypal(_this.course.name, _this.course.price);
       })["catch"](function (e) {
         console.log(e);
       });
@@ -2302,15 +2297,39 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (res) {
         console.log(res.data);
         _this2.referenceCode = res.data.referenceCode;
-        _this2.mercadoPagoUrl = res.data.init_point;
-
-        _this2.goToMercadoPago();
+        _this2.mercadoPagoUrl = res.data.init_point; //this.goToMercadoPago();
       })["catch"](function (e) {
         console.log(e);
       });
     },
     goToMercadoPago: function goToMercadoPago() {
       window.location.replace(this.mercadoPagoUrl);
+    },
+    createPaypal: function createPaypal(description, price) {
+      window.paypal.Buttons({
+        createOrder: function createOrder(data, actions) {
+          // This function sets up the details of the transaction, including the amount and line item details.
+          return actions.order.create({
+            purchase_units: [{
+              description: description,
+              amount: {
+                value: Math.floor(price / 3400),
+                currency_code: "USD"
+              }
+            }]
+          });
+        },
+        onApprove: function onApprove(data, actions) {
+          // This function captures the funds from the transaction.
+          return actions.order.capture().then(function (details) {
+            // This function shows a transaction success message to your buyer.
+            alert("Transaction completed by " + details.payer.name.given_name);
+          });
+        },
+        onError: function onError(err) {
+          console.log(err);
+        }
+      }).render("#paypal-button-container"); //This function displays Smart Payment Buttons on your web page.
     }
   },
   created: function created() {
@@ -2322,6 +2341,7 @@ __webpack_require__.r(__webpack_exports__);
 
     axios.get("api/courses/".concat(this.query.course)).then(function (res) {
       _this3.course = res.data;
+      console.log(_this3.course);
     })["catch"](function (e) {
       window.location.replace("/error");
     });
@@ -4297,11 +4317,7 @@ var render = function() {
                     staticClass:
                       "font-normal text-black text-2xl md:text-4xl mb-4 md:mb-8"
                   },
-                  [
-                    _vm._v(
-                      "\n                        Registrarme\n                    "
-                    )
-                  ]
+                  [_vm._v("Matricularme")]
                 ),
                 _vm._v(" "),
                 _c("FormulateInput", {
@@ -4449,11 +4465,21 @@ var render = function() {
                     _c("FormulateInput", {
                       attrs: {
                         type: "button",
-                        name: "Registrarme y Pagar",
+                        name: "Matricularme",
                         disabled: _vm.registered
                       },
                       on: { click: _vm.addStudent }
-                    })
+                    }),
+                    _vm._v(" "),
+                    _c("script", {
+                      attrs: {
+                        type: "application/javascript",
+                        src:
+                          "https://www.paypal.com/sdk/js?client-id=ARUO9QDHYXWYbyJgUOF_FTEGXtKTtifep5xklBxSbeWYnI5MZdnKshKztdlRASZkLU_AQdrMrqi3e6lF"
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("div", { attrs: { id: "paypal-button-container" } })
                   ],
                   1
                 )
@@ -4481,13 +4507,7 @@ var render = function() {
                     staticClass:
                       "uppercase tracking-wide text-sm text-dustyGray font-bold my-4"
                   },
-                  [
-                    _vm._v(
-                      "\n                            " +
-                        _vm._s(_vm.course.name) +
-                        "\n                        "
-                    )
-                  ]
+                  [_vm._v(_vm._s(_vm.course.name))]
                 ),
                 _vm._v(" "),
                 _c(
@@ -4503,35 +4523,25 @@ var render = function() {
                 _c(
                   "p",
                   { staticClass: "mt-2 font-thin text-black break-words" },
-                  [
-                    _vm._v(
-                      "\n                            " +
-                        _vm._s(_vm.course.description) +
-                        "\n                        "
-                    )
-                  ]
+                  [_vm._v(_vm._s(_vm.course.description))]
                 ),
                 _vm._v(" "),
                 _c("hr", { staticClass: "border-gray-400 my-4 lg:my-8" }),
                 _vm._v(" "),
                 _c("h3", { staticClass: "text-2xl font-bold mb-4" }, [
                   _vm._v(
-                    "\n                            " +
+                    "\n            " +
                       _vm._s(
                         "$ " + new Intl.NumberFormat().format(_vm.course.price)
                       ) +
-                      "\n                        "
+                      "\n          "
                   )
                 ]),
                 _vm._v(" "),
                 _c(
                   "p",
                   { staticClass: "font-hairline text-dustyGray text-xs" },
-                  [
-                    _vm._v(
-                      "\n                            MEDIOS DE PAGO\n                        "
-                    )
-                  ]
+                  [_vm._v("MEDIOS DE PAGO")]
                 ),
                 _vm._v(" "),
                 _c("px-payment-methods")
