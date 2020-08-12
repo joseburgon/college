@@ -36,7 +36,9 @@ class CreateThinkificUser implements ShouldQueue
 
         Log::info('Llegue al listener');
 
-        if ($transaction->status === 'approved') {
+        $status = $transaction->status;
+
+        if ($status === 'approved' || $status === 'COMPLETED') {
 
             Log::info('Transaction approved!', (array) $transaction);
 
@@ -60,11 +62,9 @@ class CreateThinkificUser implements ShouldQueue
             $course = $referenceCode->course;
 
             $this->enrollmentProccess($user, $course, $student);
-            
         } else {
 
             Log::info('Transaction not approved', (array) $transaction);
-
         }
     }
 
@@ -79,7 +79,7 @@ class CreateThinkificUser implements ShouldQueue
 
         if ($userExists) {
 
-            Log:info('User already exists');
+            Log: info('User already exists');
 
             $user = $apiRepo->getUser($student->email);
 
@@ -93,7 +93,14 @@ class CreateThinkificUser implements ShouldQueue
             'first_name' => $student->name,
             'last_name' => $student->last_name,
             'password' => $password,
-            'send_welcome_email' => true
+            'custom_profile_fields' => json_encode([
+                [
+                    'value' => $student->phone,
+                    'label' => 'phone',
+                    'custom_profile_field_definition_id' => 1
+                ]
+            ]),
+            'send_welcome_email' => false
         ];
 
         $user = $apiRepo->createUser($userData);

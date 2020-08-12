@@ -54,6 +54,8 @@ class TransactionController extends Controller
 
         Log::info('Transaction stored', (array) $transaction);
 
+        TransactionSaved::dispatch($transaction);
+
     }
 
 

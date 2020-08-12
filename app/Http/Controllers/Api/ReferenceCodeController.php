@@ -88,6 +88,7 @@ class ReferenceCodeController extends Controller
 
         return response()->json([
             'referenceCode' => $referenceCode->code,
+            'referenceId' => $referenceCode->id,
             'init_point' => $preference->init_point,
         ]);
 

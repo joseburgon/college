@@ -234,7 +234,7 @@ export default {
           console.log(res.data);
           this.referenceCode = res.data.referenceCode;
           this.mercadoPagoUrl = res.data.init_point;
-          this.createPaypal(this.student, this.course, this.referenceCode);
+          this.createPaypal(this.student, this.course, res.data.referenceId);
         })
         .catch((e) => {
           console.log(e);
@@ -245,7 +245,7 @@ export default {
       window.location.replace(this.mercadoPagoUrl);
     },
 
-    createPaypal(student, course, refCode) {
+    createPaypal(student, course, referenceId) {
       window.paypal
         .Buttons({
           createOrder: function (data, actions) {
@@ -260,7 +260,7 @@ export default {
               },
               purchase_units: [
                 {
-                  reference_id: refCode,
+                  reference_id: referenceId,
                   description: course.name,
                   amount: {
                     value: Math.floor(course.price / 3400),

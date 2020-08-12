@@ -2336,7 +2336,7 @@ __webpack_require__.r(__webpack_exports__);
         _this2.referenceCode = res.data.referenceCode;
         _this2.mercadoPagoUrl = res.data.init_point;
 
-        _this2.createPaypal(_this2.student, _this2.course, _this2.referenceCode);
+        _this2.createPaypal(_this2.student, _this2.course, res.data.referenceId);
       })["catch"](function (e) {
         console.log(e);
       });
@@ -2344,7 +2344,7 @@ __webpack_require__.r(__webpack_exports__);
     goToMercadoPago: function goToMercadoPago() {
       window.location.replace(this.mercadoPagoUrl);
     },
-    createPaypal: function createPaypal(student, course, refCode) {
+    createPaypal: function createPaypal(student, course, referenceId) {
       window.paypal.Buttons({
         createOrder: function createOrder(data, actions) {
           // This function sets up the details of the transaction, including the amount and line item details.
@@ -2357,7 +2357,7 @@ __webpack_require__.r(__webpack_exports__);
               email_address: student.email
             },
             purchase_units: [{
-              reference_id: refCode,
+              reference_id: referenceId,
               description: course.name,
               amount: {
                 value: Math.floor(course.price / 3400),
