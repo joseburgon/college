@@ -15,6 +15,8 @@ class CreateTransactionsTable extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
+            $table->string('type', 50)->nullable();
+            $table->string('paypal_order', 250)->nullable();
             $table->string('status', 100)->nullable();
             $table->string('status_detail', 100)->nullable();
             $table->string('payment_method_id', 100)->nullable();

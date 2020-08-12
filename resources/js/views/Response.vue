@@ -12,7 +12,7 @@
                         class="mt-2 text-sm text-gray-500 md:text-base"
                         v-if="transactionState == 'approved'"
                     >
-                        Con esto has quedado matriculado para el curso:
+                        Con esto has quedado matriculado para el curso:<br>
                         <span class="text-black font-semibold">
                             De la carencia a la abundancia.
                         </span>
@@ -102,6 +102,10 @@ export default {
 
     created() {
         this.transactionState = this.query.collection_status;
+
+        if (this.transactionState === 'COMPLETED') {
+            this.transactionState = 'approved';
+        }
     }
 };
 </script>

@@ -2,19 +2,8 @@ module.exports = {
     theme: {
         fontFamily: {
             sans: [
-                "Roboto",
-                "system-ui",
-                "-apple-system",
-                "BlinkMacSystemFont",
-                '"Segoe UI"',
                 '"Helvetica Neue"',
-                "Arial",
-                '"Noto Sans"',
-                "sans-serif",
-                '"Apple Color Emoji"',
-                '"Segoe UI Emoji"',
-                '"Segoe UI Symbol"',
-                '"Noto Color Emoji"'
+                "-apple-system",
             ],
             serif: [
                 "Georgia",
@@ -43,7 +32,9 @@ module.exports = {
                 cyan: "#9cdbff",
                 wildsand: "#f5f5f5",
                 dustyGray: "#969696",
-                swampGreen: "#B8B88F"
+                swampGreen: "#B8B88F",
+                paypalBlue: "#0070BA",
+                mercadopagoBlue: "#009EE3",
             },
             spacing: {
                 "96": "24rem",

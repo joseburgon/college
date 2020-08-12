@@ -2257,6 +2257,40 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -2265,9 +2299,11 @@ __webpack_require__.r(__webpack_exports__);
       formValues: {},
       valid: {},
       course: {},
+      student: {},
       referenceCode: "",
       mercadoPagoUrl: "",
-      registered: false
+      registered: false,
+      openTab: 1
     };
   },
   components: {
@@ -2279,11 +2315,12 @@ __webpack_require__.r(__webpack_exports__);
 
       var data = this.formValues;
       axios.post("api/students", data).then(function (res) {
+        console.log(res.data);
+        _this.student = res.data;
+
         _this.getReferenceCode(res.data.id);
 
         _this.registered = true;
-
-        _this.createPaypal(_this.course.name, _this.course.price);
       })["catch"](function (e) {
         console.log(e);
       });
@@ -2297,7 +2334,9 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (res) {
         console.log(res.data);
         _this2.referenceCode = res.data.referenceCode;
-        _this2.mercadoPagoUrl = res.data.init_point; //this.goToMercadoPago();
+        _this2.mercadoPagoUrl = res.data.init_point;
+
+        _this2.createPaypal(_this2.student, _this2.course, _this2.referenceCode);
       })["catch"](function (e) {
         console.log(e);
       });
@@ -2305,15 +2344,23 @@ __webpack_require__.r(__webpack_exports__);
     goToMercadoPago: function goToMercadoPago() {
       window.location.replace(this.mercadoPagoUrl);
     },
-    createPaypal: function createPaypal(description, price) {
+    createPaypal: function createPaypal(student, course, refCode) {
       window.paypal.Buttons({
         createOrder: function createOrder(data, actions) {
           // This function sets up the details of the transaction, including the amount and line item details.
           return actions.order.create({
+            payer: {
+              name: {
+                given_name: student.name,
+                surname: student.last_name
+              },
+              email_address: student.email
+            },
             purchase_units: [{
-              description: description,
+              reference_id: refCode,
+              description: course.name,
               amount: {
-                value: Math.floor(price / 3400),
+                value: Math.floor(course.price / 3400),
                 currency_code: "USD"
               }
             }]
@@ -2321,15 +2368,29 @@ __webpack_require__.r(__webpack_exports__);
         },
         onApprove: function onApprove(data, actions) {
           // This function captures the funds from the transaction.
-          return actions.order.capture().then(function (details) {
+          actions.order.capture().then(function (details) {
             // This function shows a transaction success message to your buyer.
-            alert("Transaction completed by " + details.payer.name.given_name);
+            console.log(details);
+            var transaction = {
+              type: "PAYPAL",
+              paypal_order: details.id,
+              status: details.status,
+              external_reference: details.purchase_units[0].reference_id,
+              description: details.purchase_units[0].description,
+              transaction_amount: details.purchase_units[0].amount.value,
+              currency_id: details.purchase_units[0].amount.currency_code
+            };
+            axios.post("api/transactions/paypal", transaction).then(function (res) {
+              window.location.replace("/response?collection_status=".concat(transaction.status));
+            })["catch"](function (e) {
+              console.log(e);
+            });
           });
-        },
-        onError: function onError(err) {
-          console.log(err);
         }
       }).render("#paypal-button-container"); //This function displays Smart Payment Buttons on your web page.
+    },
+    toggleTabs: function toggleTabs(tabNumber) {
+      this.openTab = tabNumber;
     }
   },
   created: function created() {
@@ -2341,12 +2402,10 @@ __webpack_require__.r(__webpack_exports__);
 
     axios.get("api/courses/".concat(this.query.course)).then(function (res) {
       _this3.course = res.data;
-      console.log(_this3.course);
     })["catch"](function (e) {
       window.location.replace("/error");
     });
-  },
-  mounted: function mounted() {}
+  }
 });
 
 /***/ }),
@@ -2468,6 +2527,10 @@ __webpack_require__.r(__webpack_exports__);
   },
   created: function created() {
     this.transactionState = this.query.collection_status;
+
+    if (this.transactionState === 'COMPLETED') {
+      this.transactionState = 'approved';
+    }
   }
 });
 
@@ -3835,19 +3898,14 @@ var render = function() {
     "nav",
     { staticClass: "flex items-center justify-between flex-wrap bg-wildsand" },
     [
-      _c(
-        "div",
-        { staticClass: "py-4 mx-40" },
-        [
-          _c(
-            "router-link",
-            { attrs: { to: { name: "start" } } },
-            [_c("px-logo", { staticClass: "w-40" })],
-            1
-          )
-        ],
-        1
-      )
+      _c("div", { staticClass: "py-4 mx-40" }, [
+        _c(
+          "a",
+          { attrs: { href: "https://cursos.livingroomcollege.org/" } },
+          [_c("px-logo", { staticClass: "w-40" })],
+          1
+        )
+      ])
     ]
   )
 }
@@ -4128,6 +4186,16 @@ var staticRenderFns = [
               alt: "PSE",
               src:
                 "https://colombia.payu.com/wp-content/uploads/sites/5/2020/03/CO_Sol_logos_PSE.png"
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "flex items-center w-16 m-4" }, [
+          _c("img", {
+            attrs: {
+              alt: "PayPal",
+              src:
+                "https://www.paypalobjects.com/webstatic/mktg/Logo/pp-logo-150px.png"
             }
           })
         ]),
@@ -4460,28 +4528,131 @@ var render = function() {
                 _vm._v(" "),
                 _c(
                   "div",
-                  { staticClass: "flex mt-10" },
+                  { staticClass: "flex-col mt-10" },
                   [
-                    _c("FormulateInput", {
-                      attrs: {
-                        type: "button",
-                        name: "Matricularme",
-                        disabled: _vm.registered
-                      },
-                      on: { click: _vm.addStudent }
-                    }),
-                    _vm._v(" "),
-                    _c("script", {
-                      attrs: {
-                        type: "application/javascript",
-                        src:
-                          "https://www.paypal.com/sdk/js?client-id=ARUO9QDHYXWYbyJgUOF_FTEGXtKTtifep5xklBxSbeWYnI5MZdnKshKztdlRASZkLU_AQdrMrqi3e6lF"
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c("div", { attrs: { id: "paypal-button-container" } })
+                    !_vm.registered
+                      ? _c("FormulateInput", {
+                          attrs: { type: "button", name: "Matricularme" },
+                          on: { click: _vm.addStudent }
+                        })
+                      : _vm._e()
                   ],
                   1
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    directives: [
+                      {
+                        name: "show",
+                        rawName: "v-show",
+                        value: _vm.registered,
+                        expression: "registered"
+                      }
+                    ],
+                    staticClass: "payment-options mt-6"
+                  },
+                  [
+                    _c("ul", { staticClass: "flex border-b" }, [
+                      _c("li", { staticClass: "-mb-px mr-1" }, [
+                        _c(
+                          "a",
+                          {
+                            staticClass:
+                              "bg-white inline-block rounded-t py-2 px-4 text-mercadopagoBlue font-semibold cursor-pointer",
+                            class: {
+                              "border-r border-l border-t": _vm.openTab == 1,
+                              "hover:text-blue-800": _vm.openTab !== 1
+                            },
+                            on: {
+                              click: function($event) {
+                                return _vm.toggleTabs(1)
+                              }
+                            }
+                          },
+                          [_vm._v("MercadoPago")]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("li", { staticClass: "-mb-px mr-1" }, [
+                        _c(
+                          "a",
+                          {
+                            staticClass:
+                              "bg-white inline-block rounded-t py-2 px-4 text-paypalBlue font-semibold cursor-pointer",
+                            class: {
+                              "border-r border-l border-t": _vm.openTab == 2,
+                              "hover:text-blue-800": _vm.openTab !== 2
+                            },
+                            on: {
+                              click: function($event) {
+                                return _vm.toggleTabs(2)
+                              }
+                            }
+                          },
+                          [_vm._v("PayPal")]
+                        )
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        class: {
+                          hidden: _vm.openTab !== 1,
+                          block: _vm.openTab === 1
+                        }
+                      },
+                      [
+                        _c("div", { staticClass: "p-8" }, [
+                          _vm.registered
+                            ? _c(
+                                "button",
+                                {
+                                  staticClass:
+                                    "bg-gray-100 hover:bg-blue-100 border border-gray-300 py-2 px-4 rounded",
+                                  on: { click: _vm.goToMercadoPago }
+                                },
+                                [
+                                  _c("img", {
+                                    staticClass: "w-40 py-1 px-8",
+                                    attrs: {
+                                      src: "/img/mercadopago-logo.png",
+                                      alt: "MercadoPago"
+                                    }
+                                  })
+                                ]
+                              )
+                            : _vm._e()
+                        ])
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        class: {
+                          hidden: _vm.openTab !== 2,
+                          block: _vm.openTab === 2
+                        }
+                      },
+                      [
+                        _c("script", {
+                          attrs: {
+                            type: "application/javascript",
+                            src:
+                              "https://www.paypal.com/sdk/js?client-id=ARUO9QDHYXWYbyJgUOF_FTEGXtKTtifep5xklBxSbeWYnI5MZdnKshKztdlRASZkLU_AQdrMrqi3e6lF"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("div", {
+                          staticClass: "p-8",
+                          attrs: { id: "paypal-button-container" }
+                        })
+                      ]
+                    )
+                  ]
                 )
               ],
               1
@@ -4528,7 +4699,13 @@ var render = function() {
                 _vm._v(" "),
                 _c("hr", { staticClass: "border-gray-400 my-4 lg:my-8" }),
                 _vm._v(" "),
-                _c("h3", { staticClass: "text-2xl font-bold mb-4" }, [
+                _c(
+                  "p",
+                  { staticClass: "font-hairline text-dustyGray text-xs" },
+                  [_vm._v("DONACIÓN")]
+                ),
+                _vm._v(" "),
+                _c("h3", { staticClass: "text-2xl font-bold my-2" }, [
                   _vm._v(
                     "\n            " +
                       _vm._s(
@@ -4611,8 +4788,10 @@ var render = function() {
                         },
                         [
                           _vm._v(
-                            "\n                    Con esto has quedado matriculado para el curso:\n                    "
+                            "\n                    Con esto has quedado matriculado para el curso:"
                           ),
+                          _c("br"),
+                          _vm._v(" "),
                           _c(
                             "span",
                             { staticClass: "text-black font-semibold" },

@@ -105,21 +105,54 @@
                 :disabled="registered"
               />
             </div>
-            <div class="flex mt-10">
+            <div class="flex-col mt-10">
               <FormulateInput
                 type="button"
                 name="Matricularme"
                 @click="addStudent"
-                :disabled="registered"
+                v-if="!registered"
               />
+            </div>
+            <div class="payment-options mt-6" v-show="registered">
+              <ul class="flex border-b">
+                <li class="-mb-px mr-1">
+                  <a
+                    class="bg-white inline-block rounded-t py-2 px-4 text-mercadopagoBlue font-semibold cursor-pointer"
+                    :class="{'border-r border-l border-t': openTab == 1, 'hover:text-blue-800': openTab !== 1}"
+                    @click="toggleTabs(1)"
+                  >MercadoPago</a>
+                </li>
+                <li class="-mb-px mr-1">
+                  <a
+                    class="bg-white inline-block rounded-t py-2 px-4 text-paypalBlue font-semibold cursor-pointer"
+                    :class="{'border-r border-l border-t': openTab == 2, 'hover:text-blue-800': openTab !== 2}"
+                    @click="toggleTabs(2)"
+                  >PayPal</a>
+                </li>
+              </ul>
+              <div :class="{'hidden': openTab !== 1, 'block': openTab === 1}">
+                <div class="p-8">
+                  <button
+                    class="bg-gray-100 hover:bg-blue-100 border border-gray-300 py-2 px-4 rounded"
+                    v-if="registered"
+                    @click="goToMercadoPago"
+                  >
+                    <img
+                      :src="'/img/mercadopago-logo.png'"
+                      class="w-40 py-1 px-8"
+                      alt="MercadoPago"
+                    />
+                  </button>
+                </div>
+              </div>
+              <div :class="{'hidden': openTab !== 2, 'block': openTab === 2}">
+                <script
+                  type="application/javascript"
+                  src="https://www.paypal.com/sdk/js?client-id=ARUO9QDHYXWYbyJgUOF_FTEGXtKTtifep5xklBxSbeWYnI5MZdnKshKztdlRASZkLU_AQdrMrqi3e6lF"
+                ></script>
 
-              <script
-                type="application/javascript"
-                src="https://www.paypal.com/sdk/js?client-id=ARUO9QDHYXWYbyJgUOF_FTEGXtKTtifep5xklBxSbeWYnI5MZdnKshKztdlRASZkLU_AQdrMrqi3e6lF"
-              ></script>
-
-              <div id="paypal-button-container"></div>
-              <!-- <pre class="code px-2" v-text="formValues" /> -->
+                <div id="paypal-button-container" class="p-8"></div>
+              </div>
             </div>
           </FormulateForm>
         </div>
@@ -136,7 +169,8 @@
             >{{ course.tagline }}</a>
             <p class="mt-2 font-thin text-black break-words">{{ course.description }}</p>
             <hr class="border-gray-400 my-4 lg:my-8" />
-            <h3 class="text-2xl font-bold mb-4">
+            <p class="font-hairline text-dustyGray text-xs">DONACI&OacuteN</p>
+            <h3 class="text-2xl font-bold my-2">
               {{
               "$ " +
               new Intl.NumberFormat().format(
@@ -163,9 +197,11 @@ export default {
       formValues: {},
       valid: {},
       course: {},
+      student: {},
       referenceCode: "",
       mercadoPagoUrl: "",
       registered: false,
+      openTab: 1,
     };
   },
 
@@ -178,9 +214,10 @@ export default {
       axios
         .post("api/students", data)
         .then((res) => {
+          console.log(res.data);
+          this.student = res.data;
           this.getReferenceCode(res.data.id);
           this.registered = true;
-          this.createPaypal(this.course.name, this.course.price);
         })
         .catch((e) => {
           console.log(e);
@@ -197,7 +234,7 @@ export default {
           console.log(res.data);
           this.referenceCode = res.data.referenceCode;
           this.mercadoPagoUrl = res.data.init_point;
-          //this.goToMercadoPago();
+          this.createPaypal(this.student, this.course, this.referenceCode);
         })
         .catch((e) => {
           console.log(e);
@@ -208,17 +245,25 @@ export default {
       window.location.replace(this.mercadoPagoUrl);
     },
 
-    createPaypal(description, price) {
+    createPaypal(student, course, refCode) {
       window.paypal
         .Buttons({
           createOrder: function (data, actions) {
             // This function sets up the details of the transaction, including the amount and line item details.
             return actions.order.create({
+              payer: {
+                name: {
+                  given_name: student.name,
+                  surname: student.last_name,
+                },
+                email_address: student.email,
+              },
               purchase_units: [
                 {
-                  description: description,
+                  reference_id: refCode,
+                  description: course.name,
                   amount: {
-                    value: Math.floor(price / 3400),
+                    value: Math.floor(course.price / 3400),
                     currency_code: "USD",
                   },
                 },
@@ -227,19 +272,40 @@ export default {
           },
           onApprove: function (data, actions) {
             // This function captures the funds from the transaction.
-            return actions.order.capture().then(function (details) {
+
+            actions.order.capture().then(function (details) {
               // This function shows a transaction success message to your buyer.
-              alert(
-                "Transaction completed by " + details.payer.name.given_name
-              );
+              console.log(details);
+
+              let transaction = {
+                type: "PAYPAL",
+                paypal_order: details.id,
+                status: details.status,
+                external_reference: details.purchase_units[0].reference_id,
+                description: details.purchase_units[0].description,
+                transaction_amount: details.purchase_units[0].amount.value,
+                currency_id: details.purchase_units[0].amount.currency_code,
+              };
+
+              axios
+                .post("api/transactions/paypal", transaction)
+                .then((res) => {
+                  window.location.replace(
+                    `/response?collection_status=${transaction.status}`
+                  );
+                })
+                .catch((e) => {
+                  console.log(e);
+                });
             });
-          },
-          onError: err => {
-            console.log(err);
           }
         })
         .render("#paypal-button-container");
       //This function displays Smart Payment Buttons on your web page.
+    },
+
+    toggleTabs(tabNumber) {
+      this.openTab = tabNumber;
     },
   },
 
@@ -252,13 +318,10 @@ export default {
       .get(`api/courses/${this.query.course}`)
       .then((res) => {
         this.course = res.data;
-        console.log(this.course);
       })
       .catch((e) => {
         window.location.replace("/error");
       });
   },
-
-  mounted() {},
 };
 </script>

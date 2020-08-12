@@ -29,4 +29,6 @@ mix.sass("resources/sass/app.scss", "public/css")
         extensions: ["html", "js", "php", "vue"]
     });
 
+mix.copyDirectory('resources/fonts', 'public/fonts');
+
 mix.browserSync('college.test');

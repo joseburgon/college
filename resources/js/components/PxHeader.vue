@@ -1,11 +1,11 @@
 <template>
-    <nav class="flex items-center justify-between flex-wrap bg-wildsand">
-        <div class="py-4 mx-40">
-            <router-link :to="{ name: 'start' }">
-                <px-logo class="w-40" />
-            </router-link>
-        </div>
-        <!--         <div>
+  <nav class="flex items-center justify-between flex-wrap bg-wildsand">
+    <div class="py-4 mx-40">
+      <a href="https://cursos.livingroomcollege.org/">
+        <px-logo class="w-40" />
+      </a>
+    </div>
+    <!--         <div>
             <router-link
                 :to="{ name: 'register' }"
                 class="no-underline text-dustyGray hover:text-black ml-2"
@@ -18,18 +18,18 @@
             >
                 RESPONSE
             </router-link>
-        </div> -->
-    </nav>
+    </div>-->
+  </nav>
 </template>
 
 <script>
 import PxLogo from "./PxLogo";
 
 export default {
-    name: "PxHeader",
-    data() {
-        return {};
-    },
-    components: { PxLogo }
+  name: "PxHeader",
+  data() {
+    return {};
+  },
+  components: { PxLogo },
 };
 </script>

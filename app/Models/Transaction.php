@@ -14,13 +14,15 @@ class Transaction extends Model
         'external_reference',
         'description',
         'id',
-        'net_amount',	
+        'net_amount',
         'operation_type',
         'payment_method_id',
         'payment_type_id',
+        'paypal_order',
         'status',
         'status_detail',
         'transaction_amount',
+        'type',
     ];
-    
+
 }

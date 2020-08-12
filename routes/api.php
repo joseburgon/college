@@ -23,15 +23,18 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::namespace('Api')->group(function () {
 
     Route::post('reference', 'ReferenceCodeController@store')->name('api.reference');
-    
+
     Route::post('notifications', function (Request $request) {
         Log::info('Mercado Pago notification.', $request->input());
         return response('Success', 200);
     })->name('api.notifications');
 
+    Route::post('transactions/mercadopago', 'TransactionController@mercadopago')->name('api.transactions.mercadopago');
+
+    Route::post('transactions/paypal', 'TransactionController@paypal')->name('api.transactions.paypal');
+
     Route::apiResources([
         'courses' => 'CourseController',
-        'transactions' => 'TransactionController',
         'students' => 'StudentController',
     ]);
 });

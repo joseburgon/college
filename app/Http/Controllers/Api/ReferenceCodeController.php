@@ -50,7 +50,7 @@ class ReferenceCodeController extends Controller
         $payer->identification = array(
             "type" => "CC",
             "number" => $student->identification
-        );        
+        );
 
         // Crea un objeto de preferencia
         $preference = new MercadoPago\Preference();
@@ -66,14 +66,14 @@ class ReferenceCodeController extends Controller
 
         $preference->auto_return = "approved";
 
-        $preference->notification_url = 'http://checkout.livingroomcollege.org/api/transactions';
+        $preference->notification_url = 'http://checkout.livingroomcollege.org/api/transactions/mercadopago';
 
         $item->title = $course->name;
         $item->description = $course->description;
         $item->category_id = 'learnings';
         $item->quantity = 1;
         $item->unit_price = $course->price;
-        
+
         $tax = new MercadoPago\Tax();
         $tax->type = 'IVA';
         $tax->value = 0;
