@@ -93,11 +93,6 @@ class CreateThinkificUser implements ShouldQueue
             'first_name' => $student->name,
             'last_name' => $student->last_name,
             'password' => $password,
-            'custom_profile_fields' => json_encode([
-                1 => ['value' => $student->phone,
-                    'label' => 'phone',
-                    'custom_profile_field_definition_id' => 30558]
-            ]),
             'send_welcome_email' => false
         ];
 

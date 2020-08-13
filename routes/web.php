@@ -1,13 +1,21 @@
 <?php
 
+use App\Mail\TestEmail;
+use App\Mail\ThinkificCredentials;
 use Illuminate\Support\Facades\Route;
-use App\Repositories\MercadoPagoApi;
+use Illuminate\Support\Facades\Mail;
 
 Auth::routes();
 
 Route::get('testing', function () {
-    $apiRepo = new MercadoPagoApi();
-    return $apiRepo->getPayment('28692185');
+
+    $userData = [
+        'email' => 'some@mail.copm',
+        'password' => 'password',
+    ];
+
+    Mail::to('some@mail.com')->queue(new ThinkificCredentials($userData));
+    return '<h1>Enviado!</h1>';
 });
 
 Route::get('{any}', 'AppController@index')

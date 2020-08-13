@@ -138,7 +138,7 @@
                     @click="goToMercadoPago"
                   >
                     <img
-                      :src="'/img/mercadopago-logo.png'"
+                      :src="'/img/mercadopago_logo.svg'"
                       class="w-40 inline-block py-1 px-8"
                       alt="MercadoPago"
                     />

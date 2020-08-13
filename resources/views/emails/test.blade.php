@@ -4,10 +4,10 @@
 Estas son tu credenciales de acceso a la plataforma.
 
 ## Usuario:
-{{ $user['email'] }}
+joseph@mailinator.com
 
 ## Contraseña:
-{{ $user['password'] }}
+S3cr3tPassw0rd
 
 
 @component('mail::button', ['url' => 'https://cursos.livingroomcollege.org/users/sign_in'])
@@ -18,5 +18,5 @@ Iniciar Sesión
 Te recomendamos asignar una nueva clave después de iniciar sesión.
 
 Nos vemos en clase,<br>
-Team LVR College
+{{ config('app.name') }}
 @endcomponent
