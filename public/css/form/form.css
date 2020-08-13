@@ -1,6 +1,6 @@
 .formulate-input {
     margin-bottom: 1.5em;
-    font-family: Helvetica Neue;
+    font-family: Helvetica;
 }
 .formulate-input .formulate-input-label {
     display: block;
@@ -51,7 +51,7 @@
     box-sizing: border-box;
     background-color: transparent;
     font-size: 0.9em;
-    font-family: Helvetica Neue;
+    font-family: Helvetica;
     padding: 0.75em;
     display: block;
     width: 100%;
@@ -239,7 +239,7 @@
     box-sizing: border-box;
     background-color: transparent;
     font-size: 0.9em;
-    font-family: Helvetica Neue;
+    font-family: Helvetica;
     padding: 0.75em;
     display: block;
     width: 100%;
@@ -282,7 +282,7 @@
     box-sizing: border-box;
     background-color: transparent;
     font-size: 0.9em;
-    font-family: Helvetica Neue;
+    font-family: Helvetica;
     padding: 0.75em;
     display: block;
     width: 100%;
@@ -373,7 +373,7 @@
     box-sizing: border-box;
     background-color: transparent;
     font-size: 0.9em;
-    font-family: Helvetica Neue;
+    font-family: Helvetica;
     display: block;
     width: 100%;
     font-weight: 400;
@@ -846,7 +846,7 @@
     box-sizing: border-box;
     background-color: transparent;
     font-size: 0.9em;
-    font-family: Helvetica Neue;
+    font-family: Helvetica;
     padding: 0.75em;
     font-weight: 400;
     line-height: 1.2em;

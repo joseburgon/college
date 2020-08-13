@@ -2,7 +2,7 @@ module.exports = {
     theme: {
         fontFamily: {
             sans: [
-                '"Helvetica Neue"',
+                '"Helvetica"',
                 "-apple-system",
             ],
             serif: [

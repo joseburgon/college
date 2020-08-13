@@ -10,7 +10,7 @@
             action="#"
             method="GET"
           >
-            <h2 class="font-normal text-black text-2xl md:text-4xl mb-4 md:mb-8">Matricularme</h2>
+            <h2 class="font-bold text-black text-2xl md:text-2xl mb-4 md:mb-8">MATRICULARME</h2>
 
             <FormulateInput name="course" type="hidden" v-model="course" />
 
@@ -133,13 +133,13 @@
               <div :class="{'hidden': openTab !== 1, 'block': openTab === 1}">
                 <div class="p-8">
                   <button
-                    class="bg-gray-100 hover:bg-blue-100 border border-gray-300 py-2 px-4 rounded"
+                    class="w-full bg-gray-100 hover:bg-blue-100 border border-gray-300 py-2 px-4 rounded"
                     v-if="registered"
                     @click="goToMercadoPago"
                   >
                     <img
                       :src="'/img/mercadopago-logo.png'"
-                      class="w-40 py-1 px-8"
+                      class="w-40 inline-block py-1 px-8"
                       alt="MercadoPago"
                     />
                   </button>
@@ -170,13 +170,13 @@
             <p class="mt-2 font-thin text-black break-words">{{ course.description }}</p>
             <hr class="border-gray-400 my-4 lg:my-8" />
             <p class="font-hairline text-dustyGray text-xs">DONACI&OacuteN</p>
-            <h3 class="text-2xl font-bold my-2">
+            <h3 class="text-xl md:text-2xl font-bold my-2">
               {{
               "$ " +
               new Intl.NumberFormat().format(
               course.price
-              )
-              }}
+              ) + " COP "
+              }}<span class="text-gray-500">{{ "| $ " + course.price_usd + " USD"}}</span>
             </h3>
             <p class="font-hairline text-dustyGray text-xs">MEDIOS DE PAGO</p>
             <px-payment-methods />
@@ -263,7 +263,7 @@ export default {
                   reference_id: referenceId,
                   description: course.name,
                   amount: {
-                    value: Math.floor(course.price / 3400),
+                    value: course.price_usd,
                     currency_code: "USD",
                   },
                 },

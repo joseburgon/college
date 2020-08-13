@@ -2360,7 +2360,7 @@ __webpack_require__.r(__webpack_exports__);
               reference_id: referenceId,
               description: course.name,
               amount: {
-                value: Math.floor(course.price / 3400),
+                value: course.price_usd,
                 currency_code: "USD"
               }
             }]
@@ -3898,7 +3898,7 @@ var render = function() {
     "nav",
     { staticClass: "flex items-center justify-between flex-wrap bg-wildsand" },
     [
-      _c("div", { staticClass: "py-4 mx-40" }, [
+      _c("div", { staticClass: "py-4 mx-8 md:mx-40" }, [
         _c(
           "a",
           { attrs: { href: "https://cursos.livingroomcollege.org/" } },
@@ -4383,9 +4383,9 @@ var render = function() {
                   "h2",
                   {
                     staticClass:
-                      "font-normal text-black text-2xl md:text-4xl mb-4 md:mb-8"
+                      "font-bold text-black text-2xl md:text-2xl mb-4 md:mb-8"
                   },
-                  [_vm._v("Matricularme")]
+                  [_vm._v("MATRICULARME")]
                 ),
                 _vm._v(" "),
                 _c("FormulateInput", {
@@ -4611,12 +4611,12 @@ var render = function() {
                                 "button",
                                 {
                                   staticClass:
-                                    "bg-gray-100 hover:bg-blue-100 border border-gray-300 py-2 px-4 rounded",
+                                    "w-full bg-gray-100 hover:bg-blue-100 border border-gray-300 py-2 px-4 rounded",
                                   on: { click: _vm.goToMercadoPago }
                                 },
                                 [
                                   _c("img", {
-                                    staticClass: "w-40 py-1 px-8",
+                                    staticClass: "w-40 inline-block py-1 px-8",
                                     attrs: {
                                       src: "/img/mercadopago-logo.png",
                                       alt: "MercadoPago"
@@ -4705,15 +4705,23 @@ var render = function() {
                   [_vm._v("DONACIÓN")]
                 ),
                 _vm._v(" "),
-                _c("h3", { staticClass: "text-2xl font-bold my-2" }, [
-                  _vm._v(
-                    "\n            " +
-                      _vm._s(
-                        "$ " + new Intl.NumberFormat().format(_vm.course.price)
-                      ) +
-                      "\n          "
-                  )
-                ]),
+                _c(
+                  "h3",
+                  { staticClass: "text-xl md:text-2xl font-bold my-2" },
+                  [
+                    _vm._v(
+                      "\n            " +
+                        _vm._s(
+                          "$ " +
+                            new Intl.NumberFormat().format(_vm.course.price) +
+                            " COP "
+                        )
+                    ),
+                    _c("span", { staticClass: "text-gray-500" }, [
+                      _vm._v(_vm._s("| $ " + _vm.course.price_usd + " USD"))
+                    ])
+                  ]
+                ),
                 _vm._v(" "),
                 _c(
                   "p",

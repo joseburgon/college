@@ -417,7 +417,7 @@ ul {
  */
 
 html {
-  font-family: "Helvetica Neue", -apple-system; /* 1 */
+  font-family: "Helvetica", -apple-system; /* 1 */
   line-height: 1.5; /* 2 */
 }
 
@@ -624,43 +624,9 @@ video {
 /* Fonts */
 
 @font-face {
-  font-family: "Helvetica Neue";
+  font-family: "Helvetica";
 
-  src: local("Helvetica Neue Light"), local("HelveticaNeue-Light"), url("../fonts/HelveticaNeue/HelveticaNeue-Light.woff") format("truetype");
-
-  font-weight: 300;
-
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "Helvetica Neue";
-
-  src: local("Helvetica Neue Roman"), local("HelveticaNeue-Roman"), url("../fonts/HelveticaNeue/HelveticaNeue-Roman.woff") format("woff");
-
-  font-weight: 400;
-
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "Helvetica Neue";
-
-  src: local("Helvetica Neue Medium"), local("HelveticaNeue-Medium"), url("../fonts/HelveticaNeue/HelveticaNeue-Medium.ttf") format("truetype");
-
-  font-weight: 500;
-
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "Helvetica Neue";
-
-  src: local("Helvetica Neue Bold"), local("HelveticaNeue-Bold"), url("../fonts/HelveticaNeue/HelveticaNeue-Bold.ttf") format("truetype");
-
-  font-weight: 700;
-
-  font-style: normal;
+  src: url("../fonts/Helvetica/Helvetica.ttf") format("truetype");
 }
 
 /* purgecss end ignore */
@@ -6364,7 +6330,7 @@ video {
 }
 
 .font-sans {
-  font-family: "Helvetica Neue", -apple-system;
+  font-family: "Helvetica", -apple-system;
 }
 
 .font-serif {
@@ -24612,7 +24578,7 @@ video {
   }
 
   .sm\:font-sans {
-    font-family: "Helvetica Neue", -apple-system;
+    font-family: "Helvetica", -apple-system;
   }
 
   .sm\:font-serif {
@@ -42861,7 +42827,7 @@ video {
   }
 
   .md\:font-sans {
-    font-family: "Helvetica Neue", -apple-system;
+    font-family: "Helvetica", -apple-system;
   }
 
   .md\:font-serif {
@@ -61110,7 +61076,7 @@ video {
   }
 
   .lg\:font-sans {
-    font-family: "Helvetica Neue", -apple-system;
+    font-family: "Helvetica", -apple-system;
   }
 
   .lg\:font-serif {
@@ -79359,7 +79325,7 @@ video {
   }
 
   .xl\:font-sans {
-    font-family: "Helvetica Neue", -apple-system;
+    font-family: "Helvetica", -apple-system;
   }
 
   .xl\:font-serif {

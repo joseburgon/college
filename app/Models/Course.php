@@ -16,6 +16,8 @@ class Course extends Model
         'cohort',
         'tagline',
         'description',
+        'price',
+        'price_usd',
         'thinkific_id'
     ];
 
@@ -26,7 +28,8 @@ class Course extends Model
      */
     protected $casts = [
         'id' => 'integer',
-        'price' => 'integer'
+        'price' => 'integer',
+        'price_usd' => 'integer',
     ];
 
     public function students()

@@ -6,37 +6,9 @@
 
 /* Fonts */
 @font-face {
-    font-family: 'Helvetica Neue';
-    src: local('Helvetica Neue Light'), local('HelveticaNeue-Light'),
-        url('../fonts/HelveticaNeue/HelveticaNeue-Light.woff') format('truetype');
-    font-weight: 300;
-    font-style: normal;
+    font-family: 'Helvetica';
+    src: url('../fonts/Helvetica/Helvetica.ttf') format('truetype');
 }
-
-@font-face {
-    font-family: 'Helvetica Neue';
-    src: local('Helvetica Neue Roman'), local('HelveticaNeue-Roman'),
-        url('../fonts/HelveticaNeue/HelveticaNeue-Roman.woff') format('woff');
-    font-weight: 400;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'Helvetica Neue';
-    src: local('Helvetica Neue Medium'), local('HelveticaNeue-Medium'),
-        url('../fonts/HelveticaNeue/HelveticaNeue-Medium.ttf') format('truetype');
-    font-weight: 500;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'Helvetica Neue';
-    src: local('Helvetica Neue Bold'), local('HelveticaNeue-Bold'),
-        url('../fonts/HelveticaNeue/HelveticaNeue-Bold.ttf') format('truetype');
-    font-weight: 700;
-    font-style: normal;
-}
-
 /* purgecss end ignore */
 
 @tailwind utilities;
