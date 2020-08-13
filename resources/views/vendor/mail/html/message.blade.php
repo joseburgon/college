@@ -1,7 +1,7 @@
 @component('mail::layout')
 {{-- Header --}}
 @slot('header')
-@component('mail::header', ['url' => config('app.url')])
+@component('mail::header', ['url' => 'https://cursos.livingroomcollege.org/'])
 <img src="{{ asset('/img/logo_college_horizontal_negro.svg') }}" class="logo" alt="Living Room College Logo">
 @endcomponent
 @endslot

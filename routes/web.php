@@ -14,7 +14,7 @@ Route::get('testing', function () {
         'password' => 'password',
     ];
 
-    Mail::to('some@mail.com')->queue(new ThinkificCredentials($userData));
+    Mail::to('some@mail.com')->send(new ThinkificCredentials($userData));
     return '<h1>Enviado!</h1>';
 });
 
