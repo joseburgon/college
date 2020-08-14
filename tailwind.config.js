@@ -2,6 +2,7 @@ module.exports = {
     theme: {
         fontFamily: {
             sans: [
+                '"Montserrat"',
                 '"Helvetica"',
                 "-apple-system",
             ],
