@@ -24,7 +24,7 @@
                         <a
                             class="px-4 py-3 bg-gray-900 text-gray-200 text-xs font-semibold rounded hover:bg-gray-800"
                             href="https://cursos.livingroomcollege.org/users/sign_in"
-                            >Iniciar Sesi&oacuten</a
+                            >Iniciar Sesi&oacute;n</a
                         >
                         <a
                             class="mx-4 px-4 py-3 bg-gray-300 text-gray-900 text-xs font-semibold rounded hover:bg-gray-400"
@@ -40,16 +40,16 @@
                     </h2>
                     <p class="mt-2 text-sm text-gray-500 md:text-base">
                         Apenas tu pago cambie a estado aprobado procederemos a
-                        enviar tus credenciales de acceso a tu correo electr&oacutenico.
+                        enviar tus credenciales de acceso a tu correo electr&oacute;nico.
                     </p>
                 </div>
 
                 <div v-else>
                     <h2 class="text-3xl font-semibold md:text-4xl">
-                        Ocurri&oacute un problema con tu compra
+                        Ocurri&oacute; un problema con tu compra
                     </h2>
                     <p class="mt-2 text-sm text-gray-500 md:text-base">
-                        Por favor intent&aacutelo de nuevo.
+                        Por favor intent&aacute;lo de nuevo.
                     </p>
                 </div>
             </div>

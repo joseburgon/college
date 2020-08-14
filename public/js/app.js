@@ -2291,6 +2291,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -3898,7 +3906,7 @@ var render = function() {
     "nav",
     { staticClass: "flex items-center justify-between flex-wrap bg-wildsand" },
     [
-      _c("div", { staticClass: "py-4 mx-8 md:mx-40" }, [
+      _c("div", { staticClass: "py-4 mx-8 md:mx40 lg:mx-40" }, [
         _c(
           "a",
           { attrs: { href: "https://cursos.livingroomcollege.org/" } },
@@ -4358,7 +4366,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "py-4 md:py-12 mx-8 md:mx-40" }, [
+  return _c("div", { staticClass: "py-4 md:py-12 mx-8 md:mx-20 lg:mx-40" }, [
     _c("div", { staticClass: "flex-col" }, [
       _c("div", { staticClass: "flex flex-wrap md:6" }, [
         _c(
@@ -4368,6 +4376,14 @@ var render = function() {
             _c(
               "FormulateForm",
               {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: !_vm.registered,
+                    expression: "!registered"
+                  }
+                ],
                 staticClass: "w-full max-w-lg pr-2 md:pr-8",
                 attrs: { id: "registerForm", action: "#", method: "GET" },
                 model: {
@@ -4383,9 +4399,9 @@ var render = function() {
                   "h2",
                   {
                     staticClass:
-                      "font-bold text-black text-2xl md:text-2xl mb-4 md:mb-8"
+                      "font-bold text-black text-xl md:text-2xl mt-2 mb-4 md:mb-8"
                   },
-                  [_vm._v("MATRICULARME")]
+                  [_vm._v("MATRÍCULA")]
                 ),
                 _vm._v(" "),
                 _c("FormulateInput", {
@@ -4470,8 +4486,8 @@ var render = function() {
                       attrs: {
                         name: "identification",
                         type: "text",
-                        label: "Número de cédula",
-                        placeholder: "Tu cédula",
+                        label: "Identificación",
+                        placeholder: "Tu documento de identidad",
                         validation: "required",
                         "validation-messages": {
                           required: "Cedula es requerida"
@@ -4487,7 +4503,7 @@ var render = function() {
                       attrs: {
                         name: "mobilePhone",
                         type: "text",
-                        label: "Número de teléfono",
+                        label: "Celular",
                         placeholder: "Tu teléfono",
                         validation: "required|number",
                         "validation-messages": {
@@ -4530,132 +4546,145 @@ var render = function() {
                   "div",
                   { staticClass: "flex-col mt-10" },
                   [
-                    !_vm.registered
-                      ? _c("FormulateInput", {
-                          attrs: { type: "button", name: "Matricularme" },
-                          on: { click: _vm.addStudent }
-                        })
-                      : _vm._e()
+                    _c("FormulateInput", {
+                      attrs: { type: "button", name: "Matricularme" },
+                      on: { click: _vm.addStudent }
+                    })
                   ],
                   1
+                )
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: _vm.registered,
+                    expression: "registered"
+                  }
+                ],
+                staticClass: "payment-option w-full mt-6"
+              },
+              [
+                _c("ul", { staticClass: "flex border-b" }, [
+                  _c("li", { staticClass: "-mb-px mr-1" }, [
+                    _c(
+                      "a",
+                      {
+                        staticClass:
+                          "bg-white inline-block rounded-t py-2 px-4 text-mercadopagoBlue font-semibold cursor-pointer",
+                        class: {
+                          "border-r border-l border-t": _vm.openTab == 1,
+                          "hover:text-blue-800": _vm.openTab !== 1
+                        },
+                        on: {
+                          click: function($event) {
+                            return _vm.toggleTabs(1)
+                          }
+                        }
+                      },
+                      [_vm._v("MercadoPago")]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("li", { staticClass: "-mb-px mr-1" }, [
+                    _c(
+                      "a",
+                      {
+                        staticClass:
+                          "bg-white inline-block rounded-t py-2 px-4 text-paypalBlue font-semibold cursor-pointer",
+                        class: {
+                          "border-r border-l border-t": _vm.openTab == 2,
+                          "hover:text-blue-800": _vm.openTab !== 2
+                        },
+                        on: {
+                          click: function($event) {
+                            return _vm.toggleTabs(2)
+                          }
+                        }
+                      },
+                      [_vm._v("PayPal")]
+                    )
+                  ])
+                ]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    class: {
+                      hidden: _vm.openTab !== 1,
+                      block: _vm.openTab === 1
+                    }
+                  },
+                  [
+                    _c("div", { staticClass: "p-8 text-center" }, [
+                      _vm.registered
+                        ? _c(
+                            "button",
+                            {
+                              staticClass:
+                                "w-auto md:w-64 bg-gray-100 hover:bg-blue-100 border border-gray-300 py-2 px-4 rounded",
+                              on: { click: _vm.goToMercadoPago }
+                            },
+                            [
+                              _c("img", {
+                                staticClass: "w-40 inline-block py-1 px-8",
+                                attrs: {
+                                  src: "/img/mercadopago_logo.svg",
+                                  alt: "MercadoPago"
+                                }
+                              })
+                            ]
+                          )
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm._m(0)
+                    ])
+                  ]
                 ),
                 _vm._v(" "),
                 _c(
                   "div",
                   {
-                    directives: [
-                      {
-                        name: "show",
-                        rawName: "v-show",
-                        value: _vm.registered,
-                        expression: "registered"
-                      }
-                    ],
-                    staticClass: "payment-options mt-6"
+                    class: {
+                      hidden: _vm.openTab !== 2,
+                      block: _vm.openTab === 2
+                    }
                   },
                   [
-                    _c("ul", { staticClass: "flex border-b" }, [
-                      _c("li", { staticClass: "-mb-px mr-1" }, [
-                        _c(
-                          "a",
-                          {
-                            staticClass:
-                              "bg-white inline-block rounded-t py-2 px-4 text-mercadopagoBlue font-semibold cursor-pointer",
-                            class: {
-                              "border-r border-l border-t": _vm.openTab == 1,
-                              "hover:text-blue-800": _vm.openTab !== 1
-                            },
-                            on: {
-                              click: function($event) {
-                                return _vm.toggleTabs(1)
-                              }
-                            }
-                          },
-                          [_vm._v("MercadoPago")]
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("li", { staticClass: "-mb-px mr-1" }, [
-                        _c(
-                          "a",
-                          {
-                            staticClass:
-                              "bg-white inline-block rounded-t py-2 px-4 text-paypalBlue font-semibold cursor-pointer",
-                            class: {
-                              "border-r border-l border-t": _vm.openTab == 2,
-                              "hover:text-blue-800": _vm.openTab !== 2
-                            },
-                            on: {
-                              click: function($event) {
-                                return _vm.toggleTabs(2)
-                              }
-                            }
-                          },
-                          [_vm._v("PayPal")]
-                        )
-                      ])
-                    ]),
+                    _c("script", {
+                      attrs: {
+                        type: "application/javascript",
+                        src:
+                          "https://www.paypal.com/sdk/js?client-id=ARUO9QDHYXWYbyJgUOF_FTEGXtKTtifep5xklBxSbeWYnI5MZdnKshKztdlRASZkLU_AQdrMrqi3e6lF"
+                      }
+                    }),
                     _vm._v(" "),
                     _c(
-                      "div",
+                      "p",
                       {
-                        class: {
-                          hidden: _vm.openTab !== 1,
-                          block: _vm.openTab === 1
-                        }
+                        staticClass:
+                          "font-hairline text-center text-black text-xs mt-4"
                       },
                       [
-                        _c("div", { staticClass: "p-8" }, [
-                          _vm.registered
-                            ? _c(
-                                "button",
-                                {
-                                  staticClass:
-                                    "w-full bg-gray-100 hover:bg-blue-100 border border-gray-300 py-2 px-4 rounded",
-                                  on: { click: _vm.goToMercadoPago }
-                                },
-                                [
-                                  _c("img", {
-                                    staticClass: "w-40 inline-block py-1 px-8",
-                                    attrs: {
-                                      src: "/img/mercadopago_logo.svg",
-                                      alt: "MercadoPago"
-                                    }
-                                  })
-                                ]
-                              )
-                            : _vm._e()
-                        ])
+                        _vm._v(
+                          "MEDIO RECOMENDADO SI VAS A DONAR CON UNA TARJETA DE CRÉDITO INTERNACIONAL"
+                        )
                       ]
                     ),
                     _vm._v(" "),
-                    _c(
-                      "div",
-                      {
-                        class: {
-                          hidden: _vm.openTab !== 2,
-                          block: _vm.openTab === 2
-                        }
-                      },
-                      [
-                        _c("script", {
-                          attrs: {
-                            type: "application/javascript",
-                            src:
-                              "https://www.paypal.com/sdk/js?client-id=ARUO9QDHYXWYbyJgUOF_FTEGXtKTtifep5xklBxSbeWYnI5MZdnKshKztdlRASZkLU_AQdrMrqi3e6lF"
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c("div", {
-                          staticClass: "p-8",
-                          attrs: { id: "paypal-button-container" }
-                        })
-                      ]
-                    )
+                    _c("div", {
+                      staticClass: "p-8",
+                      attrs: { id: "paypal-button-container" }
+                    })
                   ]
                 )
-              ],
-              1
+              ]
             )
           ],
           1
@@ -4668,78 +4697,96 @@ var render = function() {
               "flex flex-col flex-wrap bg-gray-100 rounded w-full md:w-1/2 mt-6 md:mt-0 sm:mt-6"
           },
           [
-            _c(
-              "div",
-              { staticClass: "flex flex-col flex-wrap py-4 px-8" },
-              [
-                _c(
+            _vm.course.id
+              ? _c(
                   "div",
-                  {
-                    staticClass:
-                      "uppercase tracking-wide text-sm text-dustyGray font-bold my-4"
-                  },
-                  [_vm._v(_vm._s(_vm.course.name))]
-                ),
-                _vm._v(" "),
-                _c(
-                  "a",
-                  {
-                    staticClass:
-                      "block mt-1 text-lg leading-tight font-semibold text-gray-900 hover:underline",
-                    attrs: { href: "#" }
-                  },
-                  [_vm._v(_vm._s(_vm.course.tagline))]
-                ),
-                _vm._v(" "),
-                _c(
-                  "p",
-                  { staticClass: "mt-2 font-thin text-black break-words" },
-                  [_vm._v(_vm._s(_vm.course.description))]
-                ),
-                _vm._v(" "),
-                _c("hr", { staticClass: "border-gray-400 my-4 lg:my-8" }),
-                _vm._v(" "),
-                _c(
-                  "p",
-                  { staticClass: "font-hairline text-dustyGray text-xs" },
-                  [_vm._v("DONACIÓN")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "h3",
-                  { staticClass: "text-xl md:text-2xl font-bold my-2" },
+                  { staticClass: "flex flex-col flex-wrap py-4 px-8" },
                   [
-                    _vm._v(
-                      "\n            " +
-                        _vm._s(
-                          "$ " +
-                            new Intl.NumberFormat().format(_vm.course.price) +
-                            " COP "
-                        )
+                    _c(
+                      "div",
+                      {
+                        staticClass:
+                          "uppercase tracking-wide text-sm text-dustyGray font-bold my-4"
+                      },
+                      [_vm._v(_vm._s(_vm.course.name))]
                     ),
-                    _c("span", { staticClass: "text-gray-500" }, [
-                      _vm._v(_vm._s("| $ " + _vm.course.price_usd + " USD"))
-                    ])
-                  ]
-                ),
-                _vm._v(" "),
-                _c(
-                  "p",
-                  { staticClass: "font-hairline text-dustyGray text-xs" },
-                  [_vm._v("MEDIOS DE PAGO")]
-                ),
-                _vm._v(" "),
-                _c("px-payment-methods")
-              ],
-              1
-            )
+                    _vm._v(" "),
+                    _c(
+                      "a",
+                      {
+                        staticClass:
+                          "block mt-1 text-lg leading-tight font-semibold text-gray-900 hover:underline",
+                        attrs: { href: "#" }
+                      },
+                      [_vm._v(_vm._s(_vm.course.tagline.toUpperCase()))]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "p",
+                      { staticClass: "mt-2 font-thin text-black break-words" },
+                      [_vm._v(_vm._s(_vm.course.description))]
+                    ),
+                    _vm._v(" "),
+                    _c("hr", { staticClass: "border-gray-400 my-4 lg:my-8" }),
+                    _vm._v(" "),
+                    _c(
+                      "p",
+                      { staticClass: "font-hairline text-dustyGray text-xs" },
+                      [_vm._v("DONACIÓN")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "h3",
+                      { staticClass: "text-lg lg:text-xl font-bold my-2" },
+                      [
+                        _vm._v(
+                          "\n            " +
+                            _vm._s(
+                              "$ " +
+                                new Intl.NumberFormat().format(
+                                  _vm.course.price
+                                ) +
+                                " COP "
+                            ) +
+                            "\n            "
+                        ),
+                        _c("span", { staticClass: "text-gray-500" }, [
+                          _vm._v(_vm._s("| $ " + _vm.course.price_usd + " USD"))
+                        ])
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "p",
+                      { staticClass: "font-hairline text-dustyGray text-xs" },
+                      [_vm._v("MEDIOS DE PAGO")]
+                    ),
+                    _vm._v(" "),
+                    _c("px-payment-methods")
+                  ],
+                  1
+                )
+              : _vm._e()
           ]
         )
       ])
     ])
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("p", { staticClass: "font-hairline text-black text-xs mt-4" }, [
+      _vm._v("PSE • BANCA EN LÍNEA"),
+      _c("br"),
+      _vm._v("TARJETAS DE CRÉDITO"),
+      _c("br"),
+      _vm._v("EFECTY • BALOTO")
+    ])
+  }
+]
 render._withStripped = true
 
 
