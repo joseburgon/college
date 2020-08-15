@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Course;
+use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 
 class CoursesTableSeeder extends Seeder
@@ -12,6 +13,7 @@ class CoursesTableSeeder extends Seeder
      */
     public function run()
     {
+
         Course::create([
             'name' => 'Curso Básico',
             'tagline' => 'School - Curso Básico',
@@ -19,7 +21,8 @@ class CoursesTableSeeder extends Seeder
             'price' => 140000,
             'price_usd' => 40,
             'cohort' => 'Septiembre 2020',
-            'thinkific_id' => 761932
+            'thinkific_id' => 761932,
+            'available_at' => Carbon::create('2020', '09', '30', '00', '00', '00', 'America/Bogota'),
         ]);
 
         Course::create([
@@ -29,7 +32,8 @@ class CoursesTableSeeder extends Seeder
             'price' => 140000,
             'price_usd' => 40,
             'cohort' => 'Agosto 2020',
-            'thinkific_id' => 866807
+            'thinkific_id' => 866807,
+            'available_at' => Carbon::create('2020', '08', '31', '00', '00', '00', 'America/Bogota'),
         ]);
 
         Course::create([
@@ -39,7 +43,8 @@ class CoursesTableSeeder extends Seeder
             'price' => 140000,
             'price_usd' => 40,
             'cohort' => 'Octubre 2020',
-            'thinkific_id' => 874120
+            'thinkific_id' => 874120,
+            'available_at' => Carbon::create('2020', '09', '30', '00', '00', '00', 'America/Bogota'),
         ]);
     }
 }

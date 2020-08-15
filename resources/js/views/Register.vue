@@ -114,7 +114,7 @@
               />
             </div>
           </FormulateForm>
-          <div class="payment-option w-full mt-6" v-show="registered">
+          <div class="payment-option w-full px-4 mt-6" v-show="registered">
             <ul class="flex border-b">
               <li class="-mb-px mr-1">
                 <a
@@ -134,7 +134,7 @@
             <div :class="{'hidden': openTab !== 1, 'block': openTab === 1}">
               <div class="p-8 text-center">
                 <button
-                  class="w-auto md:w-64 bg-gray-100 hover:bg-blue-100 border border-gray-300 py-2 px-4 rounded"
+                  class="w-auto xl:w-3/4 bg-gray-100 hover:bg-blue-100 border border-gray-300 py-2 px-4 rounded"
                   v-if="registered"
                   @click="goToMercadoPago"
                 >
@@ -145,7 +145,7 @@
                   />
                 </button>
                 <p
-                  class="font-hairline text-black text-xs mt-4"
+                  class="font-hairline text-gray-600 text-xs mt-8"
                 >PSE &bull; BANCA EN LÍNEA<br>TARJETAS DE CRÉDITO<br>EFECTY &bull; BALOTO</p>
               </div>
             </div>
@@ -155,9 +155,9 @@
                 src="https://www.paypal.com/sdk/js?client-id=ARUO9QDHYXWYbyJgUOF_FTEGXtKTtifep5xklBxSbeWYnI5MZdnKshKztdlRASZkLU_AQdrMrqi3e6lF"
               ></script>
               <p
-                class="font-hairline text-center text-black text-xs mt-4"
+                class="font-hairline text-center text-gray-600 text-xs px-4 xl:px-20 mt-8"
               >MEDIO RECOMENDADO SI VAS A DONAR CON UNA TARJETA DE CR&Eacute;DITO INTERNACIONAL</p>
-              <div id="paypal-button-container" class="p-8"></div>
+              <div id="paypal-button-container" class="px4 xl:px-20 py-8"></div>
             </div>
           </div>
         </div>
@@ -325,6 +325,7 @@ export default {
     axios
       .get(`api/courses/${this.query.course}`)
       .then((res) => {
+        console.log(res.data);
         this.course = res.data;
       })
       .catch((e) => {

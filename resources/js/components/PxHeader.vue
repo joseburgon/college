@@ -5,20 +5,6 @@
         <px-logo class="w-40" />
       </a>
     </div>
-    <!--         <div>
-            <router-link
-                :to="{ name: 'register' }"
-                class="no-underline text-dustyGray hover:text-black ml-2"
-            >
-                REGISTER
-            </router-link>
-            <router-link
-                :to="{ name: 'response' }"
-                class="no-underline text-dustyGray hover:text-black ml-2"
-            >
-                RESPONSE
-            </router-link>
-    </div>-->
   </nav>
 </template>
 

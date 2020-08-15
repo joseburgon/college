@@ -18,7 +18,17 @@ class Course extends Model
         'description',
         'price',
         'price_usd',
-        'thinkific_id'
+        'thinkific_id',
+        'available_at'
+    ];
+
+    /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = [
+        'available_at',
     ];
 
     /**
@@ -30,6 +40,7 @@ class Course extends Model
         'id' => 'integer',
         'price' => 'integer',
         'price_usd' => 'integer',
+        'thinkific_id' => 'string'
     ];
 
     public function students()

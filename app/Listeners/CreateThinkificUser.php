@@ -59,9 +59,9 @@ class CreateThinkificUser implements ShouldQueue
                 'status' => 'user created'
             ])->save();
 
-            $course = $referenceCode->course;
+            //$course = $referenceCode->course;
 
-            $this->enrollmentProccess($user, $course, $student);
+            //$this->enrollmentProccess($user, $course, $student);
         } else {
 
             Log::info('Transaction not approved', (array) $transaction);
@@ -82,6 +82,8 @@ class CreateThinkificUser implements ShouldQueue
             Log: info('User already exists');
 
             $user = $apiRepo->getUser($student->email);
+
+            Mail::to($student->email)->queue(new ThinkificCredentials($user));
 
             return $user;
         }
@@ -110,7 +112,7 @@ class CreateThinkificUser implements ShouldQueue
         $enrollmentData = [
             'course_id' => $course->thinkific_id,
             'user_id' => $user['id'],
-            'activated_at' => now(),
+            'activated_at' => $course->available_at,
         ];
 
         $enrollment = $apiRepo->createEnrollment($enrollmentData);

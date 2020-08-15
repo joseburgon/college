@@ -22,6 +22,7 @@ class CreateCoursesTable extends Migration
             $table->float('price_usd', 10, 2);
             $table->string('cohort', 150);
             $table->bigInteger('thinkific_id');
+            $table->dateTimeTz('available_at', 0);
             $table->timestamps();
         });
     }
