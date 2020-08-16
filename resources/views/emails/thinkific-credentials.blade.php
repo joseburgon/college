@@ -1,5 +1,5 @@
 @component('mail::message')
-<img src="{{ asset('/img/bienvenido.png') }}" class="welcome-img" alt="Bienvenido a bordo">
+<img src="https://checkout.livingroomcollege.org/img/bienvenido.png" class="welcome-img" alt="Bienvenido a bordo">
 
 Hola {{ $user['first_name'] }}, estamos felices de contar contigo en este nuevo curso.
 Prepárate para que tu vida sea llevada al Diseño original de Dios de prosperidad y abundancia.

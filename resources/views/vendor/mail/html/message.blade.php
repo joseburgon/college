@@ -2,7 +2,7 @@
 {{-- Header --}}
 @slot('header')
 @component('mail::header', ['url' => 'https://cursos.livingroomcollege.org/'])
-<img src="{{ asset('/img/logo_college_horizontal_negro.svg') }}" class="logo" alt="Living Room College Logo">
+<img src="{{ asset('/img/logo_college_horizontal_negro.png') }}" class="logo" alt="Living Room College Logo">
 @endcomponent
 @endslot
 
