@@ -59,9 +59,9 @@ class ReferenceCodeController extends Controller
         $item = new MercadoPago\Item();
 
         $preference->back_urls = array(
-            "success" => "https://checkout.livingroomcollege.org/response",
-            "failure" => "https://checkout.livingroomcollege.org/response",
-            "pending" => "https://checkout.livingroomcollege.org/response"
+            "success" => "https://checkout.livingroomcollege.org/success",
+            "failure" => "https://checkout.livingroomcollege.org/failure",
+            "pending" => "https://checkout.livingroomcollege.org/pending"
         );
 
         $preference->auto_return = "approved";
