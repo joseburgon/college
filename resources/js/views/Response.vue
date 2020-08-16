@@ -103,7 +103,7 @@ export default {
     created() {
         this.transactionState = this.query.collection_status;
 
-        console.log(this.query.collection_status);
+        console.log(this.query);
 
         if (this.transactionState === 'COMPLETED') {
             this.transactionState = 'approved';
