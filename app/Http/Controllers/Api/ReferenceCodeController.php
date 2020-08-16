@@ -59,14 +59,14 @@ class ReferenceCodeController extends Controller
         $item = new MercadoPago\Item();
 
         $preference->back_urls = array(
-            "success" => "http://checkout.livingroomcollege.org/response",
-            "failure" => "http://checkout.livingroomcollege.org/response",
-            "pending" => "http://checkout.livingroomcollege.org/response"
+            "success" => "https://checkout.livingroomcollege.org/response",
+            "failure" => "https://checkout.livingroomcollege.org/response",
+            "pending" => "https://checkout.livingroomcollege.org/response"
         );
 
         $preference->auto_return = "approved";
 
-        $preference->notification_url = 'http://checkout.livingroomcollege.org/api/transactions/mercadopago';
+        $preference->notification_url = 'https://checkout.livingroomcollege.org/api/transactions/mercadopago';
 
         $item->title = $course->name;
         $item->description = $course->description;
