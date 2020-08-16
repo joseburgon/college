@@ -6,9 +6,9 @@ use Illuminate\Support\Facades\Mail;
 
 Route::get('resend', function () {
     $userData = [
-        'first_name' => 'Julio Mario',
-        'email' => 'julioma73@hotmail.com',
-        'password' => '9ax39FUi',
+        'first_name' => 'Yamile',
+        'email' => 'yamilepirela@yahoo.com',
+        'password' => 'OElYuuQA',
     ];
 
     Mail::to('team@livingroomcollege.org')->send(new ThinkificCredentials($userData));
