@@ -88,19 +88,20 @@ class CreateThinkificUser implements ShouldQueue
             return $user;
         }
 
-        $password = Str::random(8);
+        //$password = Str::random(8);
+        $password = 'College*2020';
 
         $userData = [
             'email' => $student->email,
             'first_name' => $student->name,
             'last_name' => $student->last_name,
             'password' => $password,
-            'send_welcome_email' => false
+            'send_welcome_email' => true
         ];
 
         $user = $apiRepo->createUser($userData);
 
-        Mail::to($student->email)->queue(new ThinkificCredentials($userData));
+        //Mail::to($student->email)->queue(new ThinkificCredentials($userData));
 
         return $user;
     }
