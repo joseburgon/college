@@ -117,8 +117,9 @@ img {
 /* Logo */
 
 .logo {
-    height: 75px;
-    width: 150px;
+    width: 170px;
+    margin: 15px 0px;
+
 }
 
 /* Body */

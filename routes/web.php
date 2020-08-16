@@ -6,8 +6,8 @@ use Illuminate\Support\Facades\Mail;
 
 Route::get('resend', function () {
     $userData = [
-        'first_name' => 'Yamile',
-        'email' => 'yamilepirela@yahoo.com',
+        'first_name' => 'Testing',
+        'email' => 'testing@yahoo.com',
         'password' => 'OElYuuQA',
     ];
 
