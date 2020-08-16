@@ -25,7 +25,7 @@ class TransactionController extends Controller
                 $payment = $apiRepo->getPayment($id);
                 $payment['type'] = 'MERCADOPAGO';
 
-                    $transaction = Transaction::firstOrCreate(
+                    $transaction = Transaction::updateOrCreate(
                         ['id' => $payment['id']],
                         $payment
                     );
