@@ -4648,7 +4648,7 @@ var render = function() {
                       attrs: {
                         type: "application/javascript",
                         src:
-                          "https://www.paypal.com/sdk/js?client-id=ARUO9QDHYXWYbyJgUOF_FTEGXtKTtifep5xklBxSbeWYnI5MZdnKshKztdlRASZkLU_AQdrMrqi3e6lF"
+                          "https://www.paypal.com/sdk/js?client-id=AfZDLVmK8PtGjQq4nOhtZNch1qBpOvLOLHf5f5SmtwTWP9rfinjzVLyLK91Pf8p9nt6gOGSwKSsH_80X"
                       }
                     }),
                     _vm._v(" "),
