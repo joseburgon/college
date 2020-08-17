@@ -96,7 +96,7 @@ class CreateThinkificUser implements ShouldQueue
             'first_name' => $student->name,
             'last_name' => $student->last_name,
             'password' => $password,
-            'send_welcome_email' => true
+            'send_welcome_email' => false
         ];
 
         $user = $apiRepo->createUser($userData);
