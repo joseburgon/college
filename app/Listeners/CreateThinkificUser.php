@@ -59,12 +59,14 @@ class CreateThinkificUser implements ShouldQueue
                 'status' => 'user created'
             ])->save();
 
-            //$course = $referenceCode->course;
+            $course = $referenceCode->course;
 
-            //$this->enrollmentProccess($user, $course, $student);
+            $this->enrollmentProccess($user, $course, $student);
+
         } else {
 
             Log::info('Transaction not approved', (array) $transaction);
+
         }
     }
 
