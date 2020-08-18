@@ -85,7 +85,7 @@ class CreateThinkificUser implements ShouldQueue
 
             $user = $apiRepo->getUser($student->email);
 
-            Mail::to($student->email)->queue(new ThinkificCredentials($user));
+            //Mail::to($student->email)->queue(new ThinkificCredentials($user));
 
             return $user;
         }
@@ -103,7 +103,7 @@ class CreateThinkificUser implements ShouldQueue
 
         $user = $apiRepo->createUser($userData);
 
-        Mail::to($student->email)->queue(new ThinkificCredentials($userData));
+        //Mail::to($student->email)->queue(new ThinkificCredentials($userData));
 
         return $user;
     }
