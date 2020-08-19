@@ -35,6 +35,18 @@
     <div id="app" class="container mx-auto">
         @yield('content')
     </div>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-E90CHSGC37"></script>
+
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-E90CHSGC37');
+    </script>
+
     @yield('scripts')
 </body>
 
