@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import PxHeader from "./PxHeader";
+import PxHeader from "./components/PxHeader";
 
 export default {
     name: "App",

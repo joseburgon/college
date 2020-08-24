@@ -86,7 +86,6 @@
 </template>
 
 <script>
-import api from "../api";
 import PxThumbsUp from "../components/PxThumbsUp";
 import PxThumbsDown from "../components/PxThumbsDown";
 export default {
