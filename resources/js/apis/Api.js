@@ -1,7 +1,7 @@
-import axios from "axios";
+import axios from 'axios';
 
-let Api = axios.create({
-  baseURL: process.env.VUE_APP_API_ROOT
+const Api = axios.create({
+    baseURL: '/api',
 });
 
 Api.defaults.withCredentials = true;

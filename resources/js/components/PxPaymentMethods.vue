@@ -36,7 +36,7 @@
       <div class="flex items-center w-20 m-4">
         <img
           alt="Banco de Bogotá"
-          src="https://drive.google.com/uc?id=1ys5ERK1NYEKfjYS-KgyWkSZmmfuHcwcA"
+          src="https://drive.google.com/uc?id=1ye4BmJQWxLDfi0aaBLHcI0OPuj3j9bNc"
         />
       </div>
     </div>
