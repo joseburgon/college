@@ -12,12 +12,12 @@
                             <th
                                 class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider"
                             >
-                                Name
+                                Student Name / Email
                             </th>
                             <th
                                 class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider"
                             >
-                                Email / ID
+                                Phone / ID
                             </th>
                             <th
                                 class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider"
@@ -28,11 +28,6 @@
                                 class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider"
                             >
                                 City
-                            </th>
-                            <th
-                                class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider"
-                            >
-                                Phone
                             </th>
                             <th
                                 class="px-6 py-3 border-b border-gray-200 bg-gray-50"
@@ -49,7 +44,7 @@
                                     <div class="flex-shrink-0 h-10 w-10">
                                         <img
                                             class="h-10 w-10 rounded-full"
-                                            src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                                            :src="'/img/student_default_pic.png'"
                                             alt=""
                                         />
                                     </div>
@@ -75,7 +70,7 @@
                                 class="px-6 py-4 whitespace-no-wrap border-b border-gray-200"
                             >
                                 <div class="text-sm leading-5 text-gray-900">
-                                    {{ student.email }}
+                                    {{ student.phone }}
                                 </div>
                                 <div class="text-sm leading-5 text-gray-500">
                                     {{ student.identification }}
@@ -98,19 +93,16 @@
                             </td>
 
                             <td
-                                class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500"
-                            >
-                                {{ student.phone }}
-                            </td>
-
-                            <td
                                 class="px-6 py-4 whitespace-no-wrap text-right border-b border-gray-200 text-sm leading-5 font-medium"
                             >
-                                <a
-                                    href="#"
+                                <router-link
+                                    :to="{
+                                        name: 'student-edit',
+                                        params: { id: student.identification },
+                                    }"
                                     class="text-indigo-600 hover:text-indigo-900"
-                                    >Edit</a
-                                >
+                                    >Edit
+                                </router-link>
                             </td>
                         </tr>
                     </tbody>
@@ -122,16 +114,16 @@
 
 <script>
 export default {
-    name: "StudentsTable",
+    name: 'StudentsTable',
     components: {},
-    data() {
-        return {};
-    },
     props: {
         students: {
             type: Array,
             default: () => [],
         },
+    },
+    data() {
+        return {};
     },
 };
 </script>
