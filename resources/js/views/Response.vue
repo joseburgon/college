@@ -19,6 +19,9 @@
                         Enviaremos tu usuario y contraseña a tu mail para que
                         puedas acceder a la plataforma tan pronto se lance el
                         curso.
+
+                        Si en la próxima hora no recibes el mail de bienvenida por favor
+                        escríbenos a: team@livingroomcollege.org
                     </p>
                     <div class="flex justify-center lg:justify-start mt-6">
                         <a
