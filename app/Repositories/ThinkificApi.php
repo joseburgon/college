@@ -10,7 +10,7 @@ class ThinkificApi
     private $baseUrl = 'https://api.thinkific.com/api/public/v1/';
 
     private $headers = [
-        'X-Auth-API-Key' => '036142af339bb57d675eedf9b7953c97',
+        'X-Auth-API-Key' => '4809eb3ce19d7b86e1b7a216c7c17874',
         'X-Auth-Subdomain' => 'livingroomcollege',
         'Content-Type' => 'application/json',
     ];
@@ -54,9 +54,9 @@ class ThinkificApi
             ])
             ->throw()
             ->json();
-            
+
         Log::info('check if user exists response', $response);
-        
+
         if (empty($response['items'])) {
 
             return false;
@@ -71,12 +71,12 @@ class ThinkificApi
     {
         $response = Http::withHeaders($this->headers)
             ->post($this->baseUrl . 'users', $data);
-            
+
 
         if ($response->successful()) {
 
             return $response->json();
-        
+
         } else {
 
             Log::info('Error creating user', $response->json());
