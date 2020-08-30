@@ -52,4 +52,9 @@ class Course extends Model
     {
         return $this->hasMany(ReferenceCode::class);
     }
+
+    public function transaction()
+    {
+        return $this->hasOne(Transaction::class);
+    }
 }

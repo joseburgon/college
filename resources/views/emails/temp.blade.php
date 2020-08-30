@@ -46,7 +46,7 @@
 
                                                 <p
                                                     style="box-sizing: border-box; font-family: Helvetica, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative; font-size: 16px; line-height: 1.5em; margin-top: 0; text-align: left;">
-                                                    Hola user_first_name, estamos felices de contar contigo en este nuevo curso.
+                                                    Hola Daniela, estamos felices de contar contigo en este nuevo curso.
                                                     Prep&aacute;rate para que tu vida sea llevada al Dise&ntilde;o
                                                     original de Dios de prosperidad y abundancia.</p>
 
@@ -65,7 +65,7 @@
 
                                                 <p
                                                     style="box-sizing: border-box; font-family: Helvetica, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative; font-size: 16px; line-height: 1.5em; margin-top: 0; text-align: left;">
-                                                    user_email
+                                                    danielavillarreal31@hotmail.com
                                                 </p>
 
                                                 <h2
