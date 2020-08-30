@@ -25,4 +25,11 @@ class Transaction extends Model
         'type',
     ];
 
+    protected $with = ['referenceCode'];
+
+    public function referenceCode()
+    {
+        return $this->belongsTo( ReferenceCode::class, 'external_reference', 'id');
+    }
+
 }

@@ -41,9 +41,9 @@
             <router-link
                 class="flex items-center mt-4 py-2 px-6 block border-l-4"
                 :class="[
-                    $route.name === 'UIElements' ? activeClass : inactiveClass,
+                    $route.name === 'transactions' ? activeClass : inactiveClass,
                 ]"
-                to="/ui-elements"
+                :to="{ name: 'transactions' }"
             >
                 <svg
                     class="h-5 w-5"
@@ -69,7 +69,7 @@
                     />
                 </svg>
 
-                <span class="mx-4">UI Elements</span>
+                <span class="mx-4">Transacciones</span>
             </router-link>
 
             <router-link

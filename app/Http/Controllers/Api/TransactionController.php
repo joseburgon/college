@@ -12,6 +12,12 @@ use Illuminate\Support\Facades\Log;
 class TransactionController extends Controller
 {
 
+    public function index(Request $request)
+    {
+        $transactions = Transaction::all();
+        return response()->json($transactions);
+    }
+
     public function mercadopago(Request $request)
     {
         Log::info('MercadoPago Notification Request', $request->input());

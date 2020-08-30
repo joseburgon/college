@@ -40,5 +40,6 @@ Route::namespace('Api')->group(function () {
     Route::apiResources([
         'courses' => 'CourseController',
         'students' => 'StudentController',
+        'transactions' => 'TransactionController',
     ]);
 });

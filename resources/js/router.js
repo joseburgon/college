@@ -9,6 +9,7 @@ import Error from './views/Error';
 import Login from './views/dashboard/Login';
 import Dashboard from './views/dashboard/Dashboard';
 import StudentEdit from './views/dashboard/students/Edit';
+import TransactionsIndex from './views/dashboard/transactions/Index';
 
 Vue.use(VueRouter);
 
@@ -61,9 +62,15 @@ const routes = [
         meta: { authOnly: true },
     },
     {
-        path: '/student/:id/edit',
+        path: '/dashboard/student/:id/edit',
         name: 'student-edit',
         component: StudentEdit,
+        meta: { authOnly: true },
+    },
+    {
+        path: '/dashboard/transactions',
+        name: 'transactions',
+        component: TransactionsIndex,
         meta: { authOnly: true },
     },
     {

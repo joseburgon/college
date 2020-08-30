@@ -31,16 +31,11 @@ class Student extends Model
         'id' => 'integer',
     ];
 
-    protected $with = ['courses', 'reference_codes'];
+    protected $with = ['courses'];
 
 
     public function courses()
     {
         return $this->belongsToMany(Course::class)->withTimestamps();
-    }
-
-    public function reference_codes()
-    {
-        return $this->hasMany(ReferenceCode::class);
     }
 }
