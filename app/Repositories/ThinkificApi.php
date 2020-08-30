@@ -9,15 +9,15 @@ class ThinkificApi
 {
     private $baseUrl = 'https://api.thinkific.com/api/public/v1/';
 
-    private $headers = [
-        'X-Auth-API-Key' => '4809eb3ce19d7b86e1b7a216c7c17874',
-        'X-Auth-Subdomain' => 'livingroomcollege',
-        'Content-Type' => 'application/json',
-    ];
+    private $headers = null;
 
     public function __construct()
     {
-        //
+        $this->headers = [
+            'X-Auth-API-Key' => env('THINKIFIC_API_KEY'),
+            'X-Auth-Subdomain' => 'livingroomcollege',
+            'Content-Type' => 'application/json',
+        ];
     }
 
     public function getUsers()
