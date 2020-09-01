@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Api;
 
 use App\Events\TransactionSaved;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\TransactionCollection;
+use App\Http\Resources\TransactionResource;
 use App\Repositories\MercadoPagoApi;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
@@ -14,8 +16,14 @@ class TransactionController extends Controller
 
     public function index(Request $request)
     {
-        $transactions = Transaction::all();
-        return response()->json($transactions);
+        $transactions = Transaction::applySorts()->jsonPaginate();
+
+        return TransactionCollection::make($transactions);
+    }
+
+    public function show(Transaction $transaction)
+    {
+        return TransactionResource::make($transaction);
     }
 
     public function mercadopago(Request $request)

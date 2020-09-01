@@ -2,11 +2,11 @@
 
 namespace App\Models;
 
-use App\Events\TransactionSaved;
 use Illuminate\Database\Eloquent\Model;
 
 class Transaction extends Model
 {
+    public $allowedSorts = ['status', 'external_reference'];
 
     protected $fillable = [
         'coupon_amount',
