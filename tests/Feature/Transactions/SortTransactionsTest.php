@@ -18,9 +18,9 @@ class SortTransactionsTest extends TestCase
         factory(Transaction::class)->create(['status' => 'approved']);
         factory(Transaction::class)->create(['status' => 'rejected']);
 
-        $url = route('transactions.index', ['sort' => 'status']);
+        $url = route('api.v1.transactions.index', ['sort' => 'status']);
 
-        $this->getJson($url)->assertSeeInOrder([
+        $this->jsonApi()->get($url)->assertSeeInOrder([
             'approved',
             'pending',
             'rejected'
@@ -34,9 +34,9 @@ class SortTransactionsTest extends TestCase
         factory(Transaction::class)->create(['status' => 'approved']);
         factory(Transaction::class)->create(['status' => 'rejected']);
 
-        $url = route('transactions.index', ['sort' => '-status']);
+        $url = route('api.v1.transactions.index', ['sort' => '-status']);
 
-        $this->getJson($url)->assertSeeInOrder([
+        $this->jsonApi()->get($url)->assertSeeInOrder([
             'rejected',
             'pending',
             'approved',
@@ -59,17 +59,17 @@ class SortTransactionsTest extends TestCase
             'external_reference' => 30
         ]);
 
-        $url = route('transactions.index') . '?sort=status,-external_reference';
+        $url = route('api.v1.transactions.index') . '?sort=status,-external_reference';
 
-        $this->getJson($url)->assertSeeInOrder([
+        $this->jsonApi()->get($url)->assertSeeInOrder([
             'approved',
             'pending',
             'rejected',
         ]);
 
-        $url = route('transactions.index') . '?sort=-external_reference,status';
+        $url = route('api.v1.transactions.index') . '?sort=-external_reference,status';
 
-        $this->getJson($url)->assertSeeInOrder([
+        $this->jsonApi()->get($url)->assertSeeInOrder([
             'rejected',
             'approved',
             'pending',
@@ -81,8 +81,8 @@ class SortTransactionsTest extends TestCase
     {
         factory(Transaction::class)->times(3)->create();
 
-        $url = route('transactions.index') . '?sort=unknown';
+        $url = route('api.v1.transactions.index') . '?sort=unknown';
 
-        $this->getJson($url)->assertStatus(400);
+        $this->jsonApi()->get($url)->assertStatus(400);
     }
 }

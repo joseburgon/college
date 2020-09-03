@@ -8,8 +8,6 @@ use Illuminate\Support\Str;
 
 class Transaction extends Model
 {
-    public $allowedSorts = ['status', 'external_reference'];
-
     protected $fillable = [
         'coupon_amount',
         'currency_id',
@@ -27,7 +25,11 @@ class Transaction extends Model
         'type',
     ];
 
-    protected $with = ['referenceCode'];
+    protected $casts = [
+        'id' => 'integer',
+    ];
+
+    //protected $with = ['referenceCode'];
 
     public function scopeId(Builder $query, $value)
     {

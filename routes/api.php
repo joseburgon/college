@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
+use CloudCreativity\LaravelJsonApi\Facades\JsonApi;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,6 +20,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+JsonApi::register('v1')->routes(function($api) {
+    $api->resource('transactions');
+});
 
 Route::namespace('Api')->group(function () {
 
@@ -40,6 +44,5 @@ Route::namespace('Api')->group(function () {
     Route::apiResources([
         'courses' => 'CourseController',
         'students' => 'StudentController',
-        'transactions' => 'TransactionController',
     ]);
 });

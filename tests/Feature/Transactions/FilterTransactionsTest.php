@@ -22,9 +22,9 @@ class FilterTransactionsTest extends TestCase
             'id' => 9941
         ]);
 
-        $url = route('transactions.index', ['filter[id]' => 9110]);
+        $url = route('api.v1.transactions.index', ['filter[id]' => 9110]);
 
-        $this->getJson($url)
+        $this->jsonApi()->get($url)
             ->assertJsonCount(1, 'data')
             ->assertSee(9110)
             ->assertDontSee(9941);
@@ -41,9 +41,9 @@ class FilterTransactionsTest extends TestCase
             'status' => 'rejected'
         ]);
 
-        $url = route('transactions.index', ['filter[status]' => 'approved']);
+        $url = route('api.v1.transactions.index', ['filter[status]' => 'approved']);
 
-        $this->getJson($url)
+        $this->jsonApi()->get($url)
             ->assertJsonCount(1, 'data')
             ->assertSee('approved')
             ->assertDontSee('rejected');
@@ -62,9 +62,9 @@ class FilterTransactionsTest extends TestCase
             'created_at' => now()->year(2021)
         ]);
 
-        $url = route('transactions.index', ['filter[year]' => 2020]);
+        $url = route('api.v1.transactions.index', ['filter[year]' => 2020]);
 
-        $this->getJson($url)
+        $this->jsonApi()->get($url)
             ->assertJsonCount(1, 'data')
             ->assertSee('approved')
             ->assertDontSee('rejected');
@@ -88,9 +88,9 @@ class FilterTransactionsTest extends TestCase
             'created_at' => now()->month(1)
         ]);
 
-        $url = route('transactions.index', ['filter[month]' => 2]);
+        $url = route('api.v1.transactions.index', ['filter[month]' => 2]);
 
-        $this->getJson($url)
+        $this->jsonApi()->get($url)
             ->assertJsonCount(2, 'data')
             ->assertSee('approved')
             ->assertSee('pending')
@@ -102,9 +102,9 @@ class FilterTransactionsTest extends TestCase
     {
         factory(Transaction::class)->create();
 
-        $url = route('transactions.index', ['filter[unknown]' => 'random']);
+        $url = route('api.v1.transactions.index', ['filter[unknown]' => 'random']);
 
-        $this->getJson($url)->assertStatus(400);
+        $this->jsonApi()->get($url)->assertStatus(400);
     }
 
     /** @test */
@@ -125,9 +125,9 @@ class FilterTransactionsTest extends TestCase
             'external_reference' => 135
         ]);
 
-        $url = route('transactions.index', ['filter[search]' => '54']);
+        $url = route('api.v1.transactions.index', ['filter[search]' => '54']);
 
-        $this->getJson($url)
+        $this->jsonApi()->get($url)
             ->assertJsonCount(2, 'data')
             ->assertSee(54)
             ->assertSee(554)
@@ -157,9 +157,9 @@ class FilterTransactionsTest extends TestCase
             'external_reference' => 135
         ]);
 
-        $url = route('transactions.index', ['filter[search]' => '54 700']);
+        $url = route('api.v1.transactions.index', ['filter[search]' => '54 700']);
 
-        $this->getJson($url)
+        $this->jsonApi()->get($url)
             ->assertJsonCount(3, 'data')
             ->assertSee(54)
             ->assertSee(700)
