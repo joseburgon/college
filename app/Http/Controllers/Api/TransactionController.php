@@ -16,7 +16,7 @@ class TransactionController extends Controller
 
     public function index(Request $request)
     {
-        $transactions = Transaction::applySorts()->jsonPaginate();
+        $transactions = Transaction::applyFilters()->applySorts()->jsonPaginate();
 
         return TransactionCollection::make($transactions);
     }
@@ -39,20 +39,21 @@ class TransactionController extends Controller
                 $payment = $apiRepo->getPayment($id);
                 $payment['type'] = 'MERCADOPAGO';
 
-                    $transaction = Transaction::updateOrCreate(
-                        ['id' => $payment['id']],
-                        $payment
-                    );
+                $transaction = Transaction::updateOrCreate(
+                    ['id' => $payment['id']],
+                    $payment
+                );
 
-                    Log::info('Transaction stored', (array) $transaction);
+                Log::info('Transaction stored', (array) $transaction);
 
-                    TransactionSaved::dispatch($transaction);
+                TransactionSaved::dispatch($transaction);
             }
         }
 
         return response()->json(
-            ['message' => 'Received!'], 200);
-
+            ['message' => 'Received!'],
+            200
+        );
     }
 
     public function paypal(Request $request)
@@ -69,9 +70,5 @@ class TransactionController extends Controller
         Log::info('Transaction stored', (array) $transaction);
 
         TransactionSaved::dispatch($transaction);
-
     }
-
-
-
 }

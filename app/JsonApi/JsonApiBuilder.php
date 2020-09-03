@@ -41,10 +41,29 @@ class JsonApiBuilder
                 }
 
                 if (!collect($this->model->allowedSorts)->contains($sortField)) {
-                    abort(400, "Invalid Query Parameter, {$sortField} is not allowed.");
+                    abort(400, "Invalid this Parameter, {$sortField} is not allowed.");
                 }
 
                 $this->orderBy($sortField, $direction);
+            }
+
+            return $this;
+        };
+    }
+
+    public function applyFilters()
+    {
+        return function () {
+
+            foreach (request('filter', []) as $filter => $value) {
+
+                abort_unless(
+                    $this->hasNamedScope($filter),
+                    400, "The filter '{$filter}' is not allowed."
+                );
+
+                $this->{$filter}($value);
+
             }
 
             return $this;
