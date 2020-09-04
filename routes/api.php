@@ -21,8 +21,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 JsonApi::register('v1')->routes(function($api) {
-    $api->resource('transactions')->middleware('auth');
-    $api->resource('students')->middleware('auth');
+    $api->resource('transactions')->middleware('auth:sanctum');
+    $api->resource('reference-codes')->middleware('auth:sanctum');
+    $api->resource('students')->middleware('auth:sanctum');
 });
 
 Route::namespace('Api')->group(function () {

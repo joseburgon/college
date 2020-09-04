@@ -38,4 +38,16 @@ class Schema extends SchemaProvider
             'description' => $transaction->description
         ];
     }
+
+    public function getRelationships($transaction, $isPrimary, array $includeRelationships)
+    {
+
+        return [
+            'referenceCode' => [
+                'data' => function() use ($transaction) {
+                    return $transaction->referenceCode;
+                }
+            ]
+        ];
+    }
 }

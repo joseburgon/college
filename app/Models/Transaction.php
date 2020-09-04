@@ -29,7 +29,7 @@ class Transaction extends Model
         'id' => 'integer',
     ];
 
-    //protected $with = ['referenceCode'];
+    protected $with = ['referenceCode'];
 
     public function scopeId(Builder $query, $value)
     {

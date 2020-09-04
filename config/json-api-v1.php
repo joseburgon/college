@@ -67,6 +67,7 @@ return [
     */
     'resources' => [
         'students' => \App\Models\Student::class,
+        'reference-codes' => \App\Models\ReferenceCode::class,
         'transactions' => \App\Models\Transaction::class,
     ],
 
