@@ -3,8 +3,10 @@
 namespace Tests\Feature\Transactions;
 
 use App\Models\Transaction;
+use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Laravel\Sanctum\Sanctum;
 use Tests\TestCase;
 
 class SortTransactionsTest extends TestCase
@@ -19,6 +21,8 @@ class SortTransactionsTest extends TestCase
         factory(Transaction::class)->create(['status' => 'rejected']);
 
         $url = route('api.v1.transactions.index', ['sort' => 'status']);
+
+        Sanctum::actingAs(factory(User::class)->create());
 
         $this->jsonApi()->get($url)->assertSeeInOrder([
             'approved',
@@ -35,6 +39,8 @@ class SortTransactionsTest extends TestCase
         factory(Transaction::class)->create(['status' => 'rejected']);
 
         $url = route('api.v1.transactions.index', ['sort' => '-status']);
+
+        Sanctum::actingAs(factory(User::class)->create());
 
         $this->jsonApi()->get($url)->assertSeeInOrder([
             'rejected',
@@ -61,6 +67,8 @@ class SortTransactionsTest extends TestCase
 
         $url = route('api.v1.transactions.index') . '?sort=status,-external_reference';
 
+        Sanctum::actingAs(factory(User::class)->create());
+
         $this->jsonApi()->get($url)->assertSeeInOrder([
             'approved',
             'pending',
@@ -82,6 +90,8 @@ class SortTransactionsTest extends TestCase
         factory(Transaction::class)->times(3)->create();
 
         $url = route('api.v1.transactions.index') . '?sort=unknown';
+
+        Sanctum::actingAs(factory(User::class)->create());
 
         $this->jsonApi()->get($url)->assertStatus(400);
     }

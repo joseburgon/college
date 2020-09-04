@@ -13,5 +13,6 @@ $factory->define(Transaction::class, function (Faker $faker) {
         'payment_method_id' => $faker->randomElement(['pse', 'amex', 'ticket']),
         'status' => $faker->randomElement(['approved', 'rejected', 'pending']),
         'external_reference' => Str::random(8),
+        'description' => $faker->sentence(3)
     ];
 });

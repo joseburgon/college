@@ -3,8 +3,10 @@
 namespace Tests\Feature\Transactions;
 
 use App\Models\Transaction;
+use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Laravel\Sanctum\Sanctum;
 use Tests\TestCase;
 
 class FilterTransactionsTest extends TestCase
@@ -24,6 +26,8 @@ class FilterTransactionsTest extends TestCase
 
         $url = route('api.v1.transactions.index', ['filter[id]' => 9110]);
 
+        Sanctum::actingAs(factory(User::class)->create());
+
         $this->jsonApi()->get($url)
             ->assertJsonCount(1, 'data')
             ->assertSee(9110)
@@ -42,6 +46,8 @@ class FilterTransactionsTest extends TestCase
         ]);
 
         $url = route('api.v1.transactions.index', ['filter[status]' => 'approved']);
+
+        Sanctum::actingAs(factory(User::class)->create());
 
         $this->jsonApi()->get($url)
             ->assertJsonCount(1, 'data')
@@ -63,6 +69,8 @@ class FilterTransactionsTest extends TestCase
         ]);
 
         $url = route('api.v1.transactions.index', ['filter[year]' => 2020]);
+
+        Sanctum::actingAs(factory(User::class)->create());
 
         $this->jsonApi()->get($url)
             ->assertJsonCount(1, 'data')
@@ -90,6 +98,8 @@ class FilterTransactionsTest extends TestCase
 
         $url = route('api.v1.transactions.index', ['filter[month]' => 2]);
 
+        Sanctum::actingAs(factory(User::class)->create());
+
         $this->jsonApi()->get($url)
             ->assertJsonCount(2, 'data')
             ->assertSee('approved')
@@ -103,6 +113,8 @@ class FilterTransactionsTest extends TestCase
         factory(Transaction::class)->create();
 
         $url = route('api.v1.transactions.index', ['filter[unknown]' => 'random']);
+
+        Sanctum::actingAs(factory(User::class)->create());
 
         $this->jsonApi()->get($url)->assertStatus(400);
     }
@@ -126,6 +138,8 @@ class FilterTransactionsTest extends TestCase
         ]);
 
         $url = route('api.v1.transactions.index', ['filter[search]' => '54']);
+
+        Sanctum::actingAs(factory(User::class)->create());
 
         $this->jsonApi()->get($url)
             ->assertJsonCount(2, 'data')
@@ -158,6 +172,8 @@ class FilterTransactionsTest extends TestCase
         ]);
 
         $url = route('api.v1.transactions.index', ['filter[search]' => '54 700']);
+
+        Sanctum::actingAs(factory(User::class)->create());
 
         $this->jsonApi()->get($url)
             ->assertJsonCount(3, 'data')

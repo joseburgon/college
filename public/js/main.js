@@ -24033,7 +24033,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 
 var Api = axios__WEBPACK_IMPORTED_MODULE_0___default.a.create({
-  baseURL: '/api'
+  baseURL: '/'
 });
 Api.defaults.withCredentials = true;
 /* harmony default export */ __webpack_exports__["default"] = (Api);
@@ -24234,7 +24234,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               return _Csrf__WEBPACK_IMPORTED_MODULE_2__["default"].getCookie();
 
             case 2:
-              return _context.abrupt("return", _Api__WEBPACK_IMPORTED_MODULE_1__["default"].post('/register', form));
+              return _context.abrupt("return", _Api__WEBPACK_IMPORTED_MODULE_1__["default"].post('register', form));
 
             case 3:
             case "end":
@@ -24254,7 +24254,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               return _Csrf__WEBPACK_IMPORTED_MODULE_2__["default"].getCookie();
 
             case 2:
-              return _context2.abrupt("return", _Api__WEBPACK_IMPORTED_MODULE_1__["default"].post('/login', form));
+              return _context2.abrupt("return", _Api__WEBPACK_IMPORTED_MODULE_1__["default"].post('login', form));
 
             case 3:
             case "end":
@@ -24274,7 +24274,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               return _Csrf__WEBPACK_IMPORTED_MODULE_2__["default"].getCookie();
 
             case 2:
-              return _context3.abrupt("return", _Api__WEBPACK_IMPORTED_MODULE_1__["default"].post('/logout'));
+              return _context3.abrupt("return", _Api__WEBPACK_IMPORTED_MODULE_1__["default"].post('logout'));
 
             case 3:
             case "end":
@@ -24285,7 +24285,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }))();
   },
   auth: function auth() {
-    return _Api__WEBPACK_IMPORTED_MODULE_1__["default"].get('/user');
+    return _Api__WEBPACK_IMPORTED_MODULE_1__["default"].get('user');
   }
 });
 

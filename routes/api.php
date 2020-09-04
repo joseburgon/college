@@ -21,13 +21,14 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 JsonApi::register('v1')->routes(function($api) {
-    $api->resource('transactions');
+    $api->resource('transactions')->middleware('auth');
+    $api->resource('students')->middleware('auth');
 });
 
 Route::namespace('Api')->group(function () {
 
     Route::post('/register', 'RegisterController@register');
-    Route::post('/login', 'LoginController@login');
+    Route::post('/login', 'LoginController@login')->name('api.v1.login');
     Route::post('/logout', 'LoginController@logout');
 
     Route::post('reference', 'ReferenceCodeController@store')->name('api.reference');

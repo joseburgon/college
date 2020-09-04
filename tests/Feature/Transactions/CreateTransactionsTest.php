@@ -3,10 +3,12 @@
 namespace Tests\Feature\Transactions;
 
 use App\Models\Transaction;
+use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Str;
 use Illuminate\Support\Arr;
+use Laravel\Sanctum\Sanctum;
 use Tests\TestCase;
 
 class CreateTransactionsTest extends TestCase
@@ -23,6 +25,8 @@ class CreateTransactionsTest extends TestCase
             'status' => Arr::random(['approved', 'rejected', 'pending']),
             'external_reference' => Str::random(8),
         ];
+
+        Sanctum::actingAs(factory(User::class)->create());
 
         $this->assertDatabaseMissing('transactions', $transaction);
 
@@ -46,6 +50,8 @@ class CreateTransactionsTest extends TestCase
             'status' => '',
             'external_reference' => Str::random(8),
         ];
+
+        Sanctum::actingAs(factory(User::class)->create());
 
         $this->jsonApi()->content([
             'data' => [
