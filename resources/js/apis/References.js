@@ -12,5 +12,18 @@ export default {
         await Csrf.getCookie();
 
         return Api.get(`/reference-codes/${reference}`);
+    },
+
+    async create(info) {
+        await Csrf.getCookie();
+
+        let data = {
+            'data': {
+                'type': 'reference-codes',
+                'attributes': info
+            }
+        }
+
+        return Api.post(`/reference-codes`, data);
     }
 };

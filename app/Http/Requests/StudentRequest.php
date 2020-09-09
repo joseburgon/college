@@ -27,9 +27,9 @@ class StudentRequest extends FormRequest
             'name' => 'required',
             'last_name' => 'required',
             'identification' => 'required',
-            'buyerEmail' => 'required|email',
-            'mobilePhone' => 'required',
-            'billingCity' => 'required',
+            'email' => 'required|email',
+            'phone' => 'required',
+            'city' => 'required',
         ];
     }
 }

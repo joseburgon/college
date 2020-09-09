@@ -3213,29 +3213,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -7710,11 +7687,7 @@ var render = function() {
                     staticClass:
                       "font-bold text-black text-xl md:text-2xl mt-2 mb-4 md:mb-8"
                   },
-                  [
-                    _vm._v(
-                      "\n                        MATRÍCULA\n                    "
-                    )
-                  ]
+                  [_vm._v("\n            MATRÍCULA\n          ")]
                 ),
                 _vm._v(" "),
                 _c("FormulateInput", {
@@ -7773,7 +7746,7 @@ var render = function() {
                   [
                     _c("FormulateInput", {
                       attrs: {
-                        name: "buyerEmail",
+                        name: "email",
                         type: "email",
                         label: "Correo electrónico",
                         placeholder: "Email",
@@ -7814,7 +7787,7 @@ var render = function() {
                     _vm._v(" "),
                     _c("FormulateInput", {
                       attrs: {
-                        name: "mobilePhone",
+                        name: "phone",
                         type: "text",
                         label: "Celular",
                         placeholder: "Tu teléfono",
@@ -7838,7 +7811,7 @@ var render = function() {
                   [
                     _c("FormulateInput", {
                       attrs: {
-                        name: "billingCity",
+                        name: "city",
                         type: "text",
                         label: "Ciudad de residencia",
                         placeholder: "Tu ciudad",
@@ -7986,7 +7959,7 @@ var render = function() {
                       },
                       [
                         _vm._v(
-                          "\n                            MEDIO RECOMENDADO SI VAS A DONAR CON UNA TARJETA\n                            DE CRÉDITO INTERNACIONAL\n                        "
+                          "\n              MEDIO RECOMENDADO SI VAS A DONAR CON UNA TARJETA DE\n              CRÉDITO INTERNACIONAL\n            "
                         )
                       ]
                     ),
@@ -8023,9 +7996,9 @@ var render = function() {
                       },
                       [
                         _vm._v(
-                          "\n                        " +
+                          "\n            " +
                             _vm._s(_vm.course.name) +
-                            "\n                    "
+                            "\n          "
                         )
                       ]
                     ),
@@ -8045,9 +8018,9 @@ var render = function() {
                       { staticClass: "mt-2 font-thin text-black break-words" },
                       [
                         _vm._v(
-                          "\n                        " +
+                          "\n            " +
                             _vm._s(_vm.course.description) +
-                            "\n                    "
+                            "\n          "
                         )
                       ]
                     ),
@@ -8057,11 +8030,7 @@ var render = function() {
                     _c(
                       "p",
                       { staticClass: "font-hairline text-dustyGray text-xs" },
-                      [
-                        _vm._v(
-                          "\n                        DONACIÓN\n                    "
-                        )
-                      ]
+                      [_vm._v("DONACIÓN")]
                     ),
                     _vm._v(" "),
                     _c(
@@ -8069,7 +8038,7 @@ var render = function() {
                       { staticClass: "text-lg lg:text-xl font-bold my-2" },
                       [
                         _vm._v(
-                          "\n                        " +
+                          "\n            " +
                             _vm._s(
                               "$ " +
                                 new Intl.NumberFormat().format(
@@ -8077,7 +8046,7 @@ var render = function() {
                                 ) +
                                 " COP "
                             ) +
-                            "\n                        "
+                            "\n            "
                         ),
                         _c("span", { staticClass: "text-gray-500" }, [
                           _vm._v(_vm._s("| $ " + _vm.course.price_usd + " USD"))
@@ -8088,11 +8057,7 @@ var render = function() {
                     _c(
                       "p",
                       { staticClass: "font-hairline text-dustyGray text-xs" },
-                      [
-                        _vm._v(
-                          "\n                        MEDIOS DE PAGO\n                    "
-                        )
-                      ]
+                      [_vm._v("MEDIOS DE PAGO")]
                     ),
                     _vm._v(" "),
                     _c("px-payment-methods")
@@ -8115,11 +8080,11 @@ var staticRenderFns = [
       "p",
       { staticClass: "font-hairline text-gray-600 text-xs mt-8" },
       [
-        _vm._v("\n                                PSE • BANCA EN LÍNEA"),
+        _vm._v("\n                PSE • BANCA EN LÍNEA"),
         _c("br"),
-        _vm._v("TARJETAS DE\n                                CRÉDITO"),
+        _vm._v("TARJETAS DE CRÉDITO"),
         _c("br"),
-        _vm._v("EFECTY • BALOTO\n                            ")
+        _vm._v("EFECTY\n                • BALOTO\n              ")
       ]
     )
   }
@@ -24635,7 +24600,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 
 var Api = axios__WEBPACK_IMPORTED_MODULE_0___default.a.create({
-  baseURL: '/api/v1'
+  baseURL: '/api/v1',
+  headers: {
+    'Content-Type': 'application/vnd.api+json',
+    'Accept': 'application/vnd.api+json'
+  }
 });
 Api.defaults.withCredentials = true;
 /* harmony default export */ __webpack_exports__["default"] = (Api);
@@ -24733,6 +24702,33 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }
       }, _callee2);
     }))();
+  },
+  create: function create(info) {
+    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
+      var data;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+        while (1) {
+          switch (_context3.prev = _context3.next) {
+            case 0:
+              _context3.next = 2;
+              return _Csrf__WEBPACK_IMPORTED_MODULE_2__["default"].getCookie();
+
+            case 2:
+              data = {
+                'data': {
+                  'type': 'reference-codes',
+                  'attributes': info
+                }
+              };
+              return _context3.abrupt("return", _Api__WEBPACK_IMPORTED_MODULE_1__["default"].post("/reference-codes", data));
+
+            case 4:
+            case "end":
+              return _context3.stop();
+          }
+        }
+      }, _callee3);
+    }))();
   }
 });
 
@@ -24798,6 +24794,33 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           }
         }
       }, _callee2);
+    }))();
+  },
+  create: function create(student) {
+    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
+      var data;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+        while (1) {
+          switch (_context3.prev = _context3.next) {
+            case 0:
+              _context3.next = 2;
+              return _Csrf__WEBPACK_IMPORTED_MODULE_2__["default"].getCookie();
+
+            case 2:
+              data = {
+                'data': {
+                  'type': 'students',
+                  'attributes': student
+                }
+              };
+              return _context3.abrupt("return", _Api__WEBPACK_IMPORTED_MODULE_1__["default"].post("/students", data));
+
+            case 4:
+            case "end":
+              return _context3.stop();
+          }
+        }
+      }, _callee3);
     }))();
   }
 });

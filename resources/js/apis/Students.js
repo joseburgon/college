@@ -12,5 +12,18 @@ export default {
         await Csrf.getCookie();
 
         return Api.get(`/students/${student}`);
+    },
+
+    async create(student) {
+        await Csrf.getCookie();
+
+        let data = {
+            'data': {
+                'type': 'students',
+                'attributes': student
+            }
+        }
+
+        return Api.post(`/students`, data);
     }
 };
