@@ -1,26 +1,26 @@
 <template>
     <div>
-        <h3 class="text-gray-700 text-3xl font-medium">Transacciones</h3>
+        <h3 class="text-gray-700 text-3xl font-medium">Estudiantes</h3>
 
         <div class="mt-8"></div>
 
-        <transactions-table :transactions="transactions"></transactions-table>
+        <students-table :students="students"></students-table>
     </div>
 </template>
 
 <script>
 import DashboardLayout from '@/layouts/DashboardLayout';
-import TransactionsTable from '@/components/Dashboard/TransactionsTable';
+import StudentsTable from '@/components/Dashboard/StudentsTable';
 import User from '@/apis/User';
-import Transactions from '@/apis/Transactions';
+import Students from '@/apis/Students';
 
 export default {
     name: 'Dashboard',
-    components: { TransactionsTable },
+    components: { StudentsTable },
     data() {
         return {
             user: {},
-            transactions: [],
+            students: [],
             openSidebar: '',
             closeSidebar: '',
             sidebarOpen: '',
@@ -34,10 +34,9 @@ export default {
         });
     },
     mounted() {
-        Transactions.getAll()
+        Students.getAll()
             .then((res) => {
-                this.transactions = res.data.data;
-                console.log(this.transactions[0]);
+                this.students = res.data.data;
             })
             .catch((error) => {
                 console.log(error);

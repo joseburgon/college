@@ -5,12 +5,12 @@ export default {
     async getAll() {
         await Csrf.getCookie();
 
-        return Api.get('/students?page[number]=1&page[size]=25&sort=id');
+        return Api.get('/reference-codes?page[number]=1&page[size]=25&sort=id');
     },
 
-    async getStudent(student) {
+    async getReference(reference) {
         await Csrf.getCookie();
 
-        return Api.get(`/students/${student}`);
+        return Api.get(`/reference-codes/${reference}`);
     }
 };

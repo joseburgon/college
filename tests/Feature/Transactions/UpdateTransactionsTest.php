@@ -13,7 +13,6 @@ class UpdateTransactionsTest extends TestCase
 {
     use RefreshDatabase;
 
-    /** @test */
     public function guests_users_cannot_update_articles()
     {
         $transaction = factory(Transaction::class)->create();

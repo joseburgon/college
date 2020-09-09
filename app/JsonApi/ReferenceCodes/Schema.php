@@ -31,8 +31,22 @@ class Schema extends SchemaProvider
     {
         return [
             'code' => $resource->code,
-            'course_id' => $resource->course_id,
-            'student_id' => $resource->student_id,
+            'course' => $resource->course,
+            'student' => $resource->student,
+        ];
+    }
+
+    public function getRelationships($referenceCode, $isPrimary, array $includeRelationships)
+    {
+        return [
+            'students' => [
+                self::SHOW_RELATED => true,
+                self::SHOW_SELF => true,
+                self::SHOW_DATA => isset($includeRelationships['students']),
+                self::DATA => function() use ($referenceCode) {
+                    return $referenceCode->student;
+                }
+            ]
         ];
     }
 }

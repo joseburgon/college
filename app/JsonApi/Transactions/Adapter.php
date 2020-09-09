@@ -15,7 +15,11 @@ class Adapter extends AbstractAdapter
      * @var array
      */
     protected $attributes = [
-        'payment-type' => 'type'
+        'payment_type' => 'type'
+    ];
+
+    protected $includePaths = [
+        'reference-codes' => 'referenceCode',
     ];
 
     /**
@@ -43,6 +47,11 @@ class Adapter extends AbstractAdapter
     protected function filter($query, Collection $filters)
     {
         $this->filterWithScopes($query, $filters);
+    }
+
+    public function referenceCodes()
+    {
+        return $this->belongsTo('referenceCode');
     }
 
 }

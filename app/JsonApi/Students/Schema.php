@@ -31,13 +31,12 @@ class Schema extends SchemaProvider
     {
         return [
             'name' => $resource->name,
-            'last_name' => $resource->lastName,
+            'last_name' => $resource->last_name,
             'email' => $resource->email,
-            'identification' => $resource->word,
-            'phone' => $resource->phoneNumber,
+            'identification' => $resource->identification,
+            'phone' => $resource->phone,
             'city' => $resource->city,
-            'created-at' => $resource->created_at->toAtomString(),
-            'updated-at' => $resource->updated_at->toAtomString(),
+            'status' => $resource->status,
         ];
     }
 }

@@ -41,7 +41,7 @@
             <router-link
                 class="flex items-center mt-4 py-2 px-6 block border-l-4"
                 :class="[
-                    $route.name === 'transactions' ? activeClass : inactiveClass,
+                    $route.name.includes('transactions') ? activeClass : inactiveClass,
                 ]"
                 :to="{ name: 'transactions' }"
             >
@@ -75,9 +75,9 @@
             <router-link
                 class="flex items-center mt-4 py-2 px-6 block border-l-4"
                 :class="[
-                    $route.name === 'Tables' ? activeClass : inactiveClass,
+                    $route.name.includes('references') ? activeClass : inactiveClass,
                 ]"
-                to="/tables"
+                :to="{ name: 'references' }"
             >
                 <svg
                     class="h-5 w-5"
@@ -99,13 +99,15 @@
                     />
                 </svg>
 
-                <span class="mx-4">Tables</span>
+                <span class="mx-4">Referencias</span>
             </router-link>
 
-            <router-link
+             <router-link
                 class="flex items-center mt-4 py-2 px-6 block border-l-4"
-                :class="[$route.name === 'Forms' ? activeClass : inactiveClass]"
-                to="/forms"
+                :class="[
+                    $route.name.includes('students') ? activeClass : inactiveClass,
+                ]"
+                :to="{ name: 'students' }"
             >
                 <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
                     <path
@@ -118,7 +120,7 @@
                     ></path>
                 </svg>
 
-                <span class="mx-4">Forms</span>
+                <span class="mx-4">Students</span>
             </router-link>
 
             <router-link

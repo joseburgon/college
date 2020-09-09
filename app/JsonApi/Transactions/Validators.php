@@ -13,7 +13,7 @@ class Validators extends AbstractValidators
      * @var string[]|null
      *      the allowed paths, an empty array for none allowed, or null to allow all paths.
      */
-    protected $allowedIncludePaths = ['referenceCode'];
+    protected $allowedIncludePaths = ['reference-codes', 'students'];
 
     /**
      * The sort field names a client is allowed send.
@@ -21,7 +21,7 @@ class Validators extends AbstractValidators
      * @var string[]|null
      *      the allowed fields, an empty array for none allowed, or null to allow all fields.
      */
-    protected $allowedSortParameters = ['status', 'external_reference'];
+    protected $allowedSortParameters = ['id', 'status', 'external_reference'];
 
     /**
      * The filters a client is allowed send.

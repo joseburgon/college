@@ -1,5 +1,5 @@
 <template>
-  <div class="mt-8">
+  <div class="mt-8" v-if="student.attributes">
     <div class="mt-4">
       <div class="p-6 bg-white rounded-md shadow-md">
         <h2 class="text-lg text-gray-700 font-semibold capitalize">
@@ -11,7 +11,7 @@
             <div>
               <label class="text-gray-700" for="name">First Name</label>
               <input
-                v-model="student.name"
+                v-model="student.attributes.name"
                 class="form-input w-full mt-2 rounded-md focus:border-indigo-600"
                 type="text"
               />
@@ -20,25 +20,25 @@
             <div>
               <label class="text-gray-700" for="last_name">Last Name</label>
               <input
-                v-model="student.last_name"
-                class="form-input w-full mt-2 rounded-md focus:border-indigo-600"
-                type="email"
-              />
-            </div>
-
-            <div>
-              <label class="text-gray-700" for="email">Email</label>
-              <input
-                v-model="student.email"
+                v-model="student.attributes.last_name"
                 class="form-input w-full mt-2 rounded-md focus:border-indigo-600"
                 type="text"
               />
             </div>
 
             <div>
+              <label class="text-gray-700" for="email">Email</label>
+              <input
+                v-model="student.attributes.email"
+                class="form-input w-full mt-2 rounded-md focus:border-indigo-600"
+                type="email"
+              />
+            </div>
+
+            <div>
               <label class="text-gray-700" for="city">City</label>
               <input
-                v-model="student.city"
+                v-model="student.attributes.city"
                 class="form-input w-full mt-2 rounded-md focus:border-indigo-600"
                 type="text"
               />
@@ -47,7 +47,7 @@
             <div>
               <label class="text-gray-700" for="status">Status</label>
               <input
-                v-model="student.status"
+                v-model="student.attributes.status"
                 class="form-input w-full mt-2 rounded-md focus:border-indigo-600"
                 type="text"
               />
@@ -86,7 +86,7 @@ export default {
       const { id } = this.$route.params
       Students.getStudent(id)
         .then((res) => {
-          this.student = res.data.student
+          this.student = res.data.data
         })
         .catch((error) => {
           console.log(error)

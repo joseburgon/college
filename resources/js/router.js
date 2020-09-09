@@ -8,8 +8,11 @@ import Pending from './views/Pending';
 import Error from './views/Error';
 import Login from './views/dashboard/Login';
 import Dashboard from './views/dashboard/Dashboard';
-import StudentEdit from './views/dashboard/students/Edit';
+import StudentsIndex from './views/dashboard/students/Index';
+import StudentsEdit from './views/dashboard/students/Edit';
 import TransactionsIndex from './views/dashboard/transactions/Index';
+import ReferenceIndex from './views/dashboard/references/Index';
+import ReferenceShow from './views/dashboard/references/Show';
 
 Vue.use(VueRouter);
 
@@ -62,15 +65,33 @@ const routes = [
         meta: { authOnly: true },
     },
     {
-        path: '/dashboard/student/:id/edit',
-        name: 'student-edit',
-        component: StudentEdit,
+        path: '/dashboard/students',
+        name: 'students',
+        component: StudentsIndex,
+        meta: { authOnly: true },
+    },
+    {
+        path: '/dashboard/students/:id/edit',
+        name: 'students-edit',
+        component: StudentsEdit,
         meta: { authOnly: true },
     },
     {
         path: '/dashboard/transactions',
         name: 'transactions',
         component: TransactionsIndex,
+        meta: { authOnly: true },
+    },
+    {
+        path: '/dashboard/references',
+        name: 'references',
+        component: ReferenceIndex,
+        meta: { authOnly: true },
+    },
+    {
+        path: '/dashboard/references/:id/show',
+        name: 'references-show',
+        component: ReferenceShow,
         meta: { authOnly: true },
     },
     {

@@ -54,13 +54,13 @@
                                             class="text-sm leading-5 font-medium text-gray-900"
                                         >
                                             {{
-                                                `${student.name} ${student.last_name}`
+                                                `${student.attributes.name} ${student.attributes.last_name}`
                                             }}
                                         </div>
                                         <div
                                             class="text-sm leading-5 text-gray-500"
                                         >
-                                            {{ student.email }}
+                                            {{ student.attributes.email }}
                                         </div>
                                     </div>
                                 </div>
@@ -70,10 +70,10 @@
                                 class="px-6 py-4 whitespace-no-wrap border-b border-gray-200"
                             >
                                 <div class="text-sm leading-5 text-gray-900">
-                                    {{ student.phone }}
+                                    {{ student.attributes.phone }}
                                 </div>
                                 <div class="text-sm leading-5 text-gray-500">
-                                    {{ student.identification }}
+                                    {{ student.attributes.identification }}
                                 </div>
                             </td>
 
@@ -82,14 +82,14 @@
                             >
                                 <span
                                     class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800"
-                                    >{{ student.status }}</span
+                                    >{{ student.attributes.status }}</span
                                 >
                             </td>
 
                             <td
                                 class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500"
                             >
-                                {{ student.city }}
+                                {{ student.attributes.city }}
                             </td>
 
                             <td
@@ -97,8 +97,8 @@
                             >
                                 <router-link
                                     :to="{
-                                        name: 'student-edit',
-                                        params: { id: student.identification },
+                                        name: 'students-edit',
+                                        params: { id: student.id },
                                     }"
                                     class="text-indigo-600 hover:text-indigo-900"
                                     >Edit

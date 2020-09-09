@@ -30,7 +30,7 @@ class Schema extends SchemaProvider
     public function getAttributes($transaction)
     {
         return [
-            'payment-type' => $transaction->type,
+            'payment_type' => $transaction->type,
             'status_detail' => $transaction->status_detail,
             'payment_method_id' => $transaction->payment_method_id,
             'status' => $transaction->status,
@@ -41,10 +41,12 @@ class Schema extends SchemaProvider
 
     public function getRelationships($transaction, $isPrimary, array $includeRelationships)
     {
-
         return [
-            'referenceCode' => [
-                'data' => function() use ($transaction) {
+            'reference-codes' => [
+                self::SHOW_RELATED => true,
+                self::SHOW_SELF => true,
+                self::SHOW_DATA => isset($includeRelationships['reference-codes']),
+                self::DATA => function() use ($transaction) {
                     return $transaction->referenceCode;
                 }
             ]

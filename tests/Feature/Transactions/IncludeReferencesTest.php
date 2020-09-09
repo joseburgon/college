@@ -21,10 +21,30 @@ class IncludeReferencesTest extends TestCase
         Sanctum::actingAs(factory(User::class)->create());
 
         $this->jsonApi()
-            ->includePaths('referenceCode')
-            ->get(route('api.v1.transactions.read', $transaction))->dump()
+            ->includePaths('reference-codes')
+            ->get(route('api.v1.transactions.read', $transaction))
+            ->assertSee($transaction->referenceCode->code)
+            ->assertJsonFragment([
+                'related' => route('api.v1.transactions.relationships.reference-codes', $transaction)
+            ])
+            ->assertJsonFragment([
+                'self' => route('api.v1.transactions.relationships.reference-codes.read', $transaction)
+            ]);
+    }
+
+    /** @test */
+    public function can_fetch_related_references()
+    {
+        $transaction = factory(Transaction::class)->create();
+
+        Sanctum::actingAs(factory(User::class)->create());
+
+        $this->jsonApi()
+            ->get(route('api.v1.transactions.relationships.reference-codes', $transaction))
             ->assertSee($transaction->referenceCode->code);
 
-
+        $this->jsonApi()
+            ->get(route('api.v1.transactions.relationships.reference-codes.read', $transaction))
+            ->assertSee($transaction->referenceCode->id);
     }
 }

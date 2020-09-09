@@ -21,16 +21,20 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 JsonApi::register('v1')->routes(function($api) {
-    $api->resource('transactions')->middleware('auth:sanctum');
-    $api->resource('reference-codes')->middleware('auth:sanctum');
-    $api->resource('students')->middleware('auth:sanctum');
+    $api->resource('transactions')->relationships(function ($api) {
+        $api->hasOne('reference-codes');
+    });
+    $api->resource('reference-codes')->relationships(function ($api) {
+        $api->hasOne('students');
+    });
+    $api->resource('students');
 });
 
-Route::namespace('Api')->group(function () {
+Route::namespace('Api')->prefix('api/v1')->group(function () {
 
-    Route::post('/register', 'RegisterController@register');
-    Route::post('/login', 'LoginController@login')->name('api.v1.login');
-    Route::post('/logout', 'LoginController@logout');
+    Route::post('register', 'RegisterController@register');
+    Route::post('login', 'LoginController@login')->name('api.v1.login');
+    Route::post('logout', 'LoginController@logout');
 
     Route::post('reference', 'ReferenceCodeController@store')->name('api.reference');
 
@@ -45,6 +49,5 @@ Route::namespace('Api')->group(function () {
 
     Route::apiResources([
         'courses' => 'CourseController',
-        'students' => 'StudentController',
     ]);
 });
