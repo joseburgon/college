@@ -21,7 +21,7 @@ class CoursesTableSeeder extends Seeder
             'price' => 140000,
             'price_usd' => 40,
             'cohort' => 'Septiembre 2020',
-            'thinkific_id' => 761932,
+            'thinkific_id' => 884089,
             'available_at' => Carbon::create('2020', '09', '30', '00', '00', '00', 'America/Bogota'),
         ]);
 

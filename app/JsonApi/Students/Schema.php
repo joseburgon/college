@@ -37,6 +37,7 @@ class Schema extends SchemaProvider
             'phone' => $resource->phone,
             'city' => $resource->city,
             'status' => $resource->status,
+            'thinkific_user_id' => $resource->thinkific_user_id,
         ];
     }
 }

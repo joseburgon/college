@@ -47,11 +47,11 @@ Route::namespace('Api')->prefix('api/v1')->group(function () {
 JsonApi::register('v1')->routes(function($api) {
     $api->resource('transactions')->relationships(function ($api) {
         $api->hasOne('reference-codes');
-    });
+    })->middleware('auth');
 
     $api->resource('reference-codes')->relationships(function ($api) {
         $api->hasOne('students');
     });
 
-    $api->resource('students');
+    $api->resource('students')->middleware('auth');
 });

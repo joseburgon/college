@@ -9,11 +9,8 @@
                         ¡Compra completada!
                     </h2>
                     <p class="mt-2 text-sm text-gray-500 md:text-base">
-                        Con esto has quedado matriculado para el curso:
+                        Con esto has quedado matriculado para el curso.
                         <br />
-                        <span class="text-black font-semibold"
-                            >De la carencia a la abundancia.</span
-                        >
                         Enviaremos tu usuario y contraseña a tu mail para que
                         puedas acceder a la plataforma tan pronto se lance el
                         curso.

@@ -3,13 +3,13 @@
     <div class="mt-4">
       <div class="p-6 bg-white rounded-md shadow-md">
         <h2 class="text-lg text-gray-700 font-semibold capitalize">
-          Edit Student
+          Editar Estudiante
         </h2>
 
-        <form @submit.prevent="update">
+        <form @submit.prevent="updateStudent">
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-4">
             <div>
-              <label class="text-gray-700" for="name">First Name</label>
+              <label class="text-gray-700" for="name">Nombres</label>
               <input
                 v-model="student.attributes.name"
                 class="form-input w-full mt-2 rounded-md focus:border-indigo-600"
@@ -18,7 +18,7 @@
             </div>
 
             <div>
-              <label class="text-gray-700" for="last_name">Last Name</label>
+              <label class="text-gray-700" for="last_name">Apellidos</label>
               <input
                 v-model="student.attributes.last_name"
                 class="form-input w-full mt-2 rounded-md focus:border-indigo-600"
@@ -32,11 +32,23 @@
                 v-model="student.attributes.email"
                 class="form-input w-full mt-2 rounded-md focus:border-indigo-600"
                 type="email"
+                disabled
               />
             </div>
 
             <div>
-              <label class="text-gray-700" for="city">City</label>
+              <label class="text-gray-700" for="city"
+                >Identificaci&oacute;n</label
+              >
+              <input
+                v-model="student.attributes.identification"
+                class="form-input w-full mt-2 rounded-md focus:border-indigo-600"
+                type="text"
+              />
+            </div>
+
+            <div>
+              <label class="text-gray-700" for="city">Ciudad</label>
               <input
                 v-model="student.attributes.city"
                 class="form-input w-full mt-2 rounded-md focus:border-indigo-600"
@@ -50,6 +62,18 @@
                 v-model="student.attributes.status"
                 class="form-input w-full mt-2 rounded-md focus:border-indigo-600"
                 type="text"
+              />
+            </div>
+
+            <div>
+              <label class="text-gray-700" for="status"
+                >Usuario Thinkific</label
+              >
+              <input
+                v-model="student.attributes.thinkific_user_id"
+                class="form-input w-full mt-2 rounded-md focus:border-indigo-600"
+                type="text"
+                disabled
               />
             </div>
           </div>
@@ -93,8 +117,14 @@ export default {
         })
     },
 
-    update() {
-      console.log('Update Method!')
+    updateStudent() {
+      Students.update(this.student.id, this.student.attributes)
+        .then((res) => {
+          console.log('Student updated!')
+        })
+        .catch((error) => {
+          console.log(error)
+        })
     },
   },
 }

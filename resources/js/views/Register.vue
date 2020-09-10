@@ -175,7 +175,7 @@
             >
               <script
                 type="application/javascript"
-                src="https://www.paypal.com/sdk/js?client-id=AfZDLVmK8PtGjQq4nOhtZNch1qBpOvLOLHf5f5SmtwTWP9rfinjzVLyLK91Pf8p9nt6gOGSwKSsH_80X"
+                src="https://www.paypal.com/sdk/js?client-id=ARUO9QDHYXWYbyJgUOF_FTEGXtKTtifep5xklBxSbeWYnI5MZdnKshKztdlRASZkLU_AQdrMrqi3e6lF"
               ></script>
               <p
                 class="font-hairline text-center text-gray-600 text-xs px-4 xl:px-20 mt-8"
