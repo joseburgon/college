@@ -21,6 +21,11 @@ class TransactionController extends Controller
         return TransactionCollection::make($transactions);
     }
 
+    public function countApproved()
+    {
+        return Transaction::where('status', 'approved')->orWhere('status', 'COMPLETED')->count();
+    }
+
     public function show(Transaction $transaction)
     {
         return TransactionResource::make($transaction);

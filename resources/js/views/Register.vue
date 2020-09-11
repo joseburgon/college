@@ -247,7 +247,7 @@ export default {
     this.$emit(`update:layout`, DefaultLayout)
 
     if (!this.query.course) {
-      this.query.course = 2
+      this.query.course = 1
     }
 
     axios

@@ -33,6 +33,8 @@ Route::namespace('Api')->prefix('api')->group(function () {
         return response('Success', 200);
     })->name('api.v1.notifications');
 
+    Route::get('transactions/count-approved', 'TransactionController@countApproved')->name('api.transactions.countApproved');
+
     Route::post('transactions/mercadopago', 'TransactionController@mercadopago')->name('api.transactions.mercadopago');
 
     Route::post('transactions/paypal', 'TransactionController@paypal')->name('api.transactions.paypal');
