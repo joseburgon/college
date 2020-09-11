@@ -68,7 +68,7 @@ export default {
   data() {
     return {
       form: {
-        email: '',
+        email: 'team@livingroomcollege.org',
         password: '',
       },
       errors: [],

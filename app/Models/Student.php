@@ -2,7 +2,9 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class Student extends Model
 {
@@ -32,6 +34,16 @@ class Student extends Model
     ];
 
     protected $with = ['courses'];
+
+    public function scopeSearch(Builder $query, $values)
+    {
+        foreach (Str::of($values)->explode(' ') as $value) {
+            $query->orWhere('name', 'LIKE', "%{$value}%")
+                ->orWhere('last_name', 'LIKE', "%{$value}%")
+                ->orWhere('email', 'LIKE', "%{$value}%")
+                ->orWhere('identification', 'LIKE', "%{$value}%");
+        }
+    }
 
 
     public function courses()

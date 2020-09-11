@@ -78,7 +78,9 @@
             </div>
 
             <div class="mx-5">
-              <h4 class="text-2xl font-semibold text-gray-700">{{ totalCounts.transactions }}</h4>
+              <h4 class="text-2xl font-semibold text-gray-700">
+                {{ totalCounts.transactions }}
+              </h4>
               <div class="text-gray-500">Total Approved Transactions</div>
             </div>
           </div>
@@ -121,7 +123,7 @@
 
     <div class="mt-8"></div>
 
-    <students-table :students="students"></students-table>
+    <students-table :students="students" :meta="meta"></students-table>
   </div>
 </template>
 
@@ -139,6 +141,7 @@ export default {
       user: {},
       students: [],
       totalCounts: {},
+      meta: {},
       openSidebar: '',
       closeSidebar: '',
       sidebarOpen: '',
@@ -159,13 +162,14 @@ export default {
         this.totalCounts.transactions = res.data
       })
       .catch((e) => {
-        console.log(e);
+        console.log(e)
       })
 
-    Students.getAll()
+    Students.get()
       .then((res) => {
         this.totalCounts.students = res.data.meta.page.total
         this.students = res.data.data
+        this.meta = res.data.meta.page
       })
       .catch((error) => {
         console.log(error)

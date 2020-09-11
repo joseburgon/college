@@ -3,10 +3,18 @@ import Csrf from './Csrf';
 import { update } from 'lodash';
 
 export default {
-    async getAll() {
+    async get() {
         await Csrf.getCookie();
 
-        return Api.get('/students?page[number]=1&page[size]=25&sort=-id');
+        let query = {
+            params: {
+                'page[number]': 1,
+                'page[size]': 15,
+                'sort': '-id',
+            }
+        }
+
+        return Api.get('/students', query);
     },
 
     async getStudent(student) {
@@ -40,5 +48,19 @@ export default {
         }
 
         return Api.patch(`/students/${id}`, data);
+    },
+
+    async search(terms, page) {
+        await Csrf.getCookie();
+
+        let searchValues = {
+            params: {
+                'filter[search]': terms,
+                'page[number]': page,
+                'page[size]': 10,
+            }
+        }
+
+        return Api.get(`/students`, searchValues);
     }
 };
