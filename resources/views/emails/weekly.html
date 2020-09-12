@@ -1,0 +1,153 @@
+<style>
+  @media screen and (max-width: 480px) {
+    .main-table {
+      width: 300px !important;
+      margin: 0 auto;
+    }
+  }
+</style>
+
+<table
+  border="0"
+  cellpadding="0"
+  cellspacing="0"
+  style="background-color: #f3f3f3; font-family: Helvetica, Arial, sans-serif"
+  width="100%"
+>
+  <tbody>
+    <tr>
+      <td align="center">
+        <table
+          cellpadding="0"
+          cellspacing="0"
+          class="main-table"
+          style="
+            margin: 25px auto;
+            background: #ffffff;
+            -webkit-border-radius: 3px;
+            -moz-border-radius: 3px;
+            border-radius: 3px;
+            -moz-box-shadow: 1px 1px 0 #eaeaea;
+            -webkit-box-shadow: 1px 1px 0 #eaeaea;
+            box-shadow: 1px 1px 0 #eaeaea;
+            width: 500px;
+          "
+        >
+          <tbody>
+            <tr style="border: 0">
+              <td
+                style="
+                  padding: 20px;
+                  -webkit-border-top-left-radius: 3px;
+                  -webkit-border-top-right-radius: 3px;
+                  border-top-left-radius: 3px;
+                  border-top-right-radius: 3px;
+                  text-align: left;
+                  border: 0;
+                  background-color: rgb(0, 0, 0);
+                "
+              >
+                <a
+                  href="https://cursos.livingroomcollege.org/"
+                  rel="noopener noreferrer"
+                  style="
+                    box-sizing: border-box;
+                    position: relative;
+                    color: #ffffff;
+                    font-size: 19px;
+                    font-weight: bold;
+                    text-decoration: none;
+                    display: inline-block;
+                  "
+                  target="_blank"
+                  ><img
+                    src="https://checkout.livingroomcollege.org/img/logo_college_horizontal_blanco.svg"
+                    class="logo fr-fic fr-dii"
+                    alt="Living Room College Logo"
+                    style="max-width: 100%; border: none; width: 200px"
+                /></a>
+              </td>
+            </tr>
+            <tr style="border: 0">
+              <td style="padding: 20px; background: #fff; border: 0">
+                <h3 style="font-size: 18px">¡Hola {{user.full_name}}!</h3>
+
+                <p style="margin-bottom: 30px">
+                  Este es un recordatorio de {{site_name}} de que tienes cursos
+                  activos que estás completando.
+                </p>
+
+                <p>{% if enrollments %}</p>
+
+                <p>
+                  <strong
+                    >Estos son los cursos en los que está inscrito:</strong
+                  >
+                </p>
+
+                <ul>
+                  <li style="display: none">
+                    {% for enrollment in enrollments %}
+                  </li>
+                  <li>
+                    <p>
+                      {{ enrollment.course_name }} esta
+                      {{enrollment.percentage_completed}} completado.
+                      <a href="{{enrollments_url}}" target="_blank"
+                        >Reanudar este curso.</a
+                      >
+                    </p>
+                  </li>
+                  <li style="display: none">{% endfor %}</li>
+                </ul>
+                <p>¡Nos vemos en clase!</p>
+                <p>{% endif %}</p>
+              </td>
+            </tr>
+            <tr style="border: 0">
+              <td
+                style="
+                  padding: 20px 40px 20px;
+                  text-align: center;
+                  border: 0;
+                  color: white;
+                  background-color: rgb(0, 0, 0);
+                "
+              >
+                &zwnj;<a
+                  href="{{sign_in_url}}"
+                  target="_blank"
+                  style="text-decoration: none; color: white"
+                  >Iniciar sesi&oacute;n&nbsp;</a
+                >
+                |
+                <a
+                  href="{{edit_notifications_url}}"
+                  target="_blank"
+                  style="text-decoration: none; color: white"
+                  >Editar las configuración de notificaciones.</a
+                >&zwnj;
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<div style="display: flex; justify-content: center; margin-top: 2rem">
+  <a
+    href="https://s3.amazonaws.com/thinkific/file_uploads/304551/attachments/d8a/5ea/f89/DESCARGA_LA_ACTIVIDAD-Celebrando_victorias.pdf"
+    style="
+      text-decoration: none;
+      background: black;
+      padding: 1rem 3rem;
+      color: white;
+      font-family: Helvetica, Arial, sans-serif;
+      border-radius: 10px;
+    "
+    target="_blank"
+    >DESCARGA LA ACTIVIDAD</a
+  >
+</div>

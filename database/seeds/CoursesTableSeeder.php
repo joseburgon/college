@@ -18,10 +18,10 @@ class CoursesTableSeeder extends Seeder
             'name' => 'Curso Básico',
             'tagline' => 'School - Curso Básico',
             'description' => 'Este es el curso central de nuestro programa educativo y lo puedes realizar en modalidad virtual desde cualquier lugar del mundo. Tiene como propósito que puedas comprender más claramente cómo somos reconciliados con Dios por medio de su gracia.',
-            'price' => 140000,
-            'price_usd' => 40,
+            'price' => 160000,
+            'price_usd' => 45,
             'cohort' => 'Septiembre 2020',
-            'thinkific_id' => 761932,
+            'thinkific_id' => 884089,
             'available_at' => Carbon::create('2020', '09', '30', '00', '00', '00', 'America/Bogota'),
         ]);
 

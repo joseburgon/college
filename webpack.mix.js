@@ -2,7 +2,10 @@ const mix = require("laravel-mix");
 
 const tailwindcss = require("tailwindcss");
 
+const path = require('path');
+
 require("laravel-mix-purgecss");
+
 
 /*
  |--------------------------------------------------------------------------
@@ -16,7 +19,7 @@ require("laravel-mix-purgecss");
  */
 
 // Javascript
-mix.js("resources/js/app.js", "public/js");
+mix.js("resources/js/main.js", "public/js");
 
 // CSS
 mix.sass("resources/sass/app.scss", "public/css")
@@ -30,5 +33,13 @@ mix.sass("resources/sass/app.scss", "public/css")
     });
 
 mix.copyDirectory('resources/fonts', 'public/fonts');
+
+mix.webpackConfig({
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, 'resources/js')
+    },
+  },
+});
 
 mix.browserSync('college.test');

@@ -1,7 +1,7 @@
 import Vue from "vue";
 import router from "./router";
 import VueFormulate from "@braid/vue-formulate";
-import App from "./components/App";
+import App from "./App";
 
 require("./bootstrap");
 Vue.use(VueFormulate);

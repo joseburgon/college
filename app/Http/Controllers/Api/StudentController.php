@@ -18,7 +18,8 @@ class StudentController extends Controller
      */
     public function index()
     {
-        //
+        $students = Student::limit(50)->get();
+        return response()->json($students);
     }
 
     /**
@@ -29,13 +30,13 @@ class StudentController extends Controller
      */
     public function store(StudentRequest $request)
     {
-        $student = Student::updateOrCreate(['email' => $request['buyerEmail']],
+        $student = Student::updateOrCreate(['email' => $request['email']],
             [
                 'identification' => $request['identification'],
                 'name' => $request['name'],
                 'last_name' => $request['last_name'],
-                'phone' => $request['mobilePhone'],
-                'city' => $request['billingCity'],
+                'phone' => $request['phone'],
+                'city' => $request['city'],
             ]
         );
 
@@ -53,28 +54,5 @@ class StudentController extends Controller
         $student = Student::where('identification', $identification)->first();
 
         return response()->json(['student' => $student]);
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Student  $student
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Student $student)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Student  $student
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Student $student)
-    {
-        //
     }
 }

@@ -9,6 +9,7 @@ $factory->define(Student::class, function (Faker $faker) {
     return [
         'name' => $faker->name,
         'last_name' => $faker->lastName,
+        'email' => $faker->email,
         'identification' => $faker->word,
         'phone' => $faker->phoneNumber,
         'city' => $faker->city,

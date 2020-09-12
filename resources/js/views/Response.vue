@@ -1,6 +1,6 @@
 <template>
     <div class="w-full">
-        <div class="flex bg-white sm:px-40 md:px-0" style="height:685px;">
+        <div class="flex bg-white sm:px-40 md:px-0" style="height: 685px">
             <div
                 class="flex items-center text-center lg:text-left px-12 md:px-40 lg:w-1/2"
             >
@@ -9,13 +9,10 @@
                         ¡Compra completada!
                     </h2>
                     <p
-                        class="mt-2 text-sm text-gray-500 md:text-base"
                         v-if="transactionState == 'approved'"
+                        class="mt-2 text-sm text-gray-500 md:text-base"
                     >
-                        Con esto has quedado matriculado para el curso:<br>
-                        <span class="text-black font-semibold">
-                            De la carencia a la abundancia.
-                        </span>
+                        Con esto has quedado matriculado para el curso.<br />
                         Enviaremos tu usuario y contraseña a tu mail para que
                         puedas acceder a la plataforma tan pronto se lance el
                         curso.
@@ -43,7 +40,8 @@
                     </h2>
                     <p class="mt-2 text-sm text-gray-500 md:text-base">
                         Apenas tu pago cambie a estado aprobado procederemos a
-                        enviar tus credenciales de acceso a tu correo electr&oacute;nico.
+                        enviar tus credenciales de acceso a tu correo
+                        electr&oacute;nico.
                     </p>
                 </div>
 
@@ -58,7 +56,7 @@
             </div>
             <div
                 class="hidden lg:block lg:w-1/2"
-                style="clip-path:polygon(10% 0, 100% 0%, 100% 100%, 0 100%)"
+                style="clip-path: polygon(10% 0, 100% 0%, 100% 100%, 0 100%)"
             >
                 <div
                     v-if="transactionState === 'approved'"
@@ -89,28 +87,26 @@
 </template>
 
 <script>
-import api from "../api";
-import PxThumbsUp from "../components/PxThumbsUp";
-import PxThumbsDown from "../components/PxThumbsDown";
+import DefaultLayout from '../layouts/DefaultLayout';
+
 export default {
     data() {
         return {
             query: this.$route.query,
-            transactionState: "",
-            estadoTx: "",
-            student: {}
+            transactionState: '',
+            estadoTx: '',
+            student: {},
         };
     },
-    components: { PxThumbsUp, PxThumbsDown },
 
     created() {
-        this.transactionState = this.query.collection_status;
+        this.$emit(`update:layout`, DefaultLayout);
 
-        console.log(this.query);
+        this.transactionState = this.query.collection_status;
 
         if (this.transactionState === 'COMPLETED') {
             this.transactionState = 'approved';
         }
-    }
+    },
 };
 </script>
