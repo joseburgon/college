@@ -175,7 +175,7 @@
             >
               <script
                 type="application/javascript"
-                src="https://www.paypal.com/sdk/js?client-id=ARUO9QDHYXWYbyJgUOF_FTEGXtKTtifep5xklBxSbeWYnI5MZdnKshKztdlRASZkLU_AQdrMrqi3e6lF"
+                src="https://www.paypal.com/sdk/js?client-id=AfZDLVmK8PtGjQq4nOhtZNch1qBpOvLOLHf5f5SmtwTWP9rfinjzVLyLK91Pf8p9nt6gOGSwKSsH_80X"
               ></script>
               <p
                 class="font-hairline text-center text-gray-600 text-xs px-4 xl:px-20 mt-8"
@@ -248,7 +248,7 @@ export default {
 
     if (!this.query.course) {
       this.query.course = 1
-    } else if (this.query.course === 2) {
+    } else if (this.query.course == 2) {
       this.$router.push({ name: 'unavailable' })
     }
 
