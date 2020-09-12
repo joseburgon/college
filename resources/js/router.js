@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Register from './views/Register';
+import Unavailable from './views/Unavailable';
 import Response from './views/Response';
 import Success from './views/Success';
 import Failure from './views/Failure';
@@ -26,6 +27,12 @@ const routes = [
         path: '/register',
         name: 'register',
         component: Register,
+        meta: { guestOnly: true },
+    },
+    {
+        path: '/unavailable',
+        name: 'unavailable',
+        component: Unavailable,
         meta: { guestOnly: true },
     },
     {

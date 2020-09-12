@@ -248,6 +248,8 @@ export default {
 
     if (!this.query.course) {
       this.query.course = 1
+    } else if (this.query.course === 2) {
+      this.$router.push({ name: 'unavailable' })
     }
 
     axios
@@ -257,7 +259,7 @@ export default {
         this.course = res.data
       })
       .catch((e) => {
-        window.location.replace('/error')
+        this.$router.push({ name: 'error' })
       })
   },
 

@@ -6,11 +6,11 @@
       >
         <div>
           <h2 class="text-3xl font-semibold md:text-4xl">
-            Tu pago se encuentra pendiente.
+            Este curso no se encuentra disponible.
           </h2>
           <p class="mt-2 text-sm text-gray-500 md:text-base">
-            Apenas tu pago cambie a estado aprobado procederemos a enviar tus
-            credenciales de acceso a tu correo electr&oacute;nico.
+            El curso al que intentas matricularte no se encuentra disponible en
+            este momento.
           </p>
         </div>
       </div>
@@ -20,7 +20,7 @@
       >
         <div
           class="h-full object-fit"
-          style="background-image: url(/img/pending_banner.jpg)"
+          style="background-image: url(/img/unavailable_banner.jpg)"
         >
           <div class="h-full bg-black opacity-25"></div>
         </div>
