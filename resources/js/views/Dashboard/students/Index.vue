@@ -60,7 +60,6 @@ export default {
     getStudents(page = 1) {
       Students.get(page)
         .then((res) => {
-          console.log(res.data)
           this.students = res.data.data
           this.meta = res.data.meta.page
         })
@@ -73,7 +72,6 @@ export default {
         .then((res) => {
           this.students = res.data.data
           this.meta = res.data.meta.page
-          console.log(res.data.meta);
         })
         .catch((error) => {
           console.log(error)
@@ -90,19 +88,3 @@ export default {
   mounted() { this.getStudents() },
 }
 </script>
-
-<style scoped>
-.form-input {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  background-color: #fff;
-  border-color: #e2e8f0;
-  border-width: 1px;
-  border-radius: 0.25rem;
-  font-size: 1rem;
-  line-height: 1.5;
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
-}
-</style>

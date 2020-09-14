@@ -96,18 +96,3 @@ export default {
   },
 }
 </script>
-
-<style scoped>
-.form-input {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    background-color: #fff;
-    border-color: #e2e8f0;
-    border-width: 1px;
-    border-radius: .25rem;
-    font-size: 1rem;
-    line-height: 1.5;
-    padding: .5rem .75rem;
-}
-</style>
