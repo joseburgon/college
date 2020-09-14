@@ -57,7 +57,7 @@ export default {
             params: {
                 'filter[search]': terms,
                 'page[number]': page,
-                'page[size]': 10,
+                'page[size]': 15,
             }
         }
 
