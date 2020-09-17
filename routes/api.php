@@ -16,9 +16,7 @@ use CloudCreativity\LaravelJsonApi\Facades\JsonApi;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::get('user', 'Api\AuthUserController@show')->middleware('auth:sanctum');
 
 Route::namespace('Api')->prefix('api')->group(function () {
     Route::apiResources([
