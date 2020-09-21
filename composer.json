@@ -19,7 +19,8 @@
         "laravel/sanctum": "^2.4",
         "laravel/tinker": "^2.0",
         "laravel/ui": "^2.0",
-        "mercadopago/dx-php": "^2.1"
+        "mercadopago/dx-php": "^2.1",
+        "sentry/sentry-laravel": "^1.9"
     },
     "require-dev": {
         "cloudcreativity/json-api-testing": "^3.0",
