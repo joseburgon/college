@@ -28,9 +28,17 @@
 
     <div class="mt-8"></div>
 
+    <div
+      v-if="loading"
+      class="flex justify-center items-center w-full h-screen"
+    >
+      <atom-spinner :animation-duration="1000" :size="60" :color="'#000000'" />
+    </div>
+
     <students-table
+      v-else
       :students="students"
-      :meta="meta"
+      :meta="studentsMeta"
       :search="searchTerms"
     ></students-table>
   </div>
@@ -41,43 +49,41 @@ import DashboardLayout from '@/layouts/DashboardLayout'
 import StudentsTable from '@/components/Dashboard/StudentsTable'
 import User from '@/apis/User'
 import Students from '@/apis/Students'
+import { AtomSpinner } from 'epic-spinners'
 
 export default {
   name: 'Dashboard',
-  components: { StudentsTable },
+  components: { StudentsTable, AtomSpinner },
   data() {
     return {
       user: {},
-      students: [],
-      meta: {},
       searchTerms: '',
       openSidebar: '',
       closeSidebar: '',
       sidebarOpen: '',
+      loading: false,
     }
   },
-  methods: {
-    getStudents(page = 1) {
-      Students.get(page)
-        .then((res) => {
-          this.students = res.data.data
-          this.meta = res.data.meta.page
-        })
-        .catch((error) => {
-          console.log(error)
-        })
+  computed: {
+    students() {
+      return this.$store.state.students
     },
-    searchStudents(page) {
-      Students.search(this.searchTerms, page)
-        .then((res) => {
-          this.students = res.data.data
-          this.meta = res.data.meta.page
-        })
-        .catch((error) => {
-          console.log(error)
-        })
+
+    studentsMeta() {
+      return this.$store.state.studentsMeta
     },
   },
+
+  methods: {
+    searchStudents(page) {
+      let search = this.searchTerms
+
+      this.$store
+        .dispatch('searchStudents', { searchTerms: search, page: page })
+        .then(() => (this.loading = false))
+    },
+  },
+
   created() {
     this.$emit(`update:layout`, DashboardLayout)
 
@@ -85,6 +91,11 @@ export default {
       this.user = response.data
     })
   },
-  mounted() { this.getStudents() },
+
+  mounted() {
+    this.loading = true
+
+    this.$store.dispatch('fetchStudents').then(() => (this.loading = false))
+  },
 }
 </script>
