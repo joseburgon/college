@@ -108,7 +108,7 @@ class FilterTransactionsTest extends TestCase
     }
 
     /** @test */
-    public function can_filter_transactions_by_unknowm_filters()
+    public function cant_filter_transactions_by_unknowm_filters()
     {
         factory(Transaction::class)->create();
 

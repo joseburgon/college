@@ -3,6 +3,7 @@ import Vue from 'vue'
 
 import Students from '@/apis/Students'
 import Transactions from '@/apis/Transactions'
+import References from '@/apis/References'
 
 Vue.use(Vuex)
 
@@ -14,6 +15,9 @@ export default new Vuex.Store({
     transactions: [],
     transactionsMeta: {},
     transactionsCount: '',
+    references: [],
+    referencesMeta: {},
+    referencesCount: '',
   },
 
   getters: {
@@ -42,10 +46,51 @@ export default new Vuex.Store({
       })
     },
 
+    fetchTransactions({ commit }, page = 1) {
+      return new Promise((resolve, reject) => {
+        Transactions.get(page).then((res) => {
+          commit('setTransactions', res.data.data)
+          commit('setTransactionsMeta', res.data.meta.page)
+          resolve()
+        })
+      })
+    },
+
+    searchTransactions({ commit }, { searchTerms, page }) {
+      return new Promise((resolve, reject) => {
+        Transactions.search(searchTerms, page).then((res) => {
+          commit('setTransactions', res.data.data)
+          commit('setTransactionsMeta', res.data.meta.page)
+          resolve()
+        })
+      })
+    },
+
     countApprovedTransactions({ commit }) {
       return new Promise((resolve, reject) => {
         axios.get(`api/transactions/count-approved`).then((res) => {
           commit('setTransactionsCount', res.data)
+        })
+      })
+    },
+
+    fetchReferences({ commit }, page = 1) {
+      return new Promise((resolve, reject) => {
+        References.get(page).then((res) => {
+          commit('setReferences', res.data.data)
+          commit('setReferencesMeta', res.data.meta.page)
+          commit('setStudentsCount', res.data.meta.page.total)
+          resolve()
+        })
+      })
+    },
+
+    searchReferences({ commit }, { searchTerms, page }) {
+      return new Promise((resolve, reject) => {
+        References.search(searchTerms, page).then((res) => {
+          commit('setReferences', res.data.data)
+          commit('setReferencesMeta', res.data.meta.page)
+          resolve()
         })
       })
     },
@@ -74,6 +119,18 @@ export default new Vuex.Store({
 
     setTransactionsCount(state, count) {
       state.transactionsCount = count
+    },
+
+    setReferences(state, references) {
+      state.references = references
+    },
+
+    setReferencesMeta(state, meta) {
+      state.referencesMeta = meta
+    },
+
+    setReferencesCount(state, count) {
+      state.referencesCount = count
     },
   },
 })

@@ -2,7 +2,7 @@
   <div>
     <div class="flex justify-between">
       <h3 class="text-gray-700 text-3xl font-medium">Estudiantes</h3>
-
+      <!-- Search Box -->
       <div class="relative mx-4 lg:mx-0">
         <span class="absolute inset-y-0 left-0 pl-3 flex items-center">
           <svg class="h-5 w-5 text-gray-500" viewBox="0 0 24 24" fill="none">
@@ -48,7 +48,6 @@
 import DashboardLayout from '@/layouts/DashboardLayout'
 import StudentsTable from '@/components/Dashboard/StudentsTable'
 import User from '@/apis/User'
-import Students from '@/apis/Students'
 import { AtomSpinner } from 'epic-spinners'
 
 export default {
