@@ -2,10 +2,18 @@ import Api from './Api';
 import Csrf from './Csrf';
 
 export default {
-    async getAll() {
+    async get() {
         await Csrf.getCookie();
 
-        return Api.get('/reference-codes?page[number]=1&page[size]=25&sort=id');
+        let query = {
+            params: {
+                'page[number]': 1,
+                'page[size]': 15,
+                'sort': '-created_at',
+            }
+        }
+
+        return Api.get('/reference-codes', query);
     },
 
     async getReference(reference) {
@@ -25,5 +33,20 @@ export default {
         }
 
         return Api.post(`/reference-codes`, data);
+    },
+
+    async search(terms, page) {
+        await Csrf.getCookie();
+
+        let searchValues = {
+            params: {
+                'filter[search]': terms,
+                'page[number]': page,
+                'page[size]': 15,
+                'sort': '-created_at',
+            }
+        }
+
+        return Api.get(`/reference-codes`, searchValues);
     }
 };

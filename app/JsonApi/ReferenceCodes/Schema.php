@@ -33,6 +33,8 @@ class Schema extends SchemaProvider
             'code' => $resource->code,
             'course' => $resource->course,
             'student' => $resource->student,
+            'created_at' => $resource->created_at,
+            'updated_at' => $resource->updated_at,
         ];
     }
 

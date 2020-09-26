@@ -1,47 +1,101 @@
 <template>
-    <div>
-        <h3 class="text-gray-700 text-3xl font-medium">Referencias</h3>
+  <div>
+    <div class="flex justify-between">
+      <h3 class="text-gray-700 text-3xl font-medium">Referencias</h3>
+      <!-- Search Box -->
+      <div class="relative mx-4 lg:mx-0">
+        <span class="absolute inset-y-0 left-0 pl-3 flex items-center">
+          <svg class="h-5 w-5 text-gray-500" viewBox="0 0 24 24" fill="none">
+            <path
+              d="M21 21L15 15M17 10C17 13.866 13.866 17 10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10Z"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </span>
 
-        <div class="mt-8"></div>
-
-        <references-table :references="references"></references-table>
+        <input
+          class="form-input w-32 sm:w-64 rounded-md pl-10 pr-4 focus:border-indigo-600"
+          type="text"
+          placeholder="Search"
+          v-model="searchTerms"
+          v-on:keyup.enter="searchReferences(1)"
+        />
+      </div>
     </div>
+
+    <div
+      v-if="loading"
+      class="flex justify-center items-center w-full h-screen"
+    >
+      <atom-spinner :animation-duration="1000" :size="60" :color="'#000000'" />
+    </div>
+
+    <references-table
+      v-else
+      :references="references"
+      :meta="referencesMeta"
+      :search="searchTerms"
+    >
+    </references-table>
+  </div>
 </template>
 
 <script>
-import DashboardLayout from '@/layouts/DashboardLayout';
-import ReferencesTable from '@/components/Dashboard/ReferencesTable';
-import User from '@/apis/User';
-import References from '@/apis/References';
+import DashboardLayout from '@/layouts/DashboardLayout'
+import ReferencesTable from '@/components/Dashboard/ReferencesTable'
+import User from '@/apis/User'
+import { AtomSpinner } from 'epic-spinners'
 
 export default {
-    name: 'Dashboard',
-    components: { ReferencesTable },
-    data() {
-        return {
-            user: {},
-            references: [],
-            openSidebar: '',
-            closeSidebar: '',
-            sidebarOpen: '',
-        };
-    },
-    created() {
-        this.$emit(`update:layout`, DashboardLayout);
+  name: 'Dashboard',
 
-        User.auth().then((response) => {
-            this.user = response.data;
-        });
+  components: { ReferencesTable, AtomSpinner },
+
+  data() {
+    return {
+      user: {},
+      openSidebar: '',
+      closeSidebar: '',
+      sidebarOpen: '',
+      searchTerms: '',
+      loading: false,
+    }
+  },
+
+  computed: {
+    references() {
+      return this.$store.state.references
     },
-    mounted() {
-        References.getAll()
-            .then((res) => {
-                this.references = res.data.data;
-                console.log(this.references[0]);
-            })
-            .catch((error) => {
-                console.log(error);
-            });
+
+    referencesMeta() {
+      return this.$store.state.referencesMeta
     },
-};
+  },
+
+  methods: {
+    searchReferences(page) {
+      let search = this.searchTerms
+
+      this.$store
+        .dispatch('searchReferences', { searchTerms: search, page: page })
+        .then(() => (this.loading = false))
+    },
+  },
+
+  created() {
+    this.$emit(`update:layout`, DashboardLayout)
+
+    User.auth().then((response) => {
+      this.user = response.data
+    })
+  },
+  mounted() {
+    this.loading = true
+
+    this.$store.dispatch('fetchReferences').then(() => (this.loading = false))
+  },
+}
 </script>
