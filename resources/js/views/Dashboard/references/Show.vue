@@ -15,13 +15,21 @@
       }"
       class="text-indigo-600 hover:text-indigo-900"
     >
-      {{ reference.attributes.student.name +
+      {{
+        reference.attributes.student.name +
         ' ' +
-        reference.attributes.student.last_name }}
+        reference.attributes.student.last_name
+      }}
     </router-link>
 
     <div class="font-bold text-gray-700 text-lg mt-8">Curso</div>
     <p>{{ reference.attributes.course.name }}</p>
+
+    <div class="font-bold text-gray-700 text-lg mt-8">Referencia Creada</div>
+    <p>{{ reference.attributes.created_at }}</p>
+
+    <div class="font-bold text-gray-700 text-lg mt-8">Referencia Actualizada</div>
+    <p>{{ reference.attributes.updated_at }}</p>
   </div>
 </template>
 
