@@ -35,6 +35,8 @@ class Schema extends SchemaProvider
             'payment_method_id' => $transaction->payment_method_id,
             'status' => $transaction->status,
             'external_reference' => $transaction->external_reference,
+            'created_at' => $transaction->created_at,
+            'updated_at' => $transaction->updated_at,
             'description' => $transaction->description
         ];
     }

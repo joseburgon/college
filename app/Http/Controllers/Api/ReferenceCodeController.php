@@ -95,6 +95,5 @@ class ReferenceCodeController extends Controller
             'init_point' => $preference->init_point,
         ]);
 
-        //return $referenceCode->toJson();
     }
 }
