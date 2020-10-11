@@ -21,6 +21,7 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/main.js') }}" defer></script>
+    <script src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyCXXKUNVE7VX4FDerbc88HGWEiZqD-NwPE"></script>
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&display=swap" rel="stylesheet">

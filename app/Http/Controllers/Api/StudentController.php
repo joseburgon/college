@@ -37,6 +37,8 @@ class StudentController extends Controller
                 'last_name' => $request['last_name'],
                 'phone' => $request['phone'],
                 'city' => $request['city'],
+                'state' => $request['state'],
+                'country' => $request['country'],
             ]
         );
 

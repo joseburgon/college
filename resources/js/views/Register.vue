@@ -97,10 +97,11 @@
             </div>
             <div class="flex-col justify-center mb-6">
               <FormulateInput
-                name="city"
+                name="place_input"
+                id="place_input"
                 type="text"
-                label="Ciudad de residencia"
-                placeholder="Tu ciudad"
+                label="Ciudad"
+                placeholder="Tu ciudad de residencia"
                 validation="required"
                 :validation-messages="{
                   required: 'Ciudad es requerida',
@@ -108,7 +109,11 @@
                 element-class="flex-grow"
                 label-class="text-xs font-bold"
                 :disabled="registered"
+                api-key="AIzaSyCXXKUNVE7VX4FDerbc88HGWEiZqD-NwPE"
               />
+              <FormulateInput name="city" type="hidden" />
+              <FormulateInput name="state" type="hidden" />
+              <FormulateInput name="country" type="hidden" />
             </div>
             <div class="flex-col mt-10">
               <FormulateInput
@@ -263,6 +268,16 @@ export default {
       })
   },
 
+  mounted() {
+    const autocomplete = new google.maps.places.Autocomplete(
+      document.getElementById('place_input')
+    )
+
+    autocomplete.addListener('place_changed', () => {
+      this.setLocation(autocomplete.getPlace().address_components)
+    })
+  },
+
   methods: {
     addStudent() {
       const data = this.formValues
@@ -362,6 +377,31 @@ export default {
 
     toggleTabs(tabNumber) {
       this.openTab = tabNumber
+    },
+    setLocation(place) {
+      let api_city = '', api_state = '', api_country = ''
+
+      place.forEach(function (item) {
+        if (item.types.includes('locality')) {
+          api_city = item.long_name
+        }
+
+        if (item.types.includes('administrative_area_level_1')) {
+          api_state = item.long_name
+        }
+
+        if (item.types.includes('country')) {
+          api_country = item.long_name
+        }
+      })
+
+      this.formValues.city = api_city
+      this.formValues.state = api_state
+      this.formValues.country = api_country
+
+      console.log(
+        `${this.formValues.city} | ${this.formValues.state} | ${this.formValues.country}`
+      )
     },
   },
 }

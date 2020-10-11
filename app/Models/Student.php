@@ -20,6 +20,8 @@ class Student extends Model
         'email',
         'phone',
         'city',
+        'state',
+        'country',
         'status',
         'thinkific_user_id'
     ];
