@@ -109,7 +109,6 @@
                 element-class="flex-grow"
                 label-class="text-xs font-bold"
                 :disabled="registered"
-                api-key="AIzaSyCXXKUNVE7VX4FDerbc88HGWEiZqD-NwPE"
               />
               <FormulateInput name="city" type="hidden" />
               <FormulateInput name="state" type="hidden" />
