@@ -32,4 +32,17 @@ class StudentRequest extends FormRequest
             'city' => 'required',
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'name.required' => 'El nombre es obligatorio.',
+            'last_name.required' => 'El apellido es obligatorio.',
+            'identification.required' => 'La identificación es obligatoria.',
+            'email.required' => 'El correo es obligatorio.',
+            'email.email' => 'El correo debe ser un email válido.',
+            'phone.required' => 'El celular es obligatorio.',
+            'city.required' => 'Debe escoger una ciudad de la lista de autocompletado.',
+        ];
+    }
 }

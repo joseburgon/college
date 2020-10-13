@@ -101,7 +101,7 @@
                 id="place_input"
                 type="text"
                 label="Ciudad"
-                placeholder="Tu ciudad de residencia"
+                placeholder="Escribe el nombre y escoge la ciudad de la lista"
                 validation="required"
                 :validation-messages="{
                   required: 'Ciudad es requerida',
@@ -113,6 +113,13 @@
               <FormulateInput name="city" type="hidden" />
               <FormulateInput name="state" type="hidden" />
               <FormulateInput name="country" type="hidden" />
+            </div>
+            <div class="flex-col mt-5" v-if="errors">
+              <span
+                class="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1"
+                v-for="error in errors" :key="error[0]"
+                >{{ error[0] }}
+              </span>
             </div>
             <div class="flex-col mt-10">
               <FormulateInput
@@ -244,6 +251,7 @@ export default {
       mercadoPagoUrl: '',
       registered: false,
       openTab: 1,
+      errors: [],
     }
   },
 
@@ -289,8 +297,10 @@ export default {
           this.getReferenceCode(res.data.id)
           this.registered = true
         })
-        .catch((e) => {
-          console.log(e)
+        .catch((error) => {
+          if (error.response.status === 422) {
+            this.errors = error.response.data.errors
+          }
         })
     },
 
@@ -378,7 +388,9 @@ export default {
       this.openTab = tabNumber
     },
     setLocation(place) {
-      let api_city = '', api_state = '', api_country = ''
+      let api_city = '',
+        api_state = '',
+        api_country = ''
 
       place.forEach(function (item) {
         if (item.types.includes('locality')) {
