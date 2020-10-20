@@ -46,7 +46,7 @@
 import DashboardLayout from '@/layouts/DashboardLayout'
 import TransactionsTable from '@/components/Dashboard/TransactionsTable'
 import User from '@/apis/User'
-import { AtomSpinner } from 'epic-spinners'
+import AtomSpinner from 'epic-spinners/src/components/lib/AtomSpinner'
 
 export default {
   name: 'Dashboard',

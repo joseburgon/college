@@ -142,7 +142,7 @@
 <script>
 import DashboardLayout from '../../layouts/DashboardLayout'
 import StudentsTable from '../../components/Dashboard/StudentsTable'
-import { AtomSpinner } from 'epic-spinners'
+import AtomSpinner from 'epic-spinners/src/components/lib/AtomSpinner'
 import User from '../../apis/User'
 
 export default {
