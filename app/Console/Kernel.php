@@ -27,8 +27,8 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         // $schedule->command('inspire')->hourly();
-        $schedule->call(new LoggingTest)->everyTwoMinutes();
-        $schedule->call(new UpdateEnrollments)->dailyAt('07:30');
+        $schedule->command(new LoggingTest)->everyTwoMinutes();
+        $schedule->command(new UpdateEnrollments)->timezone('America/Bogota')->dailyAt('02:30');
     }
 
     /**
