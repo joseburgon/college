@@ -111,4 +111,20 @@ class ThinkificApi
 
         return $response['items'];
     }
+
+    public function getEnrolledStudents($course, $page)
+    {
+        $response = Http::withHeaders($this->headers)
+            ->get($this->baseUrl . 'enrollments', [
+                'query[course_id]' => $course,
+                'page' => $page,
+                'limit' => '50'
+            ])
+            ->throw()
+            ->json();
+
+        Log::info('Getting course enrolled students', $response);
+
+        return $response;
+    }
 }

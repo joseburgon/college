@@ -14,6 +14,7 @@ import StudentsEdit from './views/dashboard/students/Edit';
 import TransactionsIndex from './views/dashboard/transactions/Index';
 import ReferenceIndex from './views/dashboard/references/Index';
 import ReferenceShow from './views/dashboard/references/Show';
+import Exports from './views/dashboard/Exports';
 
 Vue.use(VueRouter);
 
@@ -99,6 +100,12 @@ const routes = [
         path: '/dashboard/references/:id/show',
         name: 'references-show',
         component: ReferenceShow,
+        meta: { authOnly: true },
+    },
+    {
+        path: '/dashboard/exports',
+        name: 'exports',
+        component: Exports,
         meta: { authOnly: true },
     },
     {
