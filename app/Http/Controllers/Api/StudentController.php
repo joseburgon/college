@@ -58,11 +58,4 @@ class StudentController extends Controller
 
         return response()->json(['student' => $student]);
     }
-
-    public function updateEnrollments(Request $request)
-    {
-        event(new EnrollmentsUpdated());
-
-        return response()->json(['message' => 'Updating enrollments']);
-    }
 }
