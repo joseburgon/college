@@ -28,7 +28,7 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')->hourly();
         $schedule->command(LoggingTest::class)->everyMinute();
-        $schedule->command(UpdateEnrollments::class)->timezone('America/Bogota')->dailyAt('02:30');
+        $schedule->command(UpdateEnrollments::class)->dailyAt('07:30');
     }
 
     /**
