@@ -26,8 +26,6 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command(LoggingTest::class)->everyMinute();
-
         $schedule->command(UpdateEnrollments::class)->dailyAt('07:30');
     }
 
