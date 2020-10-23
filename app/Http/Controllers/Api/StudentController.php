@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Events\EnrollmentsUpdated;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StudentRequest;
 use App\Models\Course;
@@ -56,5 +57,12 @@ class StudentController extends Controller
         $student = Student::where('identification', $identification)->first();
 
         return response()->json(['student' => $student]);
+    }
+
+    public function updateEnrollments(Request $request)
+    {
+        event(new EnrollmentsUpdated());
+
+        return response()->json(['message' => 'Updating enrollments']);
     }
 }

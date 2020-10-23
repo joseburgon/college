@@ -122,6 +122,9 @@ class CreateThinkificUser implements ShouldQueue
 
         Log::info('Student enrolled successfully in course.', $enrollment);
 
+        $student->courses()->attach($course->id);
+
         $student->fill(['status' => 'enrolled'])->save();
+
     }
 }

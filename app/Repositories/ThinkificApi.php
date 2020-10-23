@@ -95,4 +95,20 @@ class ThinkificApi
             return $response->json();
         }
     }
+
+    public function getStudentEnrollments($email)
+    {
+        $response = Http::withHeaders($this->headers)
+            ->get($this->baseUrl . 'enrollments', [
+                'query[email]' => $email,
+                'page' => '1',
+                'limit' => '25'
+            ])
+            ->throw()
+            ->json();
+
+        Log::info('Getting student enrollments', $response);
+
+        return $response['items'];
+    }
 }

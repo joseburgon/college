@@ -50,4 +50,13 @@ class UpdateStudentsTest extends TestCase
             'city' => 'City changed'
         ]);
     }
+
+    /** @test */
+    public function update_students_enrollments()
+    {
+        $student = factory(Student::class)->times(10)->create();
+
+        $this->jsonApi()->patch(route('api.v1.students.update', $student))
+            ->assertStatus(401);
+    }
 }

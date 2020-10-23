@@ -36,6 +36,8 @@ Route::namespace('Api')->prefix('api')->group(function () {
     Route::post('transactions/mercadopago', 'TransactionController@mercadopago')->name('api.transactions.mercadopago');
 
     Route::post('transactions/paypal', 'TransactionController@paypal')->name('api.transactions.paypal');
+
+    Route::get('update-enrollments', 'StudentController@updateEnrollments');
 });
 
 Route::namespace('Api')->prefix('api/v1')->group(function () {
