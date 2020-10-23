@@ -12,14 +12,14 @@ class LoggingTest extends Command
      *
      * @var string
      */
-    protected $signature = 'command:name';
+    protected $signature = 'test:logging';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'Testing schedule commands';
 
     /**
      * Create a new command instance.

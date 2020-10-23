@@ -16,14 +16,14 @@ class UpdateEnrollments extends Command
      *
      * @var string
      */
-    protected $signature = 'command:name';
+    protected $signature = 'enrollments:update';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'Updating students enrollments';
 
     /**
      * Create a new command instance.
