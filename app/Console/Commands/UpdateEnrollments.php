@@ -42,7 +42,7 @@ class UpdateEnrollments extends Command
      */
     public function handle()
     {
-        Student::chunk(50, function ($students) {
+        Student::chunk(100, function ($students) {
 
             $apiRepo = new ThinkificApi();
 
@@ -54,24 +54,34 @@ class UpdateEnrollments extends Command
 
                     $student->status = 'enrolled';
 
-                    $thinkificCourses = [];
+                    $courses = $this->getCourses($enrollments);
 
-                    foreach ($enrollments as $enrollment) {
-
-                        array_push($thinkificCourses, $enrollment['course_id']);
-                    }
-
-                    $coursesIds = Course::whereIn('thinkific_id', $thinkificCourses)->pluck('id');
-
-                    $student->courses()->sync($coursesIds);
+                    $student->courses()->sync($courses);
 
                 } else {
 
                     $student->courses()->detach();
+
                 }
             }
+
+            sleep(30);
+
         });
 
         Log::info('Enrollments Updated!');
+    }
+
+    private function getCourses($enrollments)
+    {
+        $thinkificCourses = [];
+
+        foreach ($enrollments as $enrollment) {
+
+            array_push($thinkificCourses, $enrollment['course_id']);
+        }
+
+        return Course::whereIn('thinkific_id', $thinkificCourses)->pluck('id');
+
     }
 }

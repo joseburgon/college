@@ -71,12 +71,14 @@
               >
                 Cancel
               </button>
-              <button
-                @click="download"
+              <a
+                v-if="course_id"
+                :href="exportLink"
+                target="_blank"
                 class="px-3 py-1 bg-indigo-600 text-white rounded-md text-sm hover:bg-indigo-500 focus:outline-none"
               >
                 Exportar
-              </button>
+              </a>
             </div>
           </form>
         </div>
@@ -102,10 +104,9 @@ export default {
       loading: false,
     }
   },
-  computed: {},
-  methods: {
-    download() {
-      window.open(`/api/enrollments/${this.course_id}`, '_blank')
+  computed: {
+    exportLink() {
+      return `/api/enrollments/${this.course_id}`
     },
   },
   created() {

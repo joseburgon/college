@@ -6,14 +6,35 @@ use App\Models\Course;
 use App\Models\Student;
 use App\Repositories\ThinkificApi;
 use Maatwebsite\Excel\Concerns\FromCollection;
+use Maatwebsite\Excel\Concerns\WithHeadings;
+use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 
-class EnrollmentsExport implements FromCollection
+class EnrollmentsExport implements FromCollection, WithHeadings, ShouldAutoSize
 {
     public function __construct(Course $course)
     {
 
         $this->students = $this->getCourseEnrolledStudents($course);
 
+    }
+
+    public function headings(): array
+    {
+        return [
+            'ID',
+            'Nombres',
+            'Apellidos',
+            'Identificación',
+            'Celular',
+            'Email',
+            'Ciudad',
+            'Estado / Dpto',
+            'País',
+            'Estado',
+            'Thinkific ID',
+            'Fecha de creación',
+            'Fecha de actualización',
+        ];
     }
 
     /**
