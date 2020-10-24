@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
@@ -36,6 +37,17 @@ class Student extends Model
     ];
 
     protected $with = ['courses'];
+
+    public function getUpdatedAtAttribute($value) {
+
+        return Carbon::parse($value)->format('d-m-Y H:i:s');
+
+    }
+    public function getCreatedAtAttribute($value) {
+
+        return Carbon::parse($value)->format('d-m-Y H:i:s');
+
+    }
 
     public function scopeSearch(Builder $query, $values)
     {
