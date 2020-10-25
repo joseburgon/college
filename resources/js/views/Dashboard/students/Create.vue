@@ -1,12 +1,12 @@
 <template>
-  <div class="mt-8" v-if="student.attributes">
+  <div class="mt-8">
     <div class="mt-4">
       <div class="p-6 bg-white rounded-md shadow-md">
         <h2 class="text-lg text-gray-700 font-semibold capitalize">
-          Editar Estudiante
+          Crear Estudiante
         </h2>
 
-        <form @submit.prevent="updateStudent">
+        <form @submit.prevent="createStudent" id="createStudentForm">
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-4">
             <div>
               <label class="text-gray-700" for="name">Nombres</label>
@@ -32,12 +32,11 @@
                 v-model="student.attributes.email"
                 class="form-input w-full mt-2 rounded-md focus:border-indigo-600"
                 type="email"
-                disabled
               />
             </div>
 
             <div>
-              <label class="text-gray-700" for="city"
+              <label class="text-gray-700" for="identification"
                 >Identificaci&oacute;n</label
               >
               <input
@@ -48,9 +47,36 @@
             </div>
 
             <div>
+              <label class="text-gray-700" for="phone">Celular</label>
+              <input
+                v-model="student.attributes.phone"
+                class="form-input w-full mt-2 rounded-md focus:border-indigo-600"
+                type="text"
+              />
+            </div>
+
+            <div>
               <label class="text-gray-700" for="city">Ciudad</label>
               <input
                 v-model="student.attributes.city"
+                class="form-input w-full mt-2 rounded-md focus:border-indigo-600"
+                type="text"
+              />
+            </div>
+
+            <div>
+              <label class="text-gray-700" for="state">Estado / Dpto.</label>
+              <input
+                v-model="student.attributes.state"
+                class="form-input w-full mt-2 rounded-md focus:border-indigo-600"
+                type="text"
+              />
+            </div>
+
+            <div>
+              <label class="text-gray-700" for="country">Pa&iacute;s</label>
+              <input
+                v-model="student.attributes.country"
                 class="form-input w-full mt-2 rounded-md focus:border-indigo-600"
                 type="text"
               />
@@ -73,7 +99,6 @@
                 v-model="student.attributes.thinkific_user_id"
                 class="form-input w-full mt-2 rounded-md focus:border-indigo-600"
                 type="text"
-                disabled
               />
             </div>
           </div>
@@ -84,6 +109,20 @@
             >
               Save
             </button>
+          </div>
+          <div class="flex flex-col mt-4" v-if="errors">
+            <span
+              v-for="(error, index) in errors"
+              :key="index"
+              class="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1"
+              >{{ error.detail }}
+            </span>
+          </div>
+          <div class="flex flex-col mt-4" v-if="submitted">
+            <span
+              class="flex items-center font-medium tracking-wide text-green-500 text-xs mt-1 ml-1"
+              >¡Estudiante creado!
+            </span>
           </div>
         </form>
       </div>
@@ -98,32 +137,36 @@ import DashboardLayout from '@/layouts/DashboardLayout'
 export default {
   data() {
     return {
-      student: {},
+      student: {
+        attributes: {
+          name: '',
+          last_name: '',
+          identification: '',
+          email: '',
+          phone: '',
+          city: '',
+          state: '',
+          country: '',
+          thinkific_user_id: '',
+        },
+      },
+      errors: [],
+      submitted: false,
     }
   },
   created() {
     this.$emit(`update:layout`, DashboardLayout)
-    this.getStudent()
   },
   methods: {
-    getStudent() {
-      const { id } = this.$route.params
-      Students.getStudent(id)
+    createStudent() {
+      Students.create(this.student.attributes)
         .then((res) => {
-          this.student = res.data.data
+          console.log('Student created!')
+          document.getElementById('createStudentForm').reset()
+          this.submitted = true
         })
         .catch((error) => {
-          console.log(error)
-        })
-    },
-
-    updateStudent() {
-      Students.update(this.student.id, this.student.attributes)
-        .then((res) => {
-          console.log('Student updated!')
-        })
-        .catch((error) => {
-          console.error(error);
+          this.errors = error.response.data.errors
         })
     },
   },

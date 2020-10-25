@@ -13,5 +13,8 @@ $factory->define(Student::class, function (Faker $faker) {
         'identification' => $faker->word,
         'phone' => $faker->phoneNumber,
         'city' => $faker->city,
+        'state' => $faker->state,
+        'country' => $faker->country,
+        'status' => $faker->randomElement(['registered', 'enrolled']),
     ];
 });

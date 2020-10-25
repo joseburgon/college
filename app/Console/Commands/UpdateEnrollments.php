@@ -65,7 +65,7 @@ class UpdateEnrollments extends Command
                 }
             }
 
-            sleep(30);
+            sleep(60);
 
         });
 

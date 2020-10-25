@@ -10,6 +10,7 @@ import Error from './views/Error';
 import Login from './views/dashboard/Login';
 import Dashboard from './views/dashboard/Dashboard';
 import StudentsIndex from './views/dashboard/students/Index';
+import StudentsCreate from './views/dashboard/students/Create';
 import StudentsEdit from './views/dashboard/students/Edit';
 import TransactionsIndex from './views/dashboard/transactions/Index';
 import ReferenceIndex from './views/dashboard/references/Index';
@@ -82,6 +83,12 @@ const routes = [
         path: '/dashboard/students/:id/edit',
         name: 'students-edit',
         component: StudentsEdit,
+        meta: { authOnly: true },
+    },
+    {
+        path: '/dashboard/students/create',
+        name: 'students-create',
+        component: StudentsCreate,
         meta: { authOnly: true },
     },
     {

@@ -41,7 +41,16 @@ class Validators extends AbstractValidators
     protected function rules($record = null): array
     {
         return [
-            //
+            'name' => 'required',
+            'last_name' => 'required',
+            'identification' => 'required',
+            'email' => 'required|email|unique:students,email',
+            'phone' => 'required',
+            'city' => 'required|string',
+            'state' => 'required|string',
+            'country' => 'required|string',
+            'status' => 'required|string',
+            'thinkific_user_id' => 'integer|nullable',
         ];
     }
 

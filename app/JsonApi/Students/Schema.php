@@ -36,6 +36,8 @@ class Schema extends SchemaProvider
             'identification' => $resource->identification,
             'phone' => $resource->phone,
             'city' => $resource->city,
+            'state' => $resource->state,
+            'country' => $resource->country,
             'status' => $resource->status,
             'thinkific_user_id' => $resource->thinkific_user_id,
         ];

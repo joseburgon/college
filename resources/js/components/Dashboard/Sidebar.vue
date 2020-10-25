@@ -102,9 +102,7 @@
 
       <router-link
         class="flex items-center mt-4 py-2 px-6 block border-l-4"
-        :class="[
-          $route.name.includes('students') ? activeClass : inactiveClass,
-        ]"
+        :class="[$route.name === 'students' ? activeClass : inactiveClass]"
         :to="{ name: 'students' }"
       >
         <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
@@ -118,7 +116,7 @@
           ></path>
         </svg>
 
-        <span class="mx-4">Students</span>
+        <span class="mx-4">Estudiantes</span>
       </router-link>
 
       <router-link
@@ -135,6 +133,23 @@
         </svg>
 
         <span class="mx-4">Exportar</span>
+      </router-link>
+
+      <router-link
+        class="flex items-center mt-4 py-2 px-6 block border-l-4"
+        :class="[
+          $route.name === 'students-create' ? activeClass : inactiveClass,
+        ]"
+        :to="{ name: 'students-create' }"
+      >
+
+        <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+          <path
+            d="M8 9a3 3 0 100-6 3 3 0 000 6zM8 11a6 6 0 016 6H2a6 6 0 016-6zM16 7a1 1 0 10-2 0v1h-1a1 1 0 100 2h1v1a1 1 0 102 0v-1h1a1 1 0 100-2h-1V7z"
+          />
+        </svg>
+
+        <span class="mx-4">Crear Estudiante</span>
       </router-link>
     </nav>
   </div>
