@@ -3,7 +3,7 @@
     <h3 class="text-gray-700 text-3xl font-semibold">Exportar</h3>
 
     <div class="mt-4">
-      <h4 class="text-gray-600">Exportar Matriculados</h4>
+      <h4 class="text-gray-600">Exportar Estudiantes Matriculados</h4>
 
       <div class="mt-4">
         <div

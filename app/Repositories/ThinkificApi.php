@@ -60,7 +60,6 @@ class ThinkificApi
         if (empty($response['items'])) {
 
             return false;
-
         } else {
 
             return true;
@@ -76,11 +75,9 @@ class ThinkificApi
         if ($response->successful()) {
 
             return $response->json();
-
         } else {
 
             Log::info('Error creating user', $response->json());
-
         }
     }
 
@@ -103,13 +100,21 @@ class ThinkificApi
                 'query[email]' => $email,
                 'page' => '1',
                 'limit' => '25'
-            ])
-            ->throw()
-            ->json();
+            ]);
 
-        Log::info('Getting student enrollments', $response);
+        if ($response->successful()) {
 
-        return $response['items'];
+            Log::info('Getting student enrollments', $response->json());
+
+            return $response->json()['items'];
+
+        } else {
+
+            Log::error('Error getting student enrollments', $response->json());
+
+            return [];
+
+        }
     }
 
     public function getEnrolledStudents($course, $page)

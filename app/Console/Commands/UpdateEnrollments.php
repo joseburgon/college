@@ -42,7 +42,7 @@ class UpdateEnrollments extends Command
      */
     public function handle()
     {
-        Student::chunk(100, function ($students) {
+        Student::whereDate('created_at', '>', '2020-10-24')->chunk(100, function ($students) {
 
             $apiRepo = new ThinkificApi();
 

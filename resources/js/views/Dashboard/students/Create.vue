@@ -161,13 +161,24 @@ export default {
     createStudent() {
       Students.create(this.student.attributes)
         .then((res) => {
-          console.log('Student created!')
-          document.getElementById('createStudentForm').reset()
+          this.reset()
+
           this.submitted = true
+
+          this.$notify({
+            group: 'alerts',
+            type: 'success',
+            title: 'Mensaje',
+            text: '¡Estudiante creado exitosamente!',
+          })
         })
         .catch((error) => {
           this.errors = error.response.data.errors
         })
+    },
+
+    reset() {
+      Object.assign(this.$data, this.$options.data())
     },
   },
 }

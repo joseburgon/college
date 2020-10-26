@@ -16,6 +16,7 @@ import TransactionsIndex from './views/dashboard/transactions/Index';
 import ReferenceIndex from './views/dashboard/references/Index';
 import ReferenceShow from './views/dashboard/references/Show';
 import Exports from './views/dashboard/Exports';
+import Imports from './views/dashboard/Imports';
 
 Vue.use(VueRouter);
 
@@ -113,6 +114,12 @@ const routes = [
         path: '/dashboard/exports',
         name: 'exports',
         component: Exports,
+        meta: { authOnly: true },
+    },
+    {
+        path: '/dashboard/imports',
+        name: 'imports',
+        component: Imports,
         meta: { authOnly: true },
     },
     {
