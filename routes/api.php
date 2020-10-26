@@ -38,6 +38,8 @@ Route::namespace('Api')->prefix('api')->group(function () {
     Route::post('transactions/paypal', 'TransactionController@paypal')->name('api.transactions.paypal');
 
     Route::get('enrollments/{course}', 'EnrollmentController@export')->name('api.enrollments.export');
+
+    Route::post('students/imports', 'StudentController@import')->name('api.students.import');
 });
 
 Route::namespace('Api')->prefix('api/v1')->group(function () {

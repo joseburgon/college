@@ -5,10 +5,12 @@ namespace App\Http\Controllers\Api;
 use App\Events\EnrollmentsUpdated;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StudentRequest;
+use App\Imports\StudentsImport;
 use App\Models\Course;
 use App\Models\ReferenceCode;
 use App\Models\Student;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class StudentController extends Controller
 {
@@ -57,5 +59,16 @@ class StudentController extends Controller
         $student = Student::where('identification', $identification)->first();
 
         return response()->json(['student' => $student]);
+    }
+
+    public function import(Request $request)
+    {
+        $request->validate([
+            'file' => 'required|file|max:1024|mimes:xls,xlsx,csv',
+        ]);
+
+        Excel::import(new StudentsImport, request()->file('file'));
+
+        return response()->json(['message' => '¡Archivo importado exitosamente!']);
     }
 }

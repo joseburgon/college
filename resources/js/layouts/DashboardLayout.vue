@@ -17,6 +17,7 @@
                 <div class="container mx-auto px-6 py-8">
                     <slot />
                 </div>
+                <notifications position="bottom right" group="alerts" class="mb-4 mr-4" />
             </main>
         </div>
     </div>
