@@ -3,6 +3,8 @@
 namespace App\JsonApi\Students;
 
 use CloudCreativity\LaravelJsonApi\Validation\AbstractValidators;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Validation\Rule;
 
 class Validators extends AbstractValidators
 {
@@ -44,7 +46,7 @@ class Validators extends AbstractValidators
             'name' => 'required',
             'last_name' => 'required',
             'identification' => 'required',
-            'email' => 'required|email|unique:students,email',
+            'email' => ['required', 'email', Rule::unique('students')->ignore($record)],
             'phone' => 'required',
             'city' => 'required|string',
             'state' => 'required|string',

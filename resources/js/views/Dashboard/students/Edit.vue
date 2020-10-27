@@ -135,12 +135,14 @@ export default {
     },
 
     updateStudent() {
-      Students.update(this.student.id, this.student.attributes)
+      const { ['email']: remove, ...attributes } = this.student.attributes
+      console.log(attributes)
+      Students.update(this.student.id, attributes)
         .then((res) => {
           console.log('Student updated!')
         })
         .catch((error) => {
-          console.error(error);
+          console.error(error)
         })
     },
   },
