@@ -12,7 +12,7 @@ class EnrollmentController extends Controller
 {
     public function export(Course $course)
     {
-        $fileName = str_replace(' ', '_', $course->name) . '_Matriculados_' . date("Ymd") . '.xlsx';
+        $fileName = str_replace(' ', '_', $course->name) . '_Matriculados_' . date("Ymd_His") . '.xlsx';
 
         return Excel::download(new EnrollmentsExport($course), $fileName);
     }

@@ -13,26 +13,26 @@ class MercadoPagoApi
 
     public function __construct()
     {
-        $this->token = env('MERCADOPAGO_ACCESS_TOKEN');
+        $this->token = config('app.mercadopago_access_token');
     }
 
     public function getPayment($id)
     {
-        $response = Http::get($this->baseUrl . 'v1/payments/' . $id, 
+        $response = Http::get($this->baseUrl . 'v1/payments/' . $id,
             ['access_token' => $this->token])->throw();
-        
+
         if ($response->successful()) {
             return $response->json();
-        }        
+        }
     }
 
     public function getOrder($id)
     {
-        $response = Http::get($this->baseUrl . 'merchant_orders/' . $id, 
+        $response = Http::get($this->baseUrl . 'merchant_orders/' . $id,
             ['access_token' => $this->token])->throw();
-        
+
         if ($response->successful()) {
             return $response->json();
-        }        
+        }
     }
 }

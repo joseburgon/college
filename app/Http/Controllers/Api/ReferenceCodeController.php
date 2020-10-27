@@ -35,7 +35,7 @@ class ReferenceCodeController extends Controller
         ]);
 
         // Agrega credenciales
-        MercadoPago\SDK::setAccessToken(env('MERCADOPAGO_ACCESS_TOKEN'));
+        MercadoPago\SDK::setAccessToken(config('app.mercadopago_access_token'));
 
         $payer = new MercadoPago\Payer();
         $payer->name = $student->name;

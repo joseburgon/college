@@ -95,7 +95,15 @@
             </div>
           </div>
 
-          <div class="flex justify-end mt-4">
+          <div class="flex justify-between mt-4">
+            <div class="flex flex-col mt-4" v-if="errors">
+              <span
+                v-for="(error, index) in errors"
+                :key="index"
+                class="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1"
+                >{{ error.detail }}
+              </span>
+            </div>
             <button
               class="px-4 py-2 bg-gray-800 text-gray-200 rounded-md hover:bg-gray-700 focus:outline-none focus:bg-gray-700"
             >
@@ -116,6 +124,7 @@ export default {
   data() {
     return {
       student: {},
+      errors: [],
     }
   },
   created() {
@@ -139,10 +148,24 @@ export default {
       console.log(attributes)
       Students.update(this.student.id, attributes)
         .then((res) => {
-          console.log('Student updated!')
+          this.errors = []
+
+          this.$notify({
+            group: 'alerts',
+            type: 'success',
+            title: 'Mensaje',
+            text: '¡Estudiante actualizado exitosamente!',
+          })
         })
         .catch((error) => {
-          console.error(error)
+          this.errors = error.response.data.errors
+
+          this.$notify({
+            group: 'alerts',
+            type: 'error',
+            title: 'Error',
+            text: 'Ocurrió un error',
+          })
         })
     },
   },

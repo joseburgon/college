@@ -233,9 +233,12 @@ return [
 
     /* My custom global variables */
 
-    'payu' => [
-        'apiKey' => '4Vj8eK4rloUd272L48hsrarnUA',
-        'merchantId' => '508029',
-    ],
+    'thinkific_api_key' => env('THINKIFIC_API_KEY'),
+
+    'mercadopago_access_token' => env('MERCADOPAGO_ACCESS_TOKEN'),
+
+    'google_api_key' => env('GOOGLE_API_KEY'),
+
+    'current_server' => env('CURRENT_SERVER'),
 
 ];

@@ -14,7 +14,7 @@ class ThinkificApi
     public function __construct()
     {
         $this->headers = [
-            'X-Auth-API-Key' => env('THINKIFIC_API_KEY'),
+            'X-Auth-API-Key' => config('app.thinkific_api_key'),
             'X-Auth-Subdomain' => 'livingroomcollege',
             'Content-Type' => 'application/json',
         ];

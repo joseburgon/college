@@ -25,7 +25,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(UrlGenerator $url)
     {
-        if (env('CURRENT_SERVER') === 'heroku') {
+        if (config('app.current_server') === 'heroku') {
             $url->forceScheme('https');
         }
 

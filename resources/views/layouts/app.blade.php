@@ -21,7 +21,7 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/main.js') }}" defer></script>
-    <script src="{{ 'https://maps.googleapis.com/maps/api/js?libraries=places&key='.env('GOOGLE_API_KEY') }}"></script>
+    <script src="{{ 'https://maps.googleapis.com/maps/api/js?libraries=places&key='.config('app.google_api_key') }}"></script>
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&display=swap" rel="stylesheet">
