@@ -57,6 +57,24 @@
             </div>
 
             <div>
+              <label class="text-gray-700" for="city">Estado / Dpto.</label>
+              <input
+                v-model="student.attributes.state"
+                class="form-input w-full mt-2 rounded-md focus:border-indigo-600"
+                type="text"
+              />
+            </div>
+
+            <div>
+              <label class="text-gray-700" for="city">Pa&iacute;s</label>
+              <input
+                v-model="student.attributes.country"
+                class="form-input w-full mt-2 rounded-md focus:border-indigo-600"
+                type="text"
+              />
+            </div>
+
+            <div>
               <label class="text-gray-700" for="status">Status</label>
               <input
                 v-model="student.attributes.status"
@@ -73,7 +91,6 @@
                 v-model="student.attributes.thinkific_user_id"
                 class="form-input w-full mt-2 rounded-md focus:border-indigo-600"
                 type="text"
-                disabled
               />
             </div>
           </div>

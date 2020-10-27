@@ -52,6 +52,8 @@ class UpdateEnrollments extends Command
 
                 if (count($enrollments) > 0) {
 
+                    $student->thinkific_id = $enrollments[0]['user_id'];
+
                     $student->status = 'enrolled';
 
                     $courses = $this->getCourses($enrollments);

@@ -14,7 +14,6 @@ class StudentsImport implements ToModel
     */
     public function model(array $row)
     {
-        //dd($row);
         return new Student([
             'name' => $row[0],
             'last_name' => $row[1],
