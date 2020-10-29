@@ -41,31 +41,34 @@ class CreateEnrollments extends Command
      */
     public function handle()
     {
-        Student::where('status', 'imported')->chunk(50, function ($student) {
+        Student::where('status', 'imported')->chunk(50, function ($students) {
 
-            $this->info('Enrolling student: ' . $student->email);
+            foreach ($students as $student) {
 
-            $user = $this->userCreationProccess($student);
+                $this->info('Enrolling student: ' . $student->email);
 
-            Log::info('Thinkific user created with ID: ' . $user['id']);
+                $user = $this->userCreationProccess($student);
 
-            $student->fill([
-                'thinkific_user_id' => $user['id'],
-                'status' => 'user created'
-            ])->save();
+                Log::info('Thinkific user created with ID: ' . $user['id']);
 
-            $course = Course::find($this->argument('course'));
+                $student->fill([
+                    'thinkific_user_id' => $user['id'],
+                    'status' => 'user created'
+                ])->save();
 
-            $this->enrollmentProccess($user, $course, $student);
+                $course = Course::find($this->argument('course'));
 
-            $this->info('Student: ' . $student->email . ' enrolled.');
+                $this->enrollmentProccess($user, $course, $student);
+
+                $this->info('Student: ' . $student->email . ' enrolled.');
+
+            }
 
         });
     }
 
     private function userCreationProccess($student)
     {
-
         $apiRepo = new ThinkificApi();
 
         $userExists = $apiRepo->checkIfUserExists($student->email);
