@@ -94,7 +94,7 @@ export default {
   },
   methods: {
     burgerClicked() {
-      this.dropdownOpen = !this.dropdownOpen
+      this.$emit('burgerClicked')
     },
     logout() {
       User.logout().then(() => {
