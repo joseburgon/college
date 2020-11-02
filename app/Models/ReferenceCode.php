@@ -73,4 +73,9 @@ class ReferenceCode extends Model
     {
         return $this->belongsTo(Student::class);
     }
+
+    public function transaction()
+    {
+        return $this->hasOne(Transaction::class, 'external_reference', 'id');
+    }
 }

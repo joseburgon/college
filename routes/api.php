@@ -26,16 +26,13 @@ Route::namespace('Api')->prefix('api')->group(function () {
 
     Route::post('reference', 'ReferenceCodeController@store')->name('api.reference');
 
-    Route::post('notifications', function (Request $request) {
-        Log::info('Mercado Pago notification.', $request->input());
-        return response('Success', 200);
-    })->name('api.v1.notifications');
-
     Route::get('transactions/count-approved', 'TransactionController@countApproved')->name('api.transactions.countApproved');
 
     Route::post('transactions/mercadopago', 'TransactionController@mercadopago')->name('api.transactions.mercadopago');
 
     Route::post('transactions/paypal', 'TransactionController@paypal')->name('api.transactions.paypal');
+
+    Route::get('enrollments/not-enrolled', 'EnrollmentController@notEnrolledExport')->name('api.enrollments.not-enrolled');
 
     Route::get('enrollments/{course}', 'EnrollmentController@export')->name('api.enrollments.export');
 

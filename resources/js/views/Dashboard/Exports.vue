@@ -73,7 +73,46 @@
               </button>
               <a
                 v-if="course_id"
-                :href="exportLink"
+                :href="enrolledExportLink"
+                target="_blank"
+                class="px-3 py-1 bg-indigo-600 text-white rounded-md text-sm hover:bg-indigo-500 focus:outline-none"
+              >
+                Exportar
+              </a>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div class="mt-4">
+        <div
+          class="max-w-sm w-full bg-white shadow-md rounded-md overflow-hidden border"
+        >
+          <form>
+            <div
+              class="flex justify-between items-center px-5 py-3 text-gray-700 border-b"
+            >
+              <h3 class="text-sm">Exportar Estudiantes No Matriculados</h3>
+              <button>
+                <svg
+                  class="h-4 w-4"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              </button>
+            </div>
+
+            <div class="flex justify-between items-center px-5 py-3">
+              <a
+                :href="notEnrolledExportLink"
                 target="_blank"
                 class="px-3 py-1 bg-indigo-600 text-white rounded-md text-sm hover:bg-indigo-500 focus:outline-none"
               >
@@ -101,11 +140,12 @@ export default {
       openSidebar: '',
       closeSidebar: '',
       sidebarOpen: '',
+      notEnrolledExportLink: '/api/enrollments/not-enrolled',
       loading: false,
     }
   },
   computed: {
-    exportLink() {
+    enrolledenrolledExportLink() {
       return `/api/enrollments/${this.course_id}`
     },
   },

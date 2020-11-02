@@ -65,4 +65,9 @@ class Student extends Model
     {
         return $this->belongsToMany(Course::class)->withTimestamps();
     }
+
+    public function referenceCodes()
+    {
+        return $this->hasMany(ReferenceCode::class);
+    }
 }
