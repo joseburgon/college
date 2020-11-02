@@ -27,7 +27,7 @@ class StudentRequest extends FormRequest
             'name' => 'required',
             'last_name' => 'required',
             'identification' => 'required',
-            'email' => 'required|email',
+            'email' => 'required|email|confirmed',
             'phone' => 'required',
             'city' => 'required',
         ];
@@ -41,6 +41,7 @@ class StudentRequest extends FormRequest
             'identification.required' => 'La identificación es obligatoria.',
             'email.required' => 'El correo es obligatorio.',
             'email.email' => 'El correo debe ser un email válido.',
+            'email.confirmed' => 'Las direcciones de correo no coinciden.',
             'phone.required' => 'El celular es obligatorio.',
             'city.required' => 'Debe escoger una ciudad de la lista de autocompletado.',
         ];

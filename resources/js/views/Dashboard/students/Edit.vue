@@ -48,6 +48,17 @@
             </div>
 
             <div>
+              <label class="text-gray-700" for="phone"
+                >Celular</label
+              >
+              <input
+                v-model="student.attributes.phone"
+                class="form-input w-full mt-2 rounded-md focus:border-indigo-600"
+                type="text"
+              />
+            </div>
+
+            <div>
               <label class="text-gray-700" for="city">Ciudad</label>
               <input
                 v-model="student.attributes.city"

@@ -48,16 +48,31 @@
               />
             </div>
 
-            <div class="flex-col justify-center pb-6">
+            <div class="grid grid-flow-col grid-cols-2 gap-4">
               <FormulateInput
                 name="email"
                 type="email"
                 label="Correo electrónico"
                 placeholder="Email"
-                validation="required|email"
+                validation="bail|required|email"
                 :validation-messages="{
                   required: 'Tu correo es requerido',
                   email: 'Tu correo debe ser un email válido',
+                }"
+                element-class="flex-grow"
+                label-class="text-xs font-bold"
+                :disabled="registered"
+              />
+
+              <FormulateInput
+                name="email_confirmation"
+                type="email"
+                label="Confirmar correo"
+                placeholder="Email"
+                validation="required|confirm:email"
+                :validation-messages="{
+                  confirm: 'Los correos no coinciden',
+                  required: 'Es necesario confirmar la dirección de correo',
                 }"
                 element-class="flex-grow"
                 label-class="text-xs font-bold"
@@ -117,7 +132,8 @@
             <div class="flex-col mt-5" v-if="errors">
               <span
                 class="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1"
-                v-for="error in errors" :key="error[0]"
+                v-for="error in errors"
+                :key="error[0]"
                 >{{ error[0] }}
               </span>
             </div>
@@ -281,7 +297,11 @@ export default {
     )
 
     autocomplete.addListener('place_changed', () => {
-      this.setLocation(autocomplete.getPlace().address_components)
+      let place = autocomplete.getPlace()
+
+      this.formValues.place_input = place.formatted_address
+
+      this.setLocation(place.address_components)
     })
   },
 
@@ -387,12 +407,12 @@ export default {
     toggleTabs(tabNumber) {
       this.openTab = tabNumber
     },
-    setLocation(place) {
+    setLocation(addressComponents) {
       let api_city = '',
         api_state = '',
         api_country = ''
 
-      place.forEach(function (item) {
+      addressComponents.forEach(function (item) {
         if (item.types.includes('locality')) {
           api_city = item.long_name
         }
