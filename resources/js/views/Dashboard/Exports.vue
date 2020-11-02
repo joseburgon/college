@@ -14,21 +14,6 @@
               class="flex justify-between items-center px-5 py-3 text-gray-700 border-b"
             >
               <h3 class="text-sm">Exportar Estudiantes Matriculados</h3>
-              <button>
-                <svg
-                  class="h-4 w-4"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M6 18L18 6M6 6l12 12"
-                  />
-                </svg>
-              </button>
             </div>
 
             <div class="px-5 py-6 bg-gray-200 text-gray-700 border-b">
@@ -93,21 +78,6 @@
               class="flex justify-between items-center px-5 py-3 text-gray-700 border-b"
             >
               <h3 class="text-sm">Exportar Estudiantes No Matriculados</h3>
-              <button>
-                <svg
-                  class="h-4 w-4"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M6 18L18 6M6 6l12 12"
-                  />
-                </svg>
-              </button>
             </div>
 
             <div class="flex justify-between items-center px-5 py-3">
@@ -145,7 +115,7 @@ export default {
     }
   },
   computed: {
-    enrolledenrolledExportLink() {
+    enrolledExportLink() {
       return `/api/enrollments/${this.course_id}`
     },
   },
