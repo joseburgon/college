@@ -22,7 +22,7 @@
           type="text"
           placeholder="Search"
           v-model="searchTerms"
-          v-on:keyup.enter="searchTransactions(1)"
+          v-on:keyup.enter="searchStudents(1)"
         />
       </div>
     </div>
