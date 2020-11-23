@@ -275,8 +275,8 @@ export default {
     this.$emit(`update:layout`, DefaultLayout)
 
     if (!this.query.course) {
-      this.query.course = 1
-    } else if (this.query.course == 2) {
+      this.query.course = 2
+    } else if (this.query.course === 1) {
       this.$router.push({ name: 'unavailable' })
     }
 
