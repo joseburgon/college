@@ -6,7 +6,7 @@ use App\Events\TransactionSaved;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\TransactionCollection;
 use App\Http\Resources\TransactionResource;
-use App\Repositories\MercadoPagoApi;
+use App\ExternalApis\MercadoPagoApi;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;

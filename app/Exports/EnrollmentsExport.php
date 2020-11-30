@@ -4,7 +4,7 @@ namespace App\Exports;
 
 use App\Models\Course;
 use App\Models\Student;
-use App\Repositories\ThinkificApi;
+use App\ExternalApis\ThinkificApi;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Repositories;
+namespace App\ExternalApis;
 
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;

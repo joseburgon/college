@@ -4,11 +4,8 @@ namespace App\Console\Commands;
 
 use Carbon\Carbon;
 use Illuminate\Console\Command;
-use App\Models\Course;
-use App\Models\Student;
-use App\Repositories\ThinkificApi;
+use App\ExternalApis\ThinkificApi;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Arr;
 
 class SetEnrollmentsExpiryDate extends Command
 {

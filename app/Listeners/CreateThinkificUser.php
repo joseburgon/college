@@ -4,14 +4,14 @@ namespace App\Listeners;
 
 use App\Events\TransactionSaved;
 use App\Models\ReferenceCode;
-use Carbon\Carbon;
+use App\Traits\Thinkific;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\InteractsWithQueue;
-use App\Repositories\ThinkificApi;
 use Illuminate\Support\Facades\Log;
 
 class CreateThinkificUser implements ShouldQueue
 {
+    use Thinkific;
+
     /**
      * Create the event listener.
      *
@@ -32,7 +32,7 @@ class CreateThinkificUser implements ShouldQueue
     {
         $transaction = $event->transaction;
 
-        Log::info('Llegue al listener');
+        Log::info('Llegué al listener');
 
         $status = $transaction->status;
 
@@ -48,7 +48,7 @@ class CreateThinkificUser implements ShouldQueue
 
             Log::info('Retrieving student', (array) $student);
 
-            $user = $this->userCreationProccess($student);
+            $user = $this->userCreationProcess($student);
 
             Log::info('Thinkific user created with ID: ' . $user['id']);
 
@@ -59,70 +59,12 @@ class CreateThinkificUser implements ShouldQueue
 
             $course = $referenceCode->course;
 
-            $this->enrollmentProccess($user, $course, $student);
+            $this->enrollmentProcess($user, $course, $student);
 
         } else {
 
             Log::info('Transaction not approved', (array) $transaction);
 
         }
-    }
-
-    private function userCreationProccess($student)
-    {
-
-        $apiRepo = new ThinkificApi();
-
-        $userExists = $apiRepo->checkIfUserExists($student->email);
-
-        Log::info('User exists?', ['result' => $userExists]);
-
-        if ($userExists) {
-
-            Log: info('User already exists');
-
-            $user = $apiRepo->getUser($student->email);
-
-            //Mail::to($student->email)->queue(new ThinkificCredentials($user));
-
-            return $user;
-        }
-
-        //$password = Str::random(8);
-        $password = 'College*2020';
-
-        $userData = [
-            'email' => $student->email,
-            'first_name' => $student->name,
-            'last_name' => $student->last_name,
-            'password' => $password,
-            'send_welcome_email' => false
-        ];
-
-        $user = $apiRepo->createUser($userData);
-
-        //Mail::to($student->email)->queue(new ThinkificCredentials($userData));
-
-        return $user;
-    }
-
-    private function enrollmentProccess($user, $course, $student)
-    {
-        $apiRepo = new ThinkificApi();
-
-        $enrollmentData = [
-            'course_id' => $course->thinkific_id,
-            'user_id' => $user['id'],
-            'activated_at' => Carbon::now()->toISOString(),
-        ];
-
-        $enrollment = $apiRepo->createEnrollment($enrollmentData);
-
-        Log::info('Student enrolled successfully in course.', $enrollment);
-
-        $student->courses()->attach($course->id);
-
-        $student->fill(['status' => 'enrolled'])->save();
-
     }
 }

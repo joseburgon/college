@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Repositories;
+namespace App\ExternalApis;
 
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 
@@ -181,5 +182,27 @@ class ThinkificApi
             return [];
 
         }
+    }
+
+    public function enrollmentProccess($user, $course,  $student)
+    {
+        $apiRepo = new ThinkificApi();
+
+
+
+        $enrollmentData = [
+            'course_id' => $course->thinkific_id,
+            'user_id' => $user['id'],
+            'activated_at' => Carbon::now()->toISOString(),
+        ];
+
+        $enrollment = $apiRepo->createEnrollment($enrollmentData);
+
+        Log::info('Student enrolled successfully in course.', $enrollment);
+
+        $student->courses()->attach($course->id);
+
+        $student->fill(['status' => 'enrolled'])->save();
+
     }
 }

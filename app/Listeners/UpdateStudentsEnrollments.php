@@ -4,7 +4,7 @@ namespace App\Listeners;
 
 use App\Models\Course;
 use App\Models\Student;
-use App\Repositories\ThinkificApi;
+use App\ExternalApis\ThinkificApi;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Facades\Log;
