@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use App\Models\Course;
 use App\Models\Student;
 use App\Repositories\ThinkificApi;
+use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;
 
@@ -106,7 +107,7 @@ class CreateEnrollments extends Command
         $enrollmentData = [
             'course_id' => $course->thinkific_id,
             'user_id' => $user['id'],
-            'activated_at' => $course->available_at,
+            'activated_at' => Carbon::now()->toISOString(),
         ];
 
         $enrollment = $apiRepo->createEnrollment($enrollmentData);

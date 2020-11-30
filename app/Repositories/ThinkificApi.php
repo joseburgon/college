@@ -132,4 +132,54 @@ class ThinkificApi
 
         return $response;
     }
+
+    public function getCourseEnrollments($course)
+    {
+        $courseEnrollments = [];
+        $page = 1;
+        $totalPages = 0;
+
+        do {
+            $response = Http::withHeaders($this->headers)
+                ->get($this->baseUrl . 'enrollments', [
+                    'query[course_id]' => $course,
+                    'query[expired]' => false,
+                    'page' => $page,
+                    'limit' => '50'
+                ]);
+
+            if ($response->successful()) {
+
+                $courseEnrollments = array_merge($courseEnrollments, $response['items']);
+
+                $totalPages++;
+
+                $page++;
+
+            }
+        } while ($response['meta']['pagination']['total_pages'] > $totalPages);
+
+        return $courseEnrollments;
+
+    }
+
+    public function updateEnrollment($id, $data)
+    {
+        $response = Http::withHeaders($this->headers)
+            ->put($this->baseUrl . 'enrollments/' . $id, $data);
+
+        if ($response->successful()) {
+
+            Log::info('Updating enrollment ' . $id);
+
+            return $response->json();
+
+        } else {
+
+            Log::error('Error updating enrollment ' . $id, $response->json());
+
+            return [];
+
+        }
+    }
 }

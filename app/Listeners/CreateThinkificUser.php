@@ -3,14 +3,12 @@
 namespace App\Listeners;
 
 use App\Events\TransactionSaved;
-use App\Mail\ThinkificCredentials;
 use App\Models\ReferenceCode;
+use Carbon\Carbon;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use App\Repositories\ThinkificApi;
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Mail;
 
 class CreateThinkificUser implements ShouldQueue
 {
@@ -115,7 +113,7 @@ class CreateThinkificUser implements ShouldQueue
         $enrollmentData = [
             'course_id' => $course->thinkific_id,
             'user_id' => $user['id'],
-            'activated_at' => $course->available_at,
+            'activated_at' => Carbon::now()->toISOString(),
         ];
 
         $enrollment = $apiRepo->createEnrollment($enrollmentData);
