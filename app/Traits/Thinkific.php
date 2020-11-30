@@ -57,8 +57,8 @@ trait Thinkific
         $enrollmentData = [
             'course_id' => $course->thinkific_id,
             'user_id' => $user['id'],
-            'activated_at' => $activatedAtDate->toISOString(),
-            'expiry_date' => $expiryDate->toISOString(),
+            'activated_at' => $activatedAtDate->toJSON(),
+            'expiry_date' => $expiryDate->toJSON(),
         ];
 
         $enrollment = $apiRepo->createEnrollment($enrollmentData);
