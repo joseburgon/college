@@ -31,11 +31,9 @@ class UpdateStudentsEnrollments implements ShouldQueue
     {
         Student::chunk(50, function ($students) {
 
-            $apiRepo = new ThinkificApi();
-
             foreach ($students as $student) {
 
-                $enrollments = $apiRepo->getStudentEnrollments($student->email);
+                $enrollments = ThinkificApi::getStudentEnrollments($student->email);
 
                 if (count($enrollments) > 0) {
 

@@ -42,13 +42,11 @@ class UpdateEnrollments extends Command
      */
     public function handle()
     {
-        Student::whereDate('created_at', '>', '2020-10-20')->chunk(100, function ($students) {
-
-            $apiRepo = new ThinkificApi();
+        Student::whereDate('created_at', '>', '2020-10-25')->chunk(100, function ($students) {
 
             foreach ($students as $student) {
 
-                $enrollments = $apiRepo->getStudentEnrollments($student->email);
+                $enrollments = ThinkificApi::getStudentEnrollments($student->email);
 
                 if (count($enrollments) > 0) {
 

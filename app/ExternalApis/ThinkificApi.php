@@ -2,43 +2,37 @@
 
 namespace App\ExternalApis;
 
-use Carbon\Carbon;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 
 class ThinkificApi
 {
-    private $baseUrl = 'https://api.thinkific.com/api/public/v1/';
+    private const BASE_URL = 'https://api.thinkific.com/api/public/v1/';
 
-    private $headers = null;
+    private static $headers;
 
-    public function __construct()
+    public static function __constructStatic()
     {
-        $this->headers = [
+        static::$headers = [
             'X-Auth-API-Key' => config('app.thinkific_api_key'),
             'X-Auth-Subdomain' => 'livingroomcollege',
             'Content-Type' => 'application/json',
         ];
     }
 
-    public function getUsers()
+    public static function getUsers()
     {
-
-        $response = Http::withHeaders($this->headers)
-            ->get($this->baseUrl . 'users')
+        $response = Http::withHeaders(self::$headers)
+            ->get(self::BASE_URL . 'users')
             ->throw();
 
-        if ($response->successful()) {
-
-            return $response->json();
-        }
+        return $response->json();
     }
 
-    public function getUser($email)
+    public static function getUser($email)
     {
-
-        $response = Http::withHeaders($this->headers)
-            ->get($this->baseUrl . 'users', [
+        $response = Http::withHeaders(self::$headers)
+            ->get(self::BASE_URL . 'users', [
                 'query[email]' => $email
             ])
             ->throw()
@@ -47,10 +41,10 @@ class ThinkificApi
         return $response['items']['0'];
     }
 
-    public function checkIfUserExists($email)
+    public static function checkIfUserExists($email)
     {
-        $response = Http::withHeaders($this->headers)
-            ->get($this->baseUrl . 'users', [
+        $response = Http::withHeaders(self::$headers)
+            ->get(self::BASE_URL . 'users', [
                 'query[email]' => $email
             ])
             ->throw()
@@ -67,37 +61,39 @@ class ThinkificApi
         }
     }
 
-    public function createUser($data)
+    public static function createUser($data)
     {
-        $response = Http::withHeaders($this->headers)
-            ->post($this->baseUrl . 'users', $data);
-
+        $response = Http::withHeaders(self::$headers)
+            ->post(self::BASE_URL . 'users', $data);
 
         if ($response->successful()) {
 
             return $response->json();
+
         } else {
 
             Log::info('Error creating user', $response->json());
+
         }
     }
 
-    public function createEnrollment($data)
+    public static function createEnrollment($data)
     {
-        $response = Http::withHeaders($this->headers)
-            ->post($this->baseUrl . 'enrollments', $data)
+        $response = Http::withHeaders(self::$headers)
+            ->post(self::BASE_URL . 'enrollments', $data)
             ->throw();
 
         if ($response->successful()) {
 
             return $response->json();
+
         }
     }
 
-    public function getStudentEnrollments($email)
+    public static function getStudentEnrollments($email)
     {
-        $response = Http::withHeaders($this->headers)
-            ->get($this->baseUrl . 'enrollments', [
+        $response = Http::withHeaders(self::$headers)
+            ->get(self::BASE_URL . 'enrollments', [
                 'query[email]' => $email,
                 'page' => '1',
                 'limit' => '25'
@@ -118,10 +114,10 @@ class ThinkificApi
         }
     }
 
-    public function getEnrolledStudents($course, $page)
+    public static function getEnrolledStudents($course, $page)
     {
-        $response = Http::withHeaders($this->headers)
-            ->get($this->baseUrl . 'enrollments', [
+        $response = Http::withHeaders(self::$headers)
+            ->get(self::BASE_URL . 'enrollments', [
                 'query[course_id]' => $course,
                 'page' => $page,
                 'limit' => '50'
@@ -134,15 +130,15 @@ class ThinkificApi
         return $response;
     }
 
-    public function getCourseEnrollments($course)
+    public static function getCourseEnrollments($course)
     {
         $courseEnrollments = [];
         $page = 1;
         $totalPages = 0;
 
         do {
-            $response = Http::withHeaders($this->headers)
-                ->get($this->baseUrl . 'enrollments', [
+            $response = Http::withHeaders(self::$headers)
+                ->get(self::BASE_URL . 'enrollments', [
                     'query[course_id]' => $course,
                     'query[expired]' => false,
                     'page' => $page,
@@ -161,13 +157,12 @@ class ThinkificApi
         } while ($response['meta']['pagination']['total_pages'] > $totalPages);
 
         return $courseEnrollments;
-
     }
 
-    public function updateEnrollment($id, $data)
+    public static function updateEnrollment($id, $data)
     {
-        $response = Http::withHeaders($this->headers)
-            ->put($this->baseUrl . 'enrollments/' . $id, $data);
+        $response = Http::withHeaders(self::$headers)
+            ->put(self::BASE_URL . 'enrollments/' . $id, $data);
 
         if ($response->successful()) {
 
@@ -183,26 +178,6 @@ class ThinkificApi
 
         }
     }
-
-    public function enrollmentProccess($user, $course,  $student)
-    {
-        $apiRepo = new ThinkificApi();
-
-
-
-        $enrollmentData = [
-            'course_id' => $course->thinkific_id,
-            'user_id' => $user['id'],
-            'activated_at' => Carbon::now()->toISOString(),
-        ];
-
-        $enrollment = $apiRepo->createEnrollment($enrollmentData);
-
-        Log::info('Student enrolled successfully in course.', $enrollment);
-
-        $student->courses()->attach($course->id);
-
-        $student->fill(['status' => 'enrolled'])->save();
-
-    }
 }
+
+ThinkificApi::__constructStatic();

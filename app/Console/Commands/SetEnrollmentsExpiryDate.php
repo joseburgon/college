@@ -40,9 +40,7 @@ class SetEnrollmentsExpiryDate extends Command
      */
     public function handle()
     {
-        $apiRepo = new ThinkificApi();
-
-        $enrollments = $apiRepo->getCourseEnrollments($this->argument('course'));
+        $enrollments = ThinkificApi::getCourseEnrollments($this->argument('course'));
 
         foreach ($enrollments as $enrollment) {
 
@@ -59,7 +57,7 @@ class SetEnrollmentsExpiryDate extends Command
                 'expiry_date' => $expiryDate->toISOString()
             ];
 
-            $apiRepo->updateEnrollment($enrollment['id'], $data);
+            ThinkificApi::updateEnrollment($enrollment['id'], $data);
 
             Log::info('Enrollment updated!');
 

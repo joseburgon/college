@@ -12,10 +12,7 @@ trait Thinkific
 {
     function userCreationProcess(Student $student)
     {
-
-        $apiRepo = new ThinkificApi();
-
-        $userExists = $apiRepo->checkIfUserExists($student->email);
+        $userExists = ThinkificApi::checkIfUserExists($student->email);
 
         Log::info('User exists?', ['result' => $userExists]);
 
@@ -24,7 +21,7 @@ trait Thinkific
             Log:
             info('User already exists');
 
-            $user = $apiRepo->getUser($student->email);
+            $user = ThinkificApi::getUser($student->email);
 
             return $user;
         }
@@ -39,7 +36,7 @@ trait Thinkific
             'send_welcome_email' => false
         ];
 
-        $user = $apiRepo->createUser($userData);
+        $user = ThinkificApi::createUser($userData);
 
         return $user;
 
@@ -47,9 +44,6 @@ trait Thinkific
 
     function enrollmentProcess($user, Course $course, Student $student)
     {
-
-        $apiRepo = new ThinkificApi();
-
         $activatedAtDate = Carbon::now();
 
         $expiryDate = $activatedAtDate->addDays(60);
@@ -61,14 +55,13 @@ trait Thinkific
             'expiry_date' => $expiryDate->toJSON(),
         ];
 
-        $enrollment = $apiRepo->createEnrollment($enrollmentData);
+        $enrollment = ThinkificApi::createEnrollment($enrollmentData);
 
         Log::info('Student enrolled successfully in course.', $enrollment);
 
         $student->courses()->attach($course->id);
 
         $student->fill(['status' => 'enrolled'])->save();
-
     }
 }
 

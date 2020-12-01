@@ -52,15 +52,13 @@ class EnrollmentsExport implements FromCollection, WithHeadings, ShouldAutoSize
 
         $enrolledStudents = [];
 
-        $apiRepo = new ThinkificApi();
-
         $page = 1;
 
         $totalPages = 0;
 
         do {
 
-            $response = $apiRepo->getEnrolledStudents($course->thinkific_id, $page);
+            $response = ThinkificApi::getEnrolledStudents($course->thinkific_id, $page);
 
             $enrolledStudents = array_merge($enrolledStudents, $response['items']);
 
