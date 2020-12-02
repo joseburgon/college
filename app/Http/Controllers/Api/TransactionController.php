@@ -37,11 +37,10 @@ class TransactionController extends Controller
 
         if (isset($request->type)) {
             if ($request->type === 'payment') {
-                $apiRepo = new MercadoPagoApi();
 
                 $id = $request->data_id;
 
-                $payment = $apiRepo->getPayment($id);
+                $payment = MercadoPagoApi::getPayment($id);
                 $payment['type'] = 'MERCADOPAGO';
 
                 $transaction = Transaction::updateOrCreate(

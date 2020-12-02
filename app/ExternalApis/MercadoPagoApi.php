@@ -7,32 +7,32 @@ use Illuminate\Support\Facades\Log;
 
 class MercadoPagoApi
 {
-    private $baseUrl = 'https://api.mercadopago.com/';
+    private const BASE_URL = 'https://api.mercadopago.com/';
 
-    private $token;
+    private static $token;
 
-    public function __construct()
+    public static function __constructStatic()
     {
-        $this->token = config('app.mercadopago_access_token');
+        static::$token = config('app.mercadopago_access_token');
     }
 
-    public function getPayment($id)
+    public static function getPayment($id)
     {
-        $response = Http::get($this->baseUrl . 'v1/payments/' . $id,
-            ['access_token' => $this->token])->throw();
+        $response = Http::get(self::BASE_URL . 'v1/payments/' . $id,
+            ['access_token' => self::$token])
+            ->throw();
 
-        if ($response->successful()) {
-            return $response->json();
-        }
+        return $response->json();
     }
 
-    public function getOrder($id)
+    public static function getOrder($id)
     {
-        $response = Http::get($this->baseUrl . 'merchant_orders/' . $id,
-            ['access_token' => $this->token])->throw();
+        $response = Http::get(self::BASE_URL . 'merchant_orders/' . $id,
+            ['access_token' => self::$token])
+            ->throw();
 
-        if ($response->successful()) {
-            return $response->json();
-        }
+        return $response->json();
     }
 }
+
+MercadoPagoApi::__constructStatic();

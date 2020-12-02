@@ -55,9 +55,11 @@ class ThinkificApi
         if (empty($response['items'])) {
 
             return false;
+
         } else {
 
             return true;
+
         }
     }
 
@@ -83,11 +85,7 @@ class ThinkificApi
             ->post(self::BASE_URL . 'enrollments', $data)
             ->throw();
 
-        if ($response->successful()) {
-
-            return $response->json();
-
-        }
+        return $response->json();
     }
 
     public static function getStudentEnrollments($email)
