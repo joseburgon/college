@@ -242,10 +242,6 @@
                             </span>
 
                         </h3>
-                        <span
-                            class="inline-block rounded-full text-white bg-blue-500 px-2 py-1 text-xs text-center font-bold w-auto lg:w-1/2 mr-3 mb-6">
-                                El precio subirá después del 2 dic
-                        </span>
                         <p class="font-hairline text-dustyGray text-xs">MEDIOS DE PAGO</p>
                         <px-payment-methods/>
                     </div>
