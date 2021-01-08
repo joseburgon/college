@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Exports\CompletedEnrollmentsExport;
 use App\Models\Course;
 use Illuminate\Http\Request;
 use App\Exports\EnrollmentsExport;
@@ -11,11 +12,18 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class EnrollmentController extends Controller
 {
-    public function export(Course $course)
+    public function exportCurrent(Course $course)
     {
         $fileName = str_replace(' ', '_', $course->name) . '_Matriculados_' . date("Ymd_His") . '.xlsx';
 
         return Excel::download(new EnrollmentsExport($course), $fileName);
+    }
+
+    public function exportCompleted(Course $course)
+    {
+        $fileName = str_replace(' ', '_', $course->name) . '_Completados_' . date("Ymd_His") . '.xlsx';
+
+        return Excel::download(new CompletedEnrollmentsExport($course), $fileName);
     }
 
     public function notEnrolledExport()

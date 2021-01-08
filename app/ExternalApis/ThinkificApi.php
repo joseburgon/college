@@ -129,6 +129,24 @@ class ThinkificApi
         return $response;
     }
 
+    public static function getEnrolledStudentsWhoCompleted($course, $page)
+    {
+        $response = Http::withHeaders(self::$headers)
+            ->get(self::BASE_URL . 'enrollments', [
+                'query[course_id]' => $course,
+                'query[expired]' => false,
+                'query[completed]' => true,
+                'page' => $page,
+                'limit' => '50'
+            ])
+            ->throw()
+            ->json();
+
+        Log::info('Getting course enrolled students who finished.', $response);
+
+        return $response;
+    }
+
     public static function getCourseEnrollments($course)
     {
         $courseEnrollments = [];

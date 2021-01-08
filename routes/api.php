@@ -34,7 +34,9 @@ Route::namespace('Api')->prefix('api')->group(function () {
 
     Route::get('enrollments/not-enrolled', 'EnrollmentController@notEnrolledExport')->name('api.enrollments.not-enrolled');
 
-    Route::get('enrollments/{course}', 'EnrollmentController@export')->name('api.enrollments.export');
+    Route::get('enrollments/{course}/current', 'EnrollmentController@exportCurrent')->name('api.enrollments.exportCurrent');
+
+    Route::get('enrollments/{course}/completed', 'EnrollmentController@exportCompleted')->name('api.enrollments.exportCompleted');
 
     Route::post('students/imports', 'StudentController@import')->name('api.students.import');
 });
