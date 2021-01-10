@@ -3,7 +3,7 @@
         <h3 class="text-gray-700 text-3xl font-semibold">Exportar</h3>
 
         <div class="mt-4">
-            <h4 class="text-gray-600">Exportar Estudiantes Matriculados</h4>
+            <h4 class="text-gray-600">Exportar Estudiantes</h4>
 
             <div class="mt-4">
                 <div
@@ -21,8 +21,8 @@
 
                             <div class="inline-block relative w-64">
                                 <select
-                                    name="course_id"
-                                    v-model="course_id"
+                                    name="current_course_id"
+                                    v-model="current_course_id"
                                     required
                                     class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
                                 >
@@ -57,7 +57,7 @@
                                 Cancel
                             </button>
                             <a
-                                v-if="course_id"
+                                v-if="current_course_id"
                                 :href="currentEnrolledExportLink"
                                 target="_blank"
                                 class="px-3 py-1 bg-indigo-600 text-white rounded-md text-sm hover:bg-indigo-500 focus:outline-none"
@@ -85,8 +85,8 @@
 
                             <div class="inline-block relative w-64">
                                 <select
-                                    name="course_id"
-                                    v-model="course_id"
+                                    name="completed_course_id"
+                                    v-model="completed_course_id"
                                     required
                                     class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
                                 >
@@ -121,7 +121,7 @@
                                 Cancel
                             </button>
                             <a
-                                v-if="course_id"
+                                v-if="completed_course_id"
                                 :href="completedEnrollmentsExportLink"
                                 target="_blank"
                                 class="px-3 py-1 bg-indigo-600 text-white rounded-md text-sm hover:bg-indigo-500 focus:outline-none"
@@ -169,7 +169,8 @@ export default {
 
     data() {
         return {
-            course_id: '',
+            current_course_id: '',
+            completed_course_id: '',
             courses: {},
             openSidebar: '',
             closeSidebar: '',
@@ -180,11 +181,11 @@ export default {
     },
     computed: {
         currentEnrolledExportLink() {
-            return `/api/enrollments/${this.course_id}/current`
+            return `/api/enrollments/${this.current_course_id}/current`
         },
 
         completedEnrollmentsExportLink() {
-            return `/api/enrollments/${this.course_id}/completed`
+            return `/api/enrollments/${this.completed_course_id}/completed`
         },
     },
     created() {
