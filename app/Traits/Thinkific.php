@@ -46,7 +46,7 @@ trait Thinkific
     {
         $activatedAtDate = Carbon::now();
 
-        $expiryDate = $activatedAtDate->addDays(60);
+        $expiryDate = $activatedAtDate->addWeeks(10);
 
         $enrollmentData = [
             'course_id' => $course->thinkific_id,

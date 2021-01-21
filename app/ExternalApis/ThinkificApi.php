@@ -134,7 +134,6 @@ class ThinkificApi
         $response = Http::withHeaders(self::$headers)
             ->get(self::BASE_URL . 'enrollments', [
                 'query[course_id]' => $course,
-                'query[expired]' => false,
                 'query[completed]' => true,
                 'page' => $page,
                 'limit' => '50'
