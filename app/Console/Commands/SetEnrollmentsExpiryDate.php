@@ -48,7 +48,7 @@ class SetEnrollmentsExpiryDate extends Command
 
             $startedAtDate = Carbon::now();
 
-            $expiryDate = $startedAtDate->addDays(60);
+            $expiryDate = $startedAtDate->addWeeks(10);
 
             Log::info('Calculated expiry date: ' . $expiryDate);
 

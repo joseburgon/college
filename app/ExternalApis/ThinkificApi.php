@@ -146,20 +146,18 @@ class ThinkificApi
         return $response;
     }
 
-    public static function getCourseEnrollments($course)
+    public static function getCourseEnrollments(array $queryParams)
     {
         $courseEnrollments = [];
         $page = 1;
         $totalPages = 0;
 
         do {
+
+            $queryParams['page'] = $page;
+
             $response = Http::withHeaders(self::$headers)
-                ->get(self::BASE_URL . 'enrollments', [
-                    'query[course_id]' => $course,
-                    'query[expired]' => false,
-                    'page' => $page,
-                    'limit' => '50'
-                ]);
+                ->get(self::BASE_URL . 'enrollments', $queryParams);
 
             if ($response->successful()) {
 
@@ -188,7 +186,7 @@ class ThinkificApi
 
         } else {
 
-            Log::error('Error updating enrollment ' . $id, $response->json());
+            Log::error('Error updating enrollment ' . $id);
 
             return [];
 
