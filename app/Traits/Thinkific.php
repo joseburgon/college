@@ -18,15 +18,14 @@ trait Thinkific
 
         if ($userExists) {
 
-            Log:
-            info('User already exists');
+            Log::info('User already exists');
 
             $user = ThinkificApi::getUser($student->email);
 
             return $user;
         }
 
-        $password = 'College*2020';
+        $password = 'College*2021';
 
         $userData = [
             'email' => $student->email,

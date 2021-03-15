@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Events\FinanceCoursePurchased;
 use App\Events\TransactionSaved;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\TransactionCollection;
 use App\Http\Resources\TransactionResource;
 use App\ExternalApis\MercadoPagoApi;
+use App\Models\Student;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -81,5 +83,24 @@ class TransactionController extends Controller
         $data = $request->input();
 
         Log::info('Hotmart data', (array) $data);
+
+        if ($request->status == 'approved') {
+
+            $student = Student::updateOrCreate(['email' => $request->name],
+                [
+                    'identification' => 'NO REGISTRA',
+                    'name' => $request->first_name ?? 'Sin nombre en Checkout',
+                    'last_name' => $request->last_name ?? 'Sin apellido en checkout',
+                    'phone' => $request->phone_checkout_number ?? 'Sin telefono en checkout',
+                    'city' => $request->address_city ?? 'Sin ciudad en checkout',
+                    'state' => $request->address_state ?? 'Sin estado en checkout',
+                    'country' => $request->address_country ?? 'Sin pais en checkout',
+                ]
+            );
+
+            FinanceCoursePurchased::dispatch($student);
+
+        }
+
     }
 }

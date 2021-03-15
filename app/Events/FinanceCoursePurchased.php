@@ -2,7 +2,8 @@
 
 namespace App\Events;
 
-use App\Models\Transaction;
+use App\Models\Course;
+use App\Models\Student;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
@@ -11,20 +12,23 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class TransactionSaved
+class FinanceCoursePurchased
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $transaction;
+    public $student;
+    public $course;
 
     /**
      * Create a new event instance.
      *
-     * @param Transaction $transaction
+     * @param Student $student
      */
-    public function __construct(Transaction $transaction)
+    public function __construct(Student $student)
     {
-        $this->transaction = $transaction;
+        $this->student = $student;
+
+        $this->course = Course::find(2);
     }
 
     /**

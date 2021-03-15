@@ -28,6 +28,10 @@ class EventServiceProvider extends ServiceProvider
             \App\Listeners\UpdateStudentsEnrollments::class
         ],
 
+        'App\Events\FinanceCoursePurchased' => [
+            'App\Listeners\CreateAndEnrollStudent',
+        ],
+
     ];
 
     /**
