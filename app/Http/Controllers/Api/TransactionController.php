@@ -75,4 +75,11 @@ class TransactionController extends Controller
 
         TransactionSaved::dispatch($transaction);
     }
+
+    public function hotmart(Request $request)
+    {
+        $data = $request->input();
+
+        Log::info('Hotmart data', (array) $data);
+    }
 }

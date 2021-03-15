@@ -32,6 +32,8 @@ Route::namespace('Api')->prefix('api')->group(function () {
 
     Route::post('transactions/paypal', 'TransactionController@paypal')->name('api.transactions.paypal');
 
+    Route::post('transactions/hotmart', 'TransactionController@hotmart')->name('api.transactions.hotmart');
+
     Route::get('enrollments/not-enrolled', 'EnrollmentController@notEnrolledExport')->name('api.enrollments.not-enrolled');
 
     Route::get('enrollments/{course}/current', 'EnrollmentController@exportCurrent')->name('api.enrollments.exportCurrent');
