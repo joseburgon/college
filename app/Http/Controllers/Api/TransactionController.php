@@ -86,7 +86,7 @@ class TransactionController extends Controller
 
         if ($request->status == 'approved') {
 
-            $student = Student::updateOrCreate(['email' => $request->name],
+            $student = Student::updateOrCreate(['email' => $request->email],
                 [
                     'identification' => 'NO REGISTRA',
                     'name' => $request->first_name ?? 'Sin nombre en Checkout',
