@@ -98,9 +98,16 @@ class TransactionController extends Controller
                 ]
             );
 
+            Log::info('Student created from Hotmart', (array) $student);
+
             FinanceCoursePurchased::dispatch($student);
 
         }
+
+        return response()->json(
+            ['message' => 'Received!'],
+            200
+        );
 
     }
 }

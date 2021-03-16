@@ -36,7 +36,7 @@ class CreateAndEnrollStudent implements ShouldQueue
 
         $user = $this->userCreationProcess($student);
 
-        Log::info('Thinkific user created with ID: ' . $user['id']);
+        Log::info('Thinkific user created with ID: ' . $user['id'] ?? 'N/A');
 
         $student->fill([
             'thinkific_user_id' => $user['id'],
