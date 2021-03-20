@@ -50,8 +50,6 @@ class TransactionController extends Controller
                     $payment
                 );
 
-                Log::info('Transaction stored', (array) $transaction);
-
                 TransactionSaved::dispatch($transaction);
             }
         }
@@ -73,8 +71,6 @@ class TransactionController extends Controller
             $data
         );
 
-        Log::info('Transaction stored', (array) $transaction);
-
         TransactionSaved::dispatch($transaction);
     }
 
@@ -82,7 +78,7 @@ class TransactionController extends Controller
     {
         $data = $request->input();
 
-        Log::info('Hotmart data', (array) $data);
+        Log::info('Transaction from Hotmart', (array) $data);
 
         if ($request->status == 'approved') {
 
