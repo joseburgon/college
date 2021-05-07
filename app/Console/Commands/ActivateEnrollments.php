@@ -40,12 +40,11 @@ class ActivateEnrollments extends Command
      */
     public function handle()
     {
-        $createdAfter = Carbon::createFromDate(2020, 11, 14);
+        $createdAfter = Carbon::createFromDate(2021, 01, 01);
 
         $queryParams = [
             'query[course_id]' => $this->argument('course'),
             'query[created_after]' => $createdAfter->toJSON(),
-            'query[expired]' => true,
             'limit' => '100',
         ];
 

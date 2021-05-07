@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Exports\AllHistoricEnrolledStudentsExport;
 use App\Exports\CompletedEnrollmentsExport;
 use App\Models\Course;
-use Illuminate\Http\Request;
 use App\Exports\EnrollmentsExport;
 use App\Exports\NotEnrolledStudentsExport;
 use App\Http\Controllers\Controller;
@@ -31,5 +31,12 @@ class EnrollmentController extends Controller
         $fileName = 'No_Matriculados_' . date("Ymd_His") . '.xlsx';
 
         return Excel::download(new NotEnrolledStudentsExport, $fileName);
+    }
+
+    public function allHistoricEnrolledExport()
+    {
+        $fileName = 'Todos_Los_Estudiantes_' . date("Ymd_His") . '.xlsx';
+
+        return Excel::download(new AllHistoricEnrolledStudentsExport, $fileName);
     }
 }
