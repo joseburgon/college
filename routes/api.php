@@ -34,7 +34,7 @@ Route::namespace('Api')->prefix('api')->group(function () {
 
     Route::post('transactions/hotmart', 'TransactionController@hotmart')->name('api.transactions.hotmart');
 
-    Route::get('enrollments/all-historic', 'EnrollmentController@allHistoricEnrolledExport')->name('api.enrollments.not-enrolled');
+    Route::get('enrollments/all-historic', 'EnrollmentController@allHistoricEnrolledExport')->name('api.enrollments.all-historic-enrolled');
 
     Route::get('enrollments/not-enrolled', 'EnrollmentController@notEnrolledExport')->name('api.enrollments.not-enrolled');
 
