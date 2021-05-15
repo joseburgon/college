@@ -15,7 +15,6 @@ use Illuminate\Support\Facades\Log;
 
 class TransactionController extends Controller
 {
-
     public function index(Request $request)
     {
         $transactions = Transaction::applyFilters()->applySorts()->jsonPaginate();

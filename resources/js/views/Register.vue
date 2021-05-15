@@ -202,7 +202,7 @@
                         >
                             <script
                                 type="application/javascript"
-                                src="https://www.paypal.com/sdk/js?client-id=AfZDLVmK8PtGjQq4nOhtZNch1qBpOvLOLHf5f5SmtwTWP9rfinjzVLyLK91Pf8p9nt6gOGSwKSsH_80X"
+                                :src="paypalUrl"
                             ></script>
                             <p
                                 class="font-hairline text-center text-gray-600 text-xs px-4 xl:px-20 mt-8"
@@ -266,6 +266,7 @@ export default {
             student: {},
             referenceCode: '',
             mercadoPagoUrl: '',
+            paypalUrl: 'https://www.paypal.com/sdk/js?client-id=ASJj90rMP8iMp4VnLxXLX3p1qIPrYPjit7GYnEFOqsNjJEzysf8_Hi9L882ksCzxIpGEnsB3JrUT11o5',
             registered: false,
             openTab: 1,
             errors: [],
@@ -408,6 +409,7 @@ export default {
         toggleTabs(tabNumber) {
             this.openTab = tabNumber
         },
+
         setLocation(addressComponents) {
             let api_city = '',
                 api_state = '',
