@@ -12,10 +12,12 @@
                         method="GET"
                     >
                         <h2
-                            class="font-bold text-black text-xl md:text-2xl mt-2 mb-4 md:mb-8"
+                            class="font-bold text-black text-xl md:text-2xl mt-2"
                         >
                             MATR&Iacute;CULA
                         </h2>
+
+                        <h4 v-show="course.hasOwnProperty('name')" class="text-dustyGray">{{ course.name }}</h4>
 
                         <FormulateInput v-model="course" name="course" type="hidden"/>
 
@@ -63,12 +65,12 @@
                                 label-class="text-xs font-bold"
                                 :disabled="registered"
                             />
-
                             <FormulateInput
                                 name="email_confirmation"
                                 type="email"
                                 label="Confirmar correo"
                                 placeholder="Email"
+                                onpaste="return false;"
                                 validation="required|confirm:email"
                                 :validation-messages="{
                                   confirm: 'Los correos no coinciden',
