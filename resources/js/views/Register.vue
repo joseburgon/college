@@ -19,7 +19,7 @@
 
                         <FormulateInput v-model="course" name="course" type="hidden"/>
 
-                        <div class="grid grid-flow-col grid-cols-2 gap-4">
+                        <div class="grid lg:grid-flow-col grid-cols-1 lg:grid-cols-2 lg:gap-4 mb-6 lg:mb-0">
                             <FormulateInput
                                 name="name"
                                 type="text"
@@ -27,9 +27,9 @@
                                 placeholder="Tu primer nombre"
                                 validation="required"
                                 :validation-messages="{
-                  required: 'Nombre es requerido',
-                }"
-                                outer-class="formulate-input flex-grow pr-2"
+                                  required: 'Nombre es requerido',
+                                }"
+                                element-class="flex-grow"
                                 label-class="text-xs font-bold"
                                 :disabled="registered"
                             />
@@ -40,15 +40,15 @@
                                 placeholder="Tu apellido"
                                 validation="required"
                                 :validation-messages="{
-                  required: 'Apellido es requerido',
-                }"
-                                outer-class="formulate-input flex-grow pl-2"
+                                  required: 'Apellido es requerido',
+                                }"
+                                element-class="flex-grow"
                                 label-class="text-xs font-bold"
                                 :disabled="registered"
                             />
                         </div>
 
-                        <div class="grid grid-flow-col grid-cols-2 gap-4">
+                        <div class="grid lg:grid-flow-col grid-cols-1 lg:grid-cols-2 lg:gap-4 mb-6 lg:mb-0">
                             <FormulateInput
                                 name="email"
                                 type="email"
@@ -56,9 +56,9 @@
                                 placeholder="Email"
                                 validation="bail|required|email"
                                 :validation-messages="{
-                  required: 'Tu correo es requerido',
-                  email: 'Tu correo debe ser un email válido',
-                }"
+                                  required: 'Tu correo es requerido',
+                                  email: 'Tu correo debe ser un email válido',
+                                }"
                                 element-class="flex-grow"
                                 label-class="text-xs font-bold"
                                 :disabled="registered"
@@ -71,16 +71,16 @@
                                 placeholder="Email"
                                 validation="required|confirm:email"
                                 :validation-messages="{
-                  confirm: 'Los correos no coinciden',
-                  required: 'Es necesario confirmar la dirección de correo',
-                }"
+                                  confirm: 'Los correos no coinciden',
+                                  required: 'Es necesario confirmar la dirección de correo',
+                                }"
                                 element-class="flex-grow"
                                 label-class="text-xs font-bold"
                                 :disabled="registered"
                             />
                         </div>
 
-                        <div class="grid grid-flow-col grid-cols-2 gap-4">
+                        <div class="grid lg:grid-flow-col grid-cols-1 lg:grid-cols-2 lg:gap-4 mb-6 lg:mb-0">
                             <FormulateInput
                                 name="identification"
                                 type="text"
@@ -90,8 +90,7 @@
                                 :validation-messages="{
                   required: 'Cedula es requerida',
                 }"
-                                element-class="flex justify-center"
-                                outer-class="formulate-input flex-grow pr-2"
+                                element-class="flex-grow"
                                 label-class="text-xs font-bold"
                                 :disabled="registered"
                             />
@@ -105,11 +104,12 @@
                   required: 'Tu teléfono es requerido',
                   number: 'Tu teléfono debe ser un número',
                 }"
-                                outer-class="formulate-input flex-grow pl-2"
+                                element-class="flex-grow"
                                 label-class="text-xs font-bold"
                                 :disabled="registered"
                             />
                         </div>
+
                         <div class="flex-col justify-center mb-6">
                             <FormulateInput
                                 name="place_input"
@@ -129,15 +129,17 @@
                             <FormulateInput name="state" type="hidden"/>
                             <FormulateInput name="country" type="hidden"/>
                         </div>
+
                         <div class="flex-col mt-5" v-if="errors">
-              <span
-                  class="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1"
-                  v-for="error in errors"
-                  :key="error[0]"
-              >{{ error[0] }}
-              </span>
+                          <span
+                              class="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1"
+                              v-for="error in errors"
+                              :key="error[0]"
+                          >{{ error[0] }}
+                          </span>
                         </div>
-                        <div class="flex-col mt-10">
+
+                        <div class="flex-col text-center lg:text-left mt-10">
                             <FormulateInput
                                 type="button"
                                 name="Matricularme"
@@ -162,9 +164,9 @@
                                 <a
                                     class="bg-white inline-block rounded-t py-2 px-4 text-paypalBlue font-semibold cursor-pointer"
                                     :class="{
-                    'border-r border-l border-t': openTab == 2,
-                    'hover:text-blue-800': openTab !== 2,
-                  }"
+                                'border-r border-l border-t': openTab == 2,
+                                'hover:text-blue-800': openTab !== 2,
+                              }"
                                     @click="toggleTabs(2)"
                                 >Medios de Pago Internacionales</a
                                 >
@@ -219,7 +221,7 @@
                     </div>
                 </div>
                 <div
-                    class="flex flex-col flex-wrap bg-gray-100 rounded w-full md:w-1/2 mt-6 md:mt-0 sm:mt-6"
+                    class="flex flex-col flex-wrap bg-gray-100 rounded w-full md:w-1/2 mt-10 md:mt-0 sm:mt-10"
                 >
                     <div v-if="course.id" class="flex flex-col flex-wrap py-4 px-8">
                         <div
