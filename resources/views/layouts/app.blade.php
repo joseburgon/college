@@ -28,7 +28,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&display=swap" rel="stylesheet">
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/app.css?v=2') }}" rel="stylesheet">
     <link href="{{ asset('css/form/form.css') }}" rel="stylesheet">
 
     <!-- Facebook Pixel Code -->
