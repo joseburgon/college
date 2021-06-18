@@ -46,5 +46,27 @@ class CoursesTableSeeder extends Seeder
             'thinkific_id' => 874120,
             'available_at' => Carbon::create('2020', '09', '30', '00', '00', '00', 'America/Bogota'),
         ]);
+
+        Course::create([
+            'name' => 'Curso Complementario',
+            'tagline' => 'School - Curso Complementario',
+            'description' => 'Este es el último nivel de School, continuaremos profundizando en el llamado de Dios y la autoridad delegada a los creyentes para llevar a cabo su obra a través de la Iglesia en una clase que hemos llamado: El cielo en la tierra. Haremos un recorrido histórico de la Iglesia y sus diferentes manifestaciones a lo largo del tiempo. Terminaremos revisando que opinan otras religiones acerca de Jesús y en qué se diferencian del Cristianismo.',
+            'price' => 170000,
+            'price_usd' => 50,
+            'cohort' => 'Junio 2021',
+            'thinkific_id' => 884148,
+            'available_at' => Carbon::create('2021', '06', '09', '00', '00', '00', 'America/Bogota'),
+        ]);
+
+        Course::create([
+            'name' => 'Connection',
+            'tagline' => 'CONNECTION - Aprende a escuchar la voz de Dios',
+            'description' => 'Curso presencial en Barranquilla, Medellín y Bucaramanga. Este curso se estará llevando a cabo de manera presencial en los siguientes campus: Barranquilla: 28, 29 y 30 de Julio de 7:00 pm a 10:00 pm. Medellín: 2, 3 y 4 de Agosto de 7:00 pm a 10:00 pm. Bucaramanga: 5, 6 de Agosto de 7:00 pm a 10:00 pm y 7 de Agosto de 10:30 am a 1:00 pm',
+            'price' => 270000,
+            'price_usd' => 70,
+            'cohort' => 'Junio 2021',
+            'thinkific_id' => 1408949,
+            'available_at' => Carbon::create('2021', '06', '18', '00', '00', '00', 'America/Bogota'),
+        ]);
     }
 }

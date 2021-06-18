@@ -155,7 +155,7 @@
                     'hover:text-blue-800': openTab !== 1,
                   }"
                                     @click="toggleTabs(1)"
-                                >MercadoPago</a
+                                >Medios de Pago Colombia</a
                                 >
                             </li>
                             <li class="-mb-px mr-1">
@@ -166,7 +166,7 @@
                     'hover:text-blue-800': openTab !== 2,
                   }"
                                     @click="toggleTabs(2)"
-                                >PayPal</a
+                                >Medios de Pago Internacionales</a
                                 >
                             </li>
                         </ul>
@@ -177,6 +177,11 @@
               }"
                         >
                             <div class="p-8 text-center">
+                                <p
+                                    class="font-hairline text-center text-gray-600 text-xs px-4 xl:px-20 mb-8"
+                                >
+                                    DÉBITO, CRÉDITO Y EFECTIVO EN COLOMBIA
+                                </p>
                                 <button
                                     v-if="registered"
                                     class="w-auto xl:w-3/4 bg-gray-100 hover:bg-blue-100 border border-gray-300 py-2 px-4 rounded"
@@ -207,8 +212,7 @@
                             <p
                                 class="font-hairline text-center text-gray-600 text-xs px-4 xl:px-20 mt-8"
                             >
-                                MEDIO RECOMENDADO SI VAS A DONAR CON UNA TARJETA DE
-                                CR&Eacute;DITO INTERNACIONAL
+                                DÉBITO Y CR&Eacute;DITO INTERNACIONAL
                             </p>
                             <div id="paypal-button-container" class="px4 xl:px-20 py-8"></div>
                         </div>
