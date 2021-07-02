@@ -481,6 +481,8 @@ export default {
             axios
                 .get(`api/campuses/${this.formValues.campus_id}/leaders`)
                 .then((res) => {
+                    this.formValues.leader_id = undefined
+
                     this.leaders = res.data
                 })
                 .catch((e) => {
