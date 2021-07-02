@@ -288,10 +288,6 @@ export default {
             this.query.course = 2
         }
 
-        if (parseInt(this.query.course) === 1) {
-            this.$router.push({name: 'unavailable'})
-        }
-
         if (parseInt(this.query.course) === 6) {
             this.$router.push({name: 'enrollment'})
         }
