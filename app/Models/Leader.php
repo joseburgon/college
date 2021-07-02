@@ -26,4 +26,9 @@ class Leader extends Model
     {
         return $this->belongsToMany(Student::class);
     }
+
+    public function campuses()
+    {
+        return $this->belongsToMany(Campus::class);
+    }
 }
