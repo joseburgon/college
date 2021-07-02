@@ -1,0 +1,8 @@
+﻿name,type,city,country,active
+Barranquilla,traditional,Barranquilla,Colombia,1
+Bucaramanga,traditional,Bucaramanga,Colombia,1
+Cali,traditional,Cali,Colombia,0
+Medellín,traditional,Medellín,Colombia,1
+Online,online,,,0
+Otro,other,,,1
+Valencia,traditional,Valencia,Venezuela,0

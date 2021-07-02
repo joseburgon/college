@@ -60,7 +60,6 @@ class Student extends Model
         }
     }
 
-
     public function courses()
     {
         return $this->belongsToMany(Course::class)->withTimestamps();
@@ -69,5 +68,10 @@ class Student extends Model
     public function referenceCodes()
     {
         return $this->hasMany(ReferenceCode::class);
+    }
+
+    public function leaders()
+    {
+        return $this->belongsToMany(Leader::class);
     }
 }

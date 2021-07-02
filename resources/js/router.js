@@ -17,6 +17,7 @@ import ReferenceIndex from './views/dashboard/references/Index';
 import ReferenceShow from './views/dashboard/references/Show';
 import Exports from './views/dashboard/Exports';
 import Imports from './views/dashboard/Imports';
+import Enrollment from "./views/Enrollment";
 
 Vue.use(VueRouter);
 
@@ -30,6 +31,12 @@ const routes = [
         path: '/register',
         name: 'register',
         component: Register,
+        meta: { guestOnly: true },
+    },
+    {
+        path: '/enrollment',
+        name: 'enrollment',
+        component: Enrollment,
         meta: { guestOnly: true },
     },
     {

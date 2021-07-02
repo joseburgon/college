@@ -82,20 +82,7 @@
                             />
                         </div>
 
-                        <div class="grid lg:grid-flow-col grid-cols-1 lg:grid-cols-2 lg:gap-4 mb-6 lg:mb-0">
-                            <FormulateInput
-                                name="identification"
-                                type="text"
-                                label="Identificación"
-                                placeholder="Tu documento de identidad"
-                                validation="required"
-                                :validation-messages="{
-                  required: 'Cedula es requerida',
-                }"
-                                element-class="flex-grow"
-                                label-class="text-xs font-bold"
-                                :disabled="registered"
-                            />
+                        <div class="flex-col justify-center mb-6">
                             <FormulateInput
                                 name="phone"
                                 type="text"
@@ -103,9 +90,9 @@
                                 placeholder="Tu teléfono"
                                 validation="required|number"
                                 :validation-messages="{
-                  required: 'Tu teléfono es requerido',
-                  number: 'Tu teléfono debe ser un número',
-                }"
+                                  required: 'Tu teléfono es requerido',
+                                  number: 'Tu teléfono debe ser un número',
+                                }"
                                 element-class="flex-grow"
                                 label-class="text-xs font-bold"
                                 :disabled="registered"
@@ -121,8 +108,8 @@
                                 placeholder="Escribe el nombre y escoge la ciudad de la lista"
                                 validation="required"
                                 :validation-messages="{
-                  required: 'Ciudad es requerida',
-                }"
+                                  required: 'Ciudad es requerida',
+                                }"
                                 element-class="flex-grow"
                                 label-class="text-xs font-bold"
                                 :disabled="registered"
@@ -130,6 +117,39 @@
                             <FormulateInput name="city" type="hidden"/>
                             <FormulateInput name="state" type="hidden"/>
                             <FormulateInput name="country" type="hidden"/>
+                        </div>
+
+                        <div class="grid xl:grid-flow-col grid-cols-1 xl:grid-cols-2 xl:gap-4 mb-6 xl:mb-0">
+                            <FormulateInput
+                                name="campus_id"
+                                type="select"
+                                label="Campus"
+                                v-model="formValues.campus_id"
+                                placeholder="Selecciona un Campus"
+                                :options="campuses"
+                                validation="required"
+                                :validation-messages="{
+                                  required: 'El campus al que asistes es requerido',
+                                }"
+                                element-class="flex-grow"
+                                label-class="text-xs font-bold"
+                                :disabled="registered"
+                                @input="getCampusLeaders"
+                            />
+                            <FormulateInput
+                                name="leader_id"
+                                type="select"
+                                label="Lider / Trainer"
+                                placeholder="Selecciona tu líder de LivingGroup"
+                                :options="leaders"
+                                validation="required"
+                                :validation-messages="{
+                                  required: 'Tu lider es requerido',
+                                }"
+                                element-class="flex-grow"
+                                label-class="text-xs font-bold"
+                                :disabled="!formValues.campus_id"
+                            />
                         </div>
 
                         <div class="flex-col mt-5" v-if="errors">
@@ -265,12 +285,15 @@ import PxPaymentMethods from '../components/PxPaymentMethods'
 
 export default {
     components: {PxPaymentMethods},
+
     data() {
         return {
             query: this.$route.query,
             formValues: {},
             valid: {},
             course: {},
+            campuses: {},
+            leaders: {},
             student: {},
             referenceCode: '',
             mercadoPagoUrl: '',
@@ -286,20 +309,23 @@ export default {
 
         if (!this.query.course) {
             this.query.course = 2
-        }
-
-        if (parseInt(this.query.course) === 1) {
+        } else if (this.query.course === 1) {
             this.$router.push({name: 'unavailable'})
-        }
-
-        if (parseInt(this.query.course) === 6) {
-            this.$router.push({name: 'enrollment'})
         }
 
         axios
             .get(`api/courses/${this.query.course}`)
             .then((res) => {
                 this.course = res.data
+            })
+            .catch((e) => {
+                this.$router.push({name: 'error'})
+            })
+
+        axios
+            .get(`api/campuses`)
+            .then((res) => {
+                this.campuses = res.data
             })
             .catch((e) => {
                 this.$router.push({name: 'error'})
@@ -328,7 +354,9 @@ export default {
                 .post('api/students', data)
                 .then((res) => {
                     this.student = res.data
+
                     this.getReferenceCode(res.data.id)
+
                     this.registered = true
                 })
                 .catch((error) => {
@@ -448,6 +476,17 @@ export default {
                 `${this.formValues.city} | ${this.formValues.state} | ${this.formValues.country}`
             )
         },
+
+        getCampusLeaders() {
+            axios
+                .get(`api/campuses/${this.formValues.campus_id}/leaders`)
+                .then((res) => {
+                    this.leaders = res.data
+                })
+                .catch((e) => {
+                    this.$router.push({name: 'error'})
+                })
+        }
     },
 }
 </script>

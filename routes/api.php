@@ -22,7 +22,11 @@ Route::namespace('Api')->prefix('api')->group(function () {
     Route::apiResources([
         'courses' => 'CourseController',
         'students' => 'StudentController',
+        'campuses' => 'CampusController',
+        'leaders' => 'LeaderController',
     ]);
+
+    Route::get('campuses/{campus}/leaders', 'CampusController@getLeaders')->name('api.campuses.leaders');
 
     Route::post('reference', 'ReferenceCodeController@store')->name('api.reference');
 
