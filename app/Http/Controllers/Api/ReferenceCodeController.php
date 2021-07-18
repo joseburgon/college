@@ -68,6 +68,16 @@ class ReferenceCodeController extends Controller
         $preference->external_reference = $referenceCode->id;
         $preference->payer = $payer;
         $preference->items = array ($item);
+
+        $preference->tracks = array(
+            array(
+                'type' => 'facebook_ad',
+                'values'=> array(
+                    'pixel_id' => '709663079657166'
+                )
+            )
+        );
+
         $preference->save();
 
         return $preference;

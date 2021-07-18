@@ -53,9 +53,12 @@ export default {
     },
 
     mounted() {
+        let course = this.query.description ?? 'None';
+
         window.fbq('track', 'Purchase', {
             value: 260000,
             currency: 'COP',
+            course: course
         });
     }
 };
