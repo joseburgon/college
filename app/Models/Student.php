@@ -72,6 +72,6 @@ class Student extends Model
 
     public function leaders()
     {
-        return $this->belongsToMany(Leader::class);
+        return $this->belongsToMany(Leader::class)->withTimestamps();
     }
 }

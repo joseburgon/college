@@ -5,49 +5,88 @@ namespace App\Exports;
 use App\Models\Course;
 use App\Models\Student;
 use App\ExternalApis\ThinkificApi;
+use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 
 class EnrollmentsExport implements FromCollection, WithHeadings, ShouldAutoSize
 {
+    private Course $course;
+
+    private bool $isConnectionCourse = false;
+
     public function __construct(Course $course)
     {
+        $this->course = $course;
 
-        $this->students = $this->getCourseEnrolledStudents($course);
+        $this->isConnectionCourse = $this->course->name === 'Connection';
 
+        $this->students = $this->getCourseEnrolledStudents();
     }
 
     public function headings(): array
     {
-        return [
-            'ID',
-            'Nombres',
-            'Apellidos',
-            'Identificación',
-            'Celular',
-            'Email',
-            'Ciudad',
-            'Estado / Dpto',
-            'País',
-            'Estado',
-            'Thinkific ID',
-            'Fecha de creación',
-            'Fecha de actualización',
-        ];
+        if ($this->isConnectionCourse) {
+            return [
+                'Fecha Matricula',
+                'Nombre',
+                'Apellidos',
+                'Celular',
+                'Email',
+                'Ciudad',
+                'Estado / Dpto',
+                'País',
+                'Líder',
+            ];
+        } else {
+            return [
+                'ID',
+                'Nombre',
+                'Apellidos',
+                'Identificación',
+                'Celular',
+                'Email',
+                'Ciudad',
+                'Estado / Dpto',
+                'País',
+                'Estado',
+                'Thinkific ID',
+                'Fecha de creación',
+                'Fecha de actualización',
+            ];
+        }
     }
 
     /**
-    * @return \Illuminate\Support\Collection
+    * @return Collection
     */
-    public function collection()
+    public function collection(): Collection
     {
 
-        return Student::whereIn('email', $this->students)->get();
+        if ($this->isConnectionCourse) {
+            $selectFields = [
+                'course_student.updated_at', 'students.name', 'students.last_name',
+                'students.phone', 'students.email', 'students.city', 'students.state',
+                'students.country', 'leaders.name as leader'
+            ];
+
+            return Student::query()
+                ->whereIn('email', $this->students)
+                ->join('leader_student', 'students.id', '=', 'leader_student.student_id')
+                ->join('course_student', 'students.id', '=', 'course_student.student_id')
+                ->join('leaders', 'leaders.id', '=', 'leader_student.leader_id')
+                ->select($selectFields)
+                ->orderBy('course_student.updated_at')
+                ->distinct()
+                ->get();
+        } else {
+            return Student::whereIn('email', $this->students)->get();
+        }
 
     }
 
-    public function getCourseEnrolledStudents($course)
+    public function getCourseEnrolledStudents(): array
     {
 
         $enrolledStudents = [];
@@ -58,7 +97,7 @@ class EnrollmentsExport implements FromCollection, WithHeadings, ShouldAutoSize
 
         do {
 
-            $response = ThinkificApi::getEnrolledStudents($course->thinkific_id, $page);
+            $response = ThinkificApi::getEnrolledStudents($this->course->thinkific_id, $page);
 
             $enrolledStudents = array_merge($enrolledStudents, $response['items']);
 

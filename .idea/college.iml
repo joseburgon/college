@@ -15,7 +15,6 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/cloudcreativity/laravel-json-api" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/clue/stream-filter" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/composer" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/dnoegel/php-xdg-base-dir" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/doctrine/annotations" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/doctrine/cache" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/doctrine/collections" />
@@ -151,6 +150,8 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/laravel-shift/faker-registry" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/ezyang/htmlpurifier" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/jeroenzwart/laravel-csv-seeder" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/doctrine/deprecations" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/psr/cache" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
