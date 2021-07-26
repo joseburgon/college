@@ -6,6 +6,7 @@ use App\Models\Course;
 use App\Models\Student;
 use App\ExternalApis\ThinkificApi;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
@@ -29,7 +30,6 @@ class EnrollmentsExport implements FromCollection, WithHeadings, ShouldAutoSize
     {
         if ($this->isConnectionCourse) {
             return [
-                'Fecha Matricula',
                 'Nombre',
                 'Apellidos',
                 'Celular',
@@ -59,26 +59,24 @@ class EnrollmentsExport implements FromCollection, WithHeadings, ShouldAutoSize
     }
 
     /**
-    * @return Collection
-    */
+     * @return Collection
+     */
     public function collection(): Collection
     {
 
         if ($this->isConnectionCourse) {
             $selectFields = [
-                'course_student.updated_at', 'students.name', 'students.last_name',
+                'students.name', 'students.last_name',
                 'students.phone', 'students.email', 'students.city', 'students.state',
                 'students.country', 'leaders.name as leader'
             ];
 
             return Student::query()
                 ->whereIn('email', $this->students)
-                ->join('leader_student', 'students.id', '=', 'leader_student.student_id')
-                ->join('course_student', 'students.id', '=', 'course_student.student_id')
-                ->join('leaders', 'leaders.id', '=', 'leader_student.leader_id')
+                ->leftJoin('leader_student', 'students.id', '=', 'leader_student.student_id')
+                ->leftJoin('leaders', 'leaders.id', '=', 'leader_student.leader_id')
                 ->select($selectFields)
-                ->orderBy('course_student.updated_at')
-                ->distinct()
+                ->orderBy('students.updated_at')
                 ->get();
         } else {
             return Student::whereIn('email', $this->students)->get();
