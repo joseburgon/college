@@ -11,6 +11,8 @@ use Maatwebsite\Excel\Concerns\WithHeadings;
 
 class CompletedEnrollmentsExport implements FromCollection, WithHeadings, ShouldAutoSize
 {
+    private const COMPLETION_PERCENTAGE = 0.95;
+
     public function __construct(Course $course)
     {
 
@@ -21,7 +23,6 @@ class CompletedEnrollmentsExport implements FromCollection, WithHeadings, Should
     public function headings(): array
     {
         return [
-            'ID',
             'Nombres',
             'Apellidos',
             'Identificación',
@@ -30,8 +31,6 @@ class CompletedEnrollmentsExport implements FromCollection, WithHeadings, Should
             'Ciudad',
             'Estado / Dpto',
             'País',
-            'Estado',
-            'Thinkific ID',
             'Fecha de creación',
             'Fecha de actualización',
         ];
@@ -42,8 +41,19 @@ class CompletedEnrollmentsExport implements FromCollection, WithHeadings, Should
     */
     public function collection()
     {
+        $fields = [
+            'name', 'last_name', 'identification',
+            'phone', 'email', 'city', 'state',
+            'country', 'created_at', 'updated_at'
+        ];
 
-        return Student::whereIn('email', $this->students)->get();
+        return Student::whereIn('email', $this->students)
+            ->select($fields)
+            ->orderBy('country')
+            ->orderBy('state')
+            ->orderBy('city')
+            ->orderBy('updated_at')
+            ->get();
 
     }
 
@@ -60,7 +70,11 @@ class CompletedEnrollmentsExport implements FromCollection, WithHeadings, Should
 
             $response = ThinkificApi::getEnrolledStudentsWhoCompleted($course->thinkific_id, $page);
 
-            $enrolledStudents = array_merge($enrolledStudents, $response['items']);
+            $completed = array_filter($response['items'], function ($student) {
+                return floatval($student['percentage_completed']) >= self::COMPLETION_PERCENTAGE;
+            });
+
+            $enrolledStudents = array_merge($enrolledStudents, $completed);
 
             $totalPages++;
 
