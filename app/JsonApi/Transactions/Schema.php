@@ -37,7 +37,9 @@ class Schema extends SchemaProvider
             'external_reference' => $transaction->external_reference,
             'created_at' => $transaction->created_at,
             'updated_at' => $transaction->updated_at,
-            'description' => $transaction->description
+            'description' => $transaction->description,
+            'student_name' => $transaction->referenceCode->student->full_name,
+            'student_email' => $transaction->referenceCode->student->email,
         ];
     }
 

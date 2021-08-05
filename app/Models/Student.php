@@ -38,28 +38,6 @@ class Student extends Model
 
     protected $with = ['courses'];
 
-    public function getUpdatedAtAttribute($value) {
-
-        return Carbon::parse($value, 'UTC')->setTimezone('America/Bogota')->format(DATE_RFC2822);
-
-    }
-
-    public function getCreatedAtAttribute($value) {
-
-        return Carbon::parse($value, 'UTC')->setTimezone('America/Bogota')->format(DATE_RFC2822);
-
-    }
-
-    public function scopeSearch(Builder $query, $values)
-    {
-        foreach (Str::of($values)->explode(' ') as $value) {
-            $query->orWhere('name', 'LIKE', "%{$value}%")
-                ->orWhere('last_name', 'LIKE', "%{$value}%")
-                ->orWhere('email', 'LIKE', "%{$value}%")
-                ->orWhere('identification', 'LIKE', "%{$value}%");
-        }
-    }
-
     public function courses()
     {
         return $this->belongsToMany(Course::class)->withTimestamps();
@@ -73,5 +51,32 @@ class Student extends Model
     public function leaders()
     {
         return $this->belongsToMany(Leader::class)->withTimestamps();
+    }
+
+    public function scopeSearch(Builder $query, $values)
+    {
+        foreach (Str::of($values)->explode(' ') as $value) {
+            $query->orWhere('name', 'LIKE', "%{$value}%")
+                ->orWhere('last_name', 'LIKE', "%{$value}%")
+                ->orWhere('email', 'LIKE', "%{$value}%")
+                ->orWhere('identification', 'LIKE', "%{$value}%");
+        }
+    }
+
+    public function getUpdatedAtAttribute($value) {
+
+        return Carbon::parse($value, 'UTC')->setTimezone('America/Bogota')->format(DATE_RFC2822);
+
+    }
+
+    public function getCreatedAtAttribute($value) {
+
+        return Carbon::parse($value, 'UTC')->setTimezone('America/Bogota')->format(DATE_RFC2822);
+
+    }
+
+    public function getFullNameAttribute()
+    {
+        return "{$this->name} {$this->last_name}";
     }
 }

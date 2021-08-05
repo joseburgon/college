@@ -30,13 +30,14 @@ class Transaction extends Model
         'id' => 'integer',
     ];
 
-    protected $with = ['referenceCode'];
+    protected $with = ['referenceCode.student'];
 
     public function getUpdatedAtAttribute($value) {
 
         return Carbon::parse($value, 'UTC')->setTimezone('America/Bogota')->format(DATE_RFC2822);
 
     }
+
     public function getCreatedAtAttribute($value) {
 
         return Carbon::parse($value, 'UTC')->setTimezone('America/Bogota')->format(DATE_RFC2822);
