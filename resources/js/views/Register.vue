@@ -289,7 +289,7 @@ export default {
         }
 
         if (parseInt(this.query.course) === 6) {
-            this.$router.push({name: 'enrollment'})
+            this.$router.push({name: 'unavailable'})
         }
 
         axios

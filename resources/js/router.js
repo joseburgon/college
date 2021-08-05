@@ -28,12 +28,6 @@ const routes = [
         meta: { guestOnly: true },
     },
     {
-        path: '/register',
-        name: 'register',
-        component: Register,
-        meta: { guestOnly: true },
-    },
-    {
         path: '/enrollment',
         name: 'enrollment',
         component: Enrollment,
