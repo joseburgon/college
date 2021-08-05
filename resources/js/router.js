@@ -24,7 +24,7 @@ Vue.use(VueRouter);
 const routes = [
     {
         path: '/',
-        redirect: '/register',
+        redirect: '/enrollment',
         meta: { guestOnly: true },
     },
     {
