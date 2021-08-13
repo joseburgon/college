@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class CourseLife extends Model
 {
+    protected $table = 'courses_life';
+
     protected $guarded = [];
 
     protected $dates = [
