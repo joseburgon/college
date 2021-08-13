@@ -41,15 +41,15 @@ trait Thinkific
 
     }
 
-    function enrollmentProcess($user, Course $course, Student $student)
+    function enroll($user, $thinkificId)
     {
         $activatedAtDate = Carbon::now();
 
         $expiryDate = $activatedAtDate->addDays(92);
 
         $enrollmentData = [
-            'course_id' => $course->thinkific_id,
-            'user_id' => $user['id'],
+            'course_id' => $thinkificId,
+            'user_id' => $user,
             'activated_at' => $activatedAtDate->toJSON(),
             'expiry_date' => $expiryDate->toJSON(),
         ];
@@ -57,10 +57,6 @@ trait Thinkific
         $enrollment = ThinkificApi::createEnrollment($enrollmentData);
 
         Log::info('Student enrolled successfully in course.', $enrollment);
-
-        $student->courses()->attach($course->id);
-
-        $student->fill(['status' => 'enrolled'])->save();
     }
 }
 
