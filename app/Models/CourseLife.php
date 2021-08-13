@@ -19,4 +19,9 @@ class CourseLife extends Model
         'duration' => 'integer',
         'details' => 'array',
     ];
+
+    public function scopeThinkific($query, $thinkificId)
+    {
+        return $query->where('thinkific_id', $thinkificId);
+    }
 }
