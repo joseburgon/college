@@ -18,7 +18,9 @@ class Course extends Model
         'description',
         'price',
         'price_usd',
+        'discount_percentage',
         'thinkific_id',
+        'bundle',
         'available_at'
     ];
 
@@ -40,7 +42,9 @@ class Course extends Model
         'id' => 'integer',
         'price' => 'integer',
         'price_usd' => 'integer',
-        'thinkific_id' => 'string'
+        'discount_percentage' => 'integer',
+        'thinkific_id' => 'string',
+        'bundle' => 'array',
     ];
 
     public function students()
