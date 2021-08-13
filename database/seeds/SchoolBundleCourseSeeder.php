@@ -20,7 +20,7 @@ class SchoolBundleCourseSeeder extends Seeder
             'discount_percentage' => 20,
             'cohort' => 'Septiembre 2021',
             'bundle' => [884089, 884124, 884148],
-            'available_at' => \Carbon\Carbon::create('2021', '08', '30', '00', '00', '00', 'America/Bogota'),
+            'available_at' => \Carbon\Carbon::create('2021', '08', '15', '00', '00', '00', 'America/Bogota'),
         ]);
     }
 }
