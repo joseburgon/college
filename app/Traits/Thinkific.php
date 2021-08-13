@@ -5,6 +5,7 @@ namespace App\Traits;
 use App\ExternalApis\ThinkificApi;
 use App\Models\CourseLife;
 use App\Models\Student;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
 
 trait Thinkific
@@ -45,6 +46,10 @@ trait Thinkific
         $life = CourseLife::thinkific($thinkificId)->first();
 
         $activatedAtDate = $life->activation;
+
+        if ($life->immediate) {
+            $activatedAtDate = Carbon::now();
+        }
 
         $expiryDate = $activatedAtDate->addDays($life->duration);
 
