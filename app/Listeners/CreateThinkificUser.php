@@ -52,14 +52,30 @@ class CreateThinkificUser implements ShouldQueue
 
             Log::info('Thinkific user created with ID: ' . $user['id']);
 
-            $student->fill([
+            $student->update([
                 'thinkific_user_id' => $user['id'],
                 'status' => 'user created'
-            ])->save();
+            ]);
 
             $course = $referenceCode->course;
 
-            $this->enrollmentProcess($user, $course, $student);
+            if ($course->bundle) {
+
+                foreach ($course->bundle as $thinkificId) {
+                    $this->enroll($user['id'], $thinkificId);
+
+                    sleep(5);
+                }
+
+            } else {
+
+                $this->enroll($user['id'], $course->thinkific_id);
+
+            }
+
+            $student->courses()->attach($course->id);
+
+            $student->update(['status' => 'enrolled']);
 
         } else {
 

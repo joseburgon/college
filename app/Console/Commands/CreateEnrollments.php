@@ -55,16 +55,20 @@ class CreateEnrollments extends Command
 
                 Log::info('Thinkific user created with ID: ' . $user['id']);
 
-                $student->fill([
+                $student->update([
                     'thinkific_user_id' => $user['id'],
                     'status' => 'user created'
-                ])->save();
+                ]);
 
                 $course = Course::find($this->argument('course'));
 
-                $this->enrollmentProcess($user, $course, $student);
+                $this->enroll($user['id'], $course->thinkific_id);
 
                 $this->info('Student: ' . $student->email . ' enrolled.');
+
+                $student->courses()->attach($course->id);
+
+                $student->update(['status' => 'enrolled']);
 
             }
 
