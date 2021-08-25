@@ -249,13 +249,13 @@
                         <div
                             class="uppercase tracking-wide text-sm text-dustyGray font-bold my-4"
                         >
-                            {{ course.name }}
+                            {{ course.name }} <span v-if="course.id === 7">(ACCESO POR 1 AÑO)</span>
                         </div>
                         <a
                             href="#"
                             class="block mt-1 text-lg leading-tight font-semibold text-gray-900 hover:underline"
-                        >{{ course.tagline.toUpperCase() }}</a
-                        >
+                        >{{ course.tagline.toUpperCase() }} <span v-if="course.id === 7">(20% OFF)</span>
+                        </a>
                         <p class="mt-2 font-thin text-black break-words">
                             {{ course.description }}
                         </p>
