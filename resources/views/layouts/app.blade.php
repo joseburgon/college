@@ -20,7 +20,7 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/main.js?v=3.3') }}" defer></script>
+    <script src="{{ asset('js/main.js?v=4.0') }}" defer></script>
     <script
         src="{{ 'https://maps.googleapis.com/maps/api/js?libraries=places&key='.config('app.google_api_key') }}"></script>
 
@@ -28,7 +28,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&display=swap" rel="stylesheet">
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css?v=3.1') }}" rel="stylesheet">
+    <link href="{{ asset('css/app.css?v=3.2') }}" rel="stylesheet">
     <link href="{{ asset('css/form/form.css') }}" rel="stylesheet">
 
     <!-- Facebook Pixel Code -->
