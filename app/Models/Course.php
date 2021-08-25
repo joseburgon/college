@@ -61,4 +61,13 @@ class Course extends Model
     {
         return $this->hasOne(Transaction::class);
     }
+
+    public function getPriceWithDiscount($usdPrice = false)
+    {
+        $totalPrice = $usdPrice ? $this->price_usd : $this->price;
+
+        $discount = ($this->discount_percentage / 100) * $totalPrice;
+
+        return floatval($totalPrice - $discount);
+    }
 }

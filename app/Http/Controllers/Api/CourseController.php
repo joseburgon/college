@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Course;
+use App\Http\Resources\Course as CourseResource;
 use Illuminate\Http\Request;
 
 class CourseController extends Controller
@@ -31,15 +32,9 @@ class CourseController extends Controller
         //
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Course  $course
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Course $course)
+    public function show(Course $course): CourseResource
     {
-        return response()->json($course);
+        return new CourseResource($course);
     }
 
     /**

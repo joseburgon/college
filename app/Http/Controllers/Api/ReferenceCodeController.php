@@ -24,7 +24,7 @@ class ReferenceCodeController extends Controller
             'student_id' => $request->student,
         ]);
 
-        $testing = $request->query('testing');
+        $testing = $request->get('testing');
 
         $student = Student::find($request->student);
 
@@ -112,7 +112,7 @@ class ReferenceCodeController extends Controller
         $item->category_id = 'learnings';
         $item->quantity = 1;
 
-        $item->unit_price = $testing === '1' ? '2000' : $course->price;
+        $item->unit_price = $testing ? '2000' : $course->getPriceWithDiscount();
 
         return $item;
     }

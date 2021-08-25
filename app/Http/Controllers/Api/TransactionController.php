@@ -37,7 +37,7 @@ class TransactionController extends Controller
         Log::info('MercadoPago Notification Request', $request->input());
 
         if (isset($request->type)) {
-            if ($request->type === 'payment') {
+            if ($request->type === 'payment' && $request->live_mode === true) {
 
                 $id = $request->data_id;
 

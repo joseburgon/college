@@ -260,16 +260,28 @@
                             {{ course.description }}
                         </p>
                         <hr class="border-gray-400 my-4 lg:my-8"/>
-                        <p class="font-hairline text-dustyGray text-xs">DONACI&Oacute;N</p>
+                        <p class="font-hairline text-dustyGray text-xs">
+                            PRECIO FINAL
+                            <span v-if="parseInt(course.discount_percentage) > 0" class="font-bold">{{ ` (${course.discount_percentage}% OFF)` }}</span>
+                        </p>
                         <h3 class="text-lg lg:text-xl font-bold my-2">
+                            {{
+                                '$ ' + new Intl.NumberFormat().format(course.price_with_discount) + ' COP '
+                            }}
+                            <span class="text-gray-500">
+                                {{ '| $ ' + course.price_usd_with_discount + ' USD' }}
+                            </span>
+
+                        </h3>
+                        <p v-if="parseInt(course.discount_percentage) > 0" class="font-hairline text-dustyGray text-xs">PRECIO FULL</p>
+                        <h4 v-if="parseInt(course.discount_percentage) > 0" class="text-lg lg:text-lg mt-2 mb-4">
                             {{
                                 '$ ' + new Intl.NumberFormat().format(course.price) + ' COP '
                             }}
                             <span class="text-gray-500">
                                 {{ '| $ ' + course.price_usd + ' USD' }}
                             </span>
-
-                        </h3>
+                        </h4>
                         <p class="font-hairline text-dustyGray text-xs">MEDIOS DE PAGO</p>
                         <px-payment-methods/>
                     </div>
@@ -317,9 +329,7 @@ export default {
 
         axios
             .get(`api/courses/${this.query.course}`)
-            .then((res) => {
-                this.course = res.data
-            })
+            .then((res) => { this.course = res.data.data })
             .catch((e) => {
                 this.$router.push({name: 'error'})
             })
@@ -373,6 +383,7 @@ export default {
                 .post('api/reference', {
                     course: this.query.course,
                     student,
+                    testing: false
                 })
                 .then((res) => {
                     this.referenceCode = res.data.referenceCode
@@ -406,7 +417,7 @@ export default {
                                     reference_id: referenceId,
                                     description: course.name,
                                     amount: {
-                                        value: course.price_usd,
+                                        value: course.price_usd_with_discount,
                                         currency_code: 'USD',
                                     },
                                 },
