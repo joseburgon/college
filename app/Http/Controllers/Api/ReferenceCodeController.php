@@ -95,11 +95,6 @@ class ReferenceCodeController extends Controller
             "number" => $student->phone
         );
 
-        $payer->identification = array(
-            "type" => "CC",
-            "number" => $student->identification
-        );
-
         return $payer;
     }
 
