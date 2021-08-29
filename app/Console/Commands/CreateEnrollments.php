@@ -62,7 +62,7 @@ class CreateEnrollments extends Command
 
                 $course = Course::find($this->argument('course'));
 
-                $this->enroll($user['id'], $course->thinkific_id);
+                $this->enroll($user['id'], $course);
 
                 $this->info('Student: ' . $student->email . ' enrolled.');
 

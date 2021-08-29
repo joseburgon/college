@@ -3,6 +3,7 @@
 namespace App\Traits;
 
 use App\ExternalApis\ThinkificApi;
+use App\Models\Course;
 use App\Models\CourseLife;
 use App\Models\Student;
 use Carbon\Carbon;
@@ -41,9 +42,11 @@ trait Thinkific
 
     }
 
-    function enroll($user, $thinkificId)
+    function enroll($userId, Course $course)
     {
-        $life = CourseLife::thinkific($thinkificId)->first();
+        $life = CourseLife::course($course->id)
+            ->thinkific($course->thinkific_id)
+            ->first();
 
         $activatedAtDate = $life->activation;
 
@@ -54,8 +57,8 @@ trait Thinkific
         $expiryDate = $activatedAtDate->addDays($life->duration);
 
         $enrollmentData = [
-            'course_id' => $thinkificId,
-            'user_id' => $user,
+            'course_id' => $life->thinkific_id,
+            'user_id' => $userId,
             'activated_at' => $activatedAtDate->toJSON(),
             'expiry_date' => $expiryDate->toJSON(),
         ];

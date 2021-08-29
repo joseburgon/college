@@ -26,4 +26,9 @@ class CourseLife extends Model
     {
         return $query->where('thinkific_id', $thinkificId);
     }
+
+    public function scopeCourse($query, $courseid)
+    {
+        return $query->where('course_id', $courseid);
+    }
 }

@@ -62,14 +62,14 @@ class CreateThinkificUser implements ShouldQueue
             if ($course->bundle) {
 
                 foreach ($course->bundle as $thinkificId) {
-                    $this->enroll($user['id'], $thinkificId);
+                    $this->enroll($user['id'], $course);
 
                     sleep(5);
                 }
 
             } else {
 
-                $this->enroll($user['id'], $course->thinkific_id);
+                $this->enroll($user['id'], $course);
 
             }
 

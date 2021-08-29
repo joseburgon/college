@@ -45,7 +45,7 @@ class CreateAndEnrollStudent implements ShouldQueue
 
         $course = $event->course;
 
-        $this->enroll($user['id'], $course->thinkific_id);
+        $this->enroll($user['id'], $course);
 
         $student->courses()->attach($course->id);
 
