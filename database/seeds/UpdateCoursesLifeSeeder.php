@@ -16,7 +16,7 @@ class UpdateCoursesLifeSeeder extends Seeder
         $courses->each(function($course) {
             if ($course->thinkific_id) {
                 \App\Models\CourseLife::thinkific($course->thinkific_id)->update([
-                    'course_id' => $course,
+                    'course_id' => $course->id,
                 ]);
             }
         });
