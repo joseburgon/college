@@ -22,7 +22,7 @@ class UpdateSchoolBundleCourseSeeder extends Seeder
             'name' => 'LVR School',
             'tagline' => 'School - Programa Completo (Primer Pago)',
             'description' => 'Este es el programa central de nuestra escuela de formación, en él enseñamos todos los temas fundamentales de la fe con un enfoque de gracia que de manera transversal está presente en todo el contenido. Este programa es la ruta indicada para aprender e interiorizar el ADN de Living Room.',
-            'price' => 1600000,
+            'price' => 160000,
             'price_usd' => 45,
             'discount_percentage' => 0,
             'cohort' => 'Septiembre 2021',
