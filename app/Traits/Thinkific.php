@@ -54,7 +54,11 @@ trait Thinkific
             $activatedAtDate = Carbon::now();
         }
 
-        $expiryDate = $activatedAtDate->addDays($life->duration);
+        if ($life->id === 9) {
+            $expiryDate = Carbon::createFromDate(2021, 10, 28, 'America/Bogota');
+        } else {
+            $expiryDate = $activatedAtDate->addDays($life->duration);
+        }
 
         $enrollmentData = [
             'course_id' => $life->thinkific_id,
