@@ -323,9 +323,9 @@ export default {
             this.query.course = 2
         }
 
-        if (parseInt(this.query.course) === 6) {
+        /*if (parseInt(this.query.course) === 6) {
             this.$router.push({name: 'unavailable'})
-        }
+        }*/
 
         axios
             .get(`api/courses/${this.query.course}`)
