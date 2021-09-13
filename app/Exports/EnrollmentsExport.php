@@ -6,7 +6,6 @@ use App\Models\Course;
 use App\Models\Student;
 use App\ExternalApis\ThinkificApi;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
@@ -15,20 +14,22 @@ class EnrollmentsExport implements FromCollection, WithHeadings, ShouldAutoSize
 {
     private Course $course;
 
-    private bool $isConnectionCourse = false;
+    private array $especialCourses = ['Connection', 'LVR School'];
+
+    private bool $withLeader = false;
 
     public function __construct(Course $course)
     {
         $this->course = $course;
 
-        $this->isConnectionCourse = $this->course->name === 'Connection';
+        $this->withLeader = in_array($this->course->name, $this->especialCourses);
 
         $this->students = $this->getCourseEnrolledStudents();
     }
 
     public function headings(): array
     {
-        if ($this->isConnectionCourse) {
+        if ($this->withLeader) {
             return [
                 'Nombre',
                 'Apellidos',
@@ -64,7 +65,7 @@ class EnrollmentsExport implements FromCollection, WithHeadings, ShouldAutoSize
     public function collection(): Collection
     {
 
-        if ($this->isConnectionCourse) {
+        if ($this->withLeader) {
             $selectFields = [
                 'students.name', 'students.last_name',
                 'students.phone', 'students.email', 'students.city', 'students.state',
