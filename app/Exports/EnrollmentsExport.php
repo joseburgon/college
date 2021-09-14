@@ -74,8 +74,8 @@ class EnrollmentsExport implements FromCollection, WithHeadings, ShouldAutoSize
 
             return Student::query()
                 ->whereIn('email', $this->students)
-                ->leftJoin('leader_student', 'students.id', '=', 'leader_student.student_id')
-                ->leftJoin('leaders', 'leaders.id', '=', 'leader_student.leader_id')
+                ->join('leader_student', 'students.id', '=', 'leader_student.student_id')
+                ->join('leaders', 'leaders.id', '=', 'leader_student.leader_id')
                 ->select($selectFields)
                 ->orderBy('students.updated_at')
                 ->get();
