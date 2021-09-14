@@ -5,6 +5,7 @@ namespace App\Exports;
 use App\Models\Course;
 use App\Models\Student;
 use App\ExternalApis\ThinkificApi;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
@@ -74,6 +75,9 @@ class EnrollmentsExport implements FromCollection, WithHeadings, ShouldAutoSize
 
             return Student::query()
                 ->whereIn('email', $this->students)
+                ->whereHas('courses', function (Builder $query) {
+                    $query->where('id', $this->course);
+                })
                 ->join('leader_student', 'students.id', '=', 'leader_student.student_id')
                 ->join('leaders', 'leaders.id', '=', 'leader_student.leader_id')
                 ->select($selectFields)
