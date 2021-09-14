@@ -76,7 +76,6 @@ class EnrollmentsExport implements FromCollection, WithHeadings, ShouldAutoSize
             return Student::query()
                 ->whereIn('email', $this->students)
                 ->whereHas('courses', function (Builder $query) {
-                    dd($this->course);
                     $query->where('courses.id', $this->course->id);
                 })
                 ->join('leader_student', 'students.id', '=', 'leader_student.student_id')
