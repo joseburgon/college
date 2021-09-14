@@ -7,9 +7,9 @@
 
             <div class="flex space-x-4">
 
-                <div class="mt-4">
+                <div class="w-1/2 mt-4">
                     <div
-                        class="max-w-sm w-full bg-white shadow-md rounded-md overflow-hidden border"
+                        class="w-full bg-white shadow-md rounded-md overflow-hidden border"
                     >
                         <form>
                             <div
@@ -21,7 +21,7 @@
                             <div class="px-5 py-6 bg-gray-200 text-gray-700 border-b">
                                 <label class="text-xs mr-8">Curso:</label>
 
-                                <div class="inline-block relative w-64">
+                                <div class="inline-block relative">
                                     <select
                                         name="current_course_id"
                                         v-model="current_course_id"
@@ -33,7 +33,7 @@
                                             :key="index"
                                             :value="course.id"
                                         >
-                                            {{ course.name }}
+                                            {{ course.name + ' - ' + course.tagline }}
                                         </option>
                                     </select>
                                     <div
@@ -71,9 +71,9 @@
                     </div>
                 </div>
 
-                <div class="mt-4">
+                <div class="w-1/2 mt-4">
                     <div
-                        class="max-w-sm w-full bg-white shadow-md rounded-md overflow-hidden border"
+                        class="w-full bg-white shadow-md rounded-md overflow-hidden border"
                     >
                         <form>
                             <div
@@ -85,7 +85,7 @@
                             <div class="px-5 py-6 bg-gray-200 text-gray-700 border-b">
                                 <label class="text-xs mr-8">Curso:</label>
 
-                                <div class="inline-block relative w-64">
+                                <div class="inline-block relative">
                                     <select
                                         name="completed_course_id"
                                         v-model="completed_course_id"
@@ -97,7 +97,7 @@
                                             :key="index"
                                             :value="course.id"
                                         >
-                                            {{ course.name }}
+                                            {{ course.name + ' - ' + course.tagline }}
                                         </option>
                                     </select>
                                     <div
@@ -139,9 +139,9 @@
 
             <div class="flex space-x-4">
 
-                <div class="mt-4">
+                <div class="w-1/2 mt-4">
                     <div
-                        class="max-w-sm w-full bg-white shadow-md rounded-md overflow-hidden border"
+                        class="w-full bg-white shadow-md rounded-md overflow-hidden border"
                     >
                         <form>
                             <div
@@ -150,7 +150,7 @@
                                 <h3 class="text-sm">Exportar TODOS los estudiantes</h3>
                             </div>
 
-                            <div class="flex justify-between items-center px-5 py-3">
+                            <div class="flex justify-between items-center p-5">
                                 <a
                                     :href="allHistoricEnrolledLink"
                                     target="_blank"
@@ -163,9 +163,9 @@
                     </div>
                 </div>
 
-                <div class="mt-4">
+                <div class="w-1/2 mt-4">
                     <div
-                        class="max-w-sm w-full bg-white shadow-md rounded-md overflow-hidden border"
+                        class="w-full bg-white shadow-md rounded-md overflow-hidden border"
                     >
                         <form>
                             <div
@@ -174,7 +174,7 @@
                                 <h3 class="text-sm">Exportar Estudiantes NO matriculados</h3>
                             </div>
 
-                            <div class="flex justify-between items-center px-5 py-3">
+                            <div class="flex justify-between items-center p-5">
                                 <a
                                     :href="notEnrolledExportLink"
                                     target="_blank"
