@@ -40,27 +40,39 @@ class SetEnrollmentsExpiryDate extends Command
      */
     public function handle()
     {
-        $enrollments = ThinkificApi::getCourseEnrollments($this->argument('course'));
-
-        foreach ($enrollments as $enrollment) {
-
-            Log::info('Enrollment ID: ' . $enrollment['id']);
-
-            $startedAtDate = Carbon::now();
-
-            $expiryDate = $startedAtDate->addWeeks(10);
-
-            Log::info('Calculated expiry date: ' . $expiryDate);
-
-            $data = [
-                'activated_at' => $startedAtDate->toISOString(),
-                'expiry_date' => $expiryDate->toISOString()
+        try {
+            $query = [
+                'query[course_id]' => $this->argument('course')
             ];
 
-            ThinkificApi::updateEnrollment($enrollment['id'], $data);
+            $enrollments = ThinkificApi::getCourseEnrollments($query);
 
-            Log::info('Enrollment updated!');
+            $bar = $this->output->createProgressBar(count($enrollments));
 
+            $bar->start();
+
+            foreach ($enrollments as $enrollment) {
+                Log::info('Enrollment ID: ' . $enrollment['id']);
+
+                $expiryDate = Carbon::now()->addDays(32);
+
+                Log::info('Calculated expiry date: ' . $expiryDate);
+
+                $data = [
+                    'activated_at' => $enrollment['activated_at'],
+                    'expiry_date' => $expiryDate->toISOString()
+                ];
+
+                ThinkificApi::updateEnrollment($enrollment['id'], $data);
+
+                $bar->advance();
+
+                Log::info('Enrollment updated!');
+            }
+
+            $bar->finish();
+        } catch (\Exception $e) {
+            Log::error($e->getMessage());
         }
     }
 }

@@ -145,7 +145,7 @@ class ThinkificApi
         return $response;
     }
 
-    public static function getCourseEnrollments(array $queryParams)
+    public static function getCourseEnrollments(array $queryParams): array
     {
         $courseEnrollments = [];
         $page = 1;
