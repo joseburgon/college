@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\DB;
 use JeroenZwart\CsvSeeder\CsvSeeder;
 
 class AddNewBucaramangaLeaders extends CsvSeeder
@@ -19,7 +20,11 @@ class AddNewBucaramangaLeaders extends CsvSeeder
      */
     public function run()
     {
-        \Illuminate\Support\Facades\DB::disableQueryLog();
+        DB::table('leaders')
+            ->where('id', '>', 120)
+            ->delete();
+
+        DB::disableQueryLog();
 
         parent::run();
     }

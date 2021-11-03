@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\DB;
 use JeroenZwart\CsvSeeder\CsvSeeder;
 
 class NewBgaCampusLeaderSeeder extends CsvSeeder
@@ -19,7 +20,11 @@ class NewBgaCampusLeaderSeeder extends CsvSeeder
      */
     public function run()
     {
-        \Illuminate\Support\Facades\DB::disableQueryLog();
+        DB::table('campus_leader')
+            ->where('id', '>', 121)
+            ->delete();
+
+        DB::disableQueryLog();
 
         parent::run();
     }
