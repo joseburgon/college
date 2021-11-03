@@ -262,7 +262,8 @@
                         <hr class="border-gray-400 my-4 lg:my-8"/>
                         <p class="font-hairline text-dustyGray text-xs">
                             PRECIO FINAL
-                            <span v-if="parseInt(course.discount_percentage) > 0" class="font-bold">{{ ` (${course.discount_percentage}% OFF)` }}</span>
+                            <span v-if="parseInt(course.discount_percentage) > 0"
+                                  class="font-bold">{{ ` (${course.discount_percentage}% OFF)` }}</span>
                         </p>
                         <h3 class="text-lg lg:text-xl font-bold my-2">
                             {{
@@ -273,7 +274,8 @@
                             </span>
 
                         </h3>
-                        <p v-if="parseInt(course.discount_percentage) > 0" class="font-hairline text-dustyGray text-xs">PRECIO FULL</p>
+                        <p v-if="parseInt(course.discount_percentage) > 0" class="font-hairline text-dustyGray text-xs">
+                            PRECIO FULL</p>
                         <h4 v-if="parseInt(course.discount_percentage) > 0" class="text-lg lg:text-lg mt-2 mb-4">
                             {{
                                 '$ ' + new Intl.NumberFormat().format(course.price) + ' COP '
@@ -329,7 +331,9 @@ export default {
 
         axios
             .get(`api/courses/${this.query.course}`)
-            .then((res) => { this.course = res.data.data })
+            .then((res) => {
+                this.course = res.data.data
+            })
             .catch((e) => {
                 this.$router.push({name: 'error'})
             })
@@ -496,7 +500,16 @@ export default {
                 .then((res) => {
                     this.formValues.leader_id = undefined
 
-                    this.leaders = res.data
+                    this.leaders = Object.entries(res.data)
+                        .sort((a, b) => a[1] > b[1] ? 1 : -1)
+                        .map(function (obj) {
+                            return {
+                                'label': obj[1],
+                                'value': obj[0],
+                            };
+                        });
+
+                    console.log(this.leaders)
                 })
                 .catch((e) => {
                     this.$router.push({name: 'error'})
