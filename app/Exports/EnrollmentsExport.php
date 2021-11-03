@@ -6,6 +6,7 @@ use App\Models\Course;
 use App\Models\Student;
 use App\ExternalApis\ThinkificApi;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
@@ -19,9 +20,13 @@ class EnrollmentsExport implements FromCollection, WithHeadings, ShouldAutoSize
 
     private bool $withLeader = false;
 
-    public function __construct(Course $course)
+    private $customParams;
+
+    public function __construct(Course $course, array $params = [])
     {
         $this->course = $course;
+
+        $this->customParams = $params;
 
         $this->withLeader = in_array($this->course->name, $this->especialCourses);
 
@@ -91,7 +96,6 @@ class EnrollmentsExport implements FromCollection, WithHeadings, ShouldAutoSize
 
     public function getCourseEnrolledStudents(): array
     {
-
         $enrolledStudents = [];
 
         $page = 1;
@@ -99,6 +103,12 @@ class EnrollmentsExport implements FromCollection, WithHeadings, ShouldAutoSize
         $totalPages = 0;
 
         do {
+            $query = [
+                'query[course_id]' => $this->course->thinkific_id,
+                'limit' => '50',
+            ];
+
+            $query = Arr::collapse([$query, $this->customParams]);
 
             $response = ThinkificApi::getEnrolledStudents($this->course->thinkific_id, $page);
 
@@ -111,6 +121,5 @@ class EnrollmentsExport implements FromCollection, WithHeadings, ShouldAutoSize
         } while ($response['meta']['pagination']['total_pages'] > $totalPages);
 
         return array_column($enrolledStudents, 'user_email');
-
     }
 }

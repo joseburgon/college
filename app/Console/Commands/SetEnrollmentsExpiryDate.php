@@ -42,7 +42,9 @@ class SetEnrollmentsExpiryDate extends Command
     {
         try {
             $query = [
-                'query[course_id]' => $this->argument('course')
+                'query[course_id]' => $this->argument('course'),
+                'query[completed]' => false,
+                'query[expired]' => true,
             ];
 
             $enrollments = ThinkificApi::getCourseEnrollments($query);
@@ -54,7 +56,7 @@ class SetEnrollmentsExpiryDate extends Command
             foreach ($enrollments as $enrollment) {
                 Log::info('Enrollment ID: ' . $enrollment['id']);
 
-                $expiryDate = Carbon::now()->addDays(32);
+                $expiryDate = Carbon::now()->addDays(41);
 
                 Log::info('Calculated expiry date: ' . $expiryDate);
 

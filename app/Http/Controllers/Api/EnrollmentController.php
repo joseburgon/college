@@ -25,6 +25,15 @@ class EnrollmentController extends Controller
     {
         $fileName = str_replace(' ', '_', $course->name) . '_Matriculados_' . $this->now->format("Ymd_His") . '.xlsx';
 
+        $params['query[expired]'] = false;
+
+        return Excel::download(new EnrollmentsExport($course, $params), $fileName);
+    }
+
+    public function exportHistoric(Course $course)
+    {
+        $fileName = str_replace(' ', '_', $course->name) . '_Matriculados_' . $this->now->format("Ymd_His") . '.xlsx';
+
         return Excel::download(new EnrollmentsExport($course), $fileName);
     }
 
