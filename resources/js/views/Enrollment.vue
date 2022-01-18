@@ -119,39 +119,6 @@
                             <FormulateInput name="country" type="hidden"/>
                         </div>
 
-                        <div class="grid xl:grid-flow-col grid-cols-1 xl:grid-cols-2 xl:gap-4 mb-6 xl:mb-0">
-                            <FormulateInput
-                                name="campus_id"
-                                type="select"
-                                label="Campus"
-                                v-model="formValues.campus_id"
-                                placeholder="Selecciona un Campus"
-                                :options="campuses"
-                                validation="required"
-                                :validation-messages="{
-                                  required: 'El campus al que asistes es requerido',
-                                }"
-                                element-class="flex-grow"
-                                label-class="text-xs font-bold"
-                                :disabled="registered"
-                                @input="getCampusLeaders"
-                            />
-                            <FormulateInput
-                                name="leader_id"
-                                type="select"
-                                label="Lider / Trainer"
-                                placeholder="Selecciona tu líder de LivingGroup"
-                                :options="leaders"
-                                validation="required"
-                                :validation-messages="{
-                                  required: 'Tu lider es requerido',
-                                }"
-                                element-class="flex-grow"
-                                label-class="text-xs font-bold"
-                                :disabled="!formValues.campus_id"
-                            />
-                        </div>
-
                         <div class="flex-col mt-5" v-if="errors">
                           <span
                               class="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1"
@@ -306,8 +273,6 @@ export default {
             formValues: {},
             valid: {},
             course: {},
-            campuses: {},
-            leaders: {},
             student: {},
             referenceCode: '',
             mercadoPagoUrl: '',
@@ -333,15 +298,6 @@ export default {
             .get(`api/courses/${this.query.course}`)
             .then((res) => {
                 this.course = res.data.data
-            })
-            .catch((e) => {
-                this.$router.push({name: 'error'})
-            })
-
-        axios
-            .get(`api/campuses`)
-            .then((res) => {
-                this.campuses = res.data
             })
             .catch((e) => {
                 this.$router.push({name: 'error'})

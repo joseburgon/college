@@ -31,7 +31,9 @@ class StudentController extends Controller
             ]
         );
 
-        $student->leaders()->sync($request['leader_id']);
+        if ($request->has('leader_id')) {
+            $student->leaders()->sync($request['leader_id']);
+        }
 
         return response()->json($student);
     }
