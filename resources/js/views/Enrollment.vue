@@ -286,14 +286,6 @@ export default {
     created() {
         this.$emit(`update:layout`, DefaultLayout)
 
-        if (!this.query.course) {
-            this.query.course = 2
-        }
-
-        /*if (parseInt(this.query.course) === 6) {
-            this.$router.push({name: 'unavailable'})
-        }*/
-
         axios
             .get(`api/courses/${this.query.course}`)
             .then((res) => {
