@@ -24,12 +24,11 @@ Vue.use(VueRouter);
 const routes = [
     {
         path: '/',
-        redirect: '/unavailable',
+        redirect: '/enrollment',
         meta: { guestOnly: true },
     },
     {
         path: '/enrollment',
-        redirect: '/unavailable',
         name: 'enrollment',
         component: Enrollment,
         meta: { guestOnly: true },

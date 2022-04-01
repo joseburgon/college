@@ -286,14 +286,13 @@ export default {
     created() {
         this.$emit(`update:layout`, DefaultLayout)
 
-        axios
-            .get(`api/courses/${this.query.course}`)
-            .then((res) => {
-                this.course = res.data.data
-            })
-            .catch((e) => {
-                this.$router.push({name: 'error'})
-            })
+        if (!this.query.course) {
+            this.setMostRecentCourse()
+
+            return
+        }
+
+        this.setCourse(this.query.course)
     },
 
     mounted() {
@@ -458,6 +457,28 @@ export default {
                         });
 
                     console.log(this.leaders)
+                })
+                .catch((e) => {
+                    this.$router.push({name: 'error'})
+                })
+        },
+
+        setMostRecentCourse() {
+            axios
+                .get(`api/courses`)
+                .then((res) => {
+                    this.course = res.data.data.pop()
+                })
+                .catch((e) => {
+                    this.$router.push({name: 'error'})
+                })
+        },
+
+        setCourse(id) {
+            axios
+                .get(`api/courses/${id}`)
+                .then((res) => {
+                    this.course = res.data.data
                 })
                 .catch((e) => {
                     this.$router.push({name: 'error'})

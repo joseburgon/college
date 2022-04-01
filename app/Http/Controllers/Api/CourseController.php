@@ -3,8 +3,9 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\CourseCollection;
+use App\Http\Resources\CourseResource;
 use App\Models\Course;
-use App\Http\Resources\Course as CourseResource;
 use Illuminate\Http\Request;
 
 class CourseController extends Controller
@@ -12,13 +13,13 @@ class CourseController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return CourseCollection
      */
     public function index()
     {
         $courses = Course::all();
 
-        return response()->json($courses);
+        return CourseCollection::make($courses);
     }
 
     /**
