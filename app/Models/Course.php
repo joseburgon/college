@@ -42,7 +42,7 @@ class Course extends Model
         'id' => 'integer',
         'price' => 'integer',
         'price_usd' => 'integer',
-        'discount_percentage' => 'integer',
+        'discount_percentage' => 'float',
         'thinkific_id' => 'string',
         'bundle' => 'array',
     ];
@@ -68,6 +68,6 @@ class Course extends Model
 
         $discount = ($this->discount_percentage / 100) * $totalPrice;
 
-        return floatval($totalPrice - $discount);
+        return round(floatval($totalPrice - $discount), 2);
     }
 }

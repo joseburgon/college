@@ -243,7 +243,7 @@
                         </h3>
                         <p v-if="parseInt(course.discount_percentage) > 0" class="font-hairline text-dustyGray text-xs">
                             PRECIO FULL</p>
-                        <h4 v-if="parseInt(course.discount_percentage) > 0" class="text-lg lg:text-lg mt-2 mb-4">
+                        <h4 v-if="parseInt(course.discount_percentage) > 0" class="text-lg lg:text-lg line-through mt-2 mb-4">
                             {{
                                 '$ ' + new Intl.NumberFormat().format(course.price) + ' COP '
                             }}
