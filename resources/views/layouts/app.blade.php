@@ -20,7 +20,7 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/main.js?v=5.2') }}" defer></script>
+    <script src="{{ asset('js/main.js?v=5.3') }}" defer></script>
     <script
         src="{{ 'https://maps.googleapis.com/maps/api/js?libraries=places&key='.config('app.google_api_key') }}"></script>
 

@@ -479,6 +479,10 @@ export default {
                 .get(`api/courses/${id}`)
                 .then((res) => {
                     this.course = res.data.data
+
+                    if (this.course.name === 'Curso de Finanzas') {
+                        this.$router.push({name: 'unavailable'})
+                    }
                 })
                 .catch((e) => {
                     this.$router.push({name: 'error'})
