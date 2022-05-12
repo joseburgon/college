@@ -26,7 +26,7 @@ trait Thinkific
             return $user;
         }
 
-        $password = 'College*2021';
+        $password = 'College*2022';
 
         $userData = [
             'email' => $student->email,
